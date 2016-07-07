@@ -7,36 +7,31 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 	
-    <listener>
-        <listener-class>
-                com.sun.xml.ws.transport.http.servlet.WSServletContextListener
-        </listener-class>
-    </listener>
+	<servlet>
+		<servlet-name>googleTest</servlet-name>
+		<servlet-class>edu.softserveinc.healthbody.webclient.servlets.GoogleTestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>googleTest</servlet-name>
+		<url-pattern>/googleTest</url-pattern>
+	</servlet-mapping>
+
     <servlet>
         <servlet-name>main</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-	<servlet>
-		<servlet-name>googleTest</servlet-name>
-		<servlet-class>edu.softserveinc.healthbody.webclient.servlets.GoogleTestServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>googleTest</servlet-name>
-		<url-pattern>/googleTest</url-pattern>
-	</servlet-mapping>
-	
 	<servlet-mapping>
         <servlet-name>main</servlet-name>
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>120</session-timeout>
     </session-config>
 
 	<welcome-file-list>
-	    <welcome-file>main</welcome-file>
+ 	    <welcome-file>main</welcome-file>
 		<welcome-file>googleTest</welcome-file>
 	</welcome-file-list>
 </web-app>
