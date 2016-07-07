@@ -16,6 +16,16 @@
 		<url-pattern>/googleTest</url-pattern>
 	</servlet-mapping>
 
+<!-- @xtralife Google test playground
+	<servlet>
+		<servlet-name>CalendarServletSample</servlet-name>
+		<servlet-class>edu.softserveinc.healthbody.webclient.servlets.CalendarServletSample</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CalendarServletSample</servlet-name>
+		<url-pattern>/calendar</url-pattern>
+	</servlet-mapping>
+-->
     <servlet>
         <servlet-name>main</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
