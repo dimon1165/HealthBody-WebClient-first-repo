@@ -20,10 +20,6 @@
 		<jdk.source.version.openshift>1.6</jdk.source.version.openshift>
 		<jdk.compiler.version.openshift>1.6</jdk.compiler.version.openshift>
 		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
-		<!-- - - - - - DB - - - - - -->
-		<net.sourceforge.jtds.version>1.3.1</net.sourceforge.jtds.version>
-		<mysql.connector.version>5.1.37</mysql.connector.version>
-		<postgresql.connector.version>9.4-1200-jdbc41</postgresql.connector.version>
 		<!-- - - - - - Logger - - - - - -->
 		<org.slf4j.version>1.7.21</org.slf4j.version>
 		<!-- - - - - - Test - - - - - -->
@@ -46,36 +42,13 @@
 			<version>${org.testng.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- - - - DBConnect - - - -->
-		<dependency>
-			<groupId>net.sourceforge.jtds</groupId>
-			<artifactId>jtds</artifactId>
-			<version>${net.sourceforge.jtds.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.connector.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>${postgresql.connector.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-simple</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 		<!-- - - - Logger - - - -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${org.slf4j.version}</version>
 		</dependency>
-
+<!-- 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
@@ -86,18 +59,20 @@
 			<artifactId>selenium-java</artifactId>
 			<version>2.53.0</version>
 		</dependency>
-
+ -->
 		<!-- - - - Google API - - - -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
 			<version>${google.api.client.version}</version>
 		</dependency>
+<!-- 
 		<dependency>
 		    <groupId>com.google.api-client</groupId>
 		    <artifactId>google-api-client-appengine</artifactId>
 			<version>${google.api.client.version}</version>
 		</dependency>
+-->
 <!-- Google API Services
 		<dependency>
 		    <groupId>com.google.apis</groupId>
@@ -110,6 +85,13 @@
 		    <version>v1-rev407-${google.api.client.version}</version>
 		</dependency>
 -->
+		<!-- - - - Java Servlets - - - -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -121,7 +103,6 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -132,7 +113,6 @@
 					<warName>resources</warName>
 				</configuration>
 			</plugin>
--->
 		</plugins>
 	</build>
 	<profiles>
