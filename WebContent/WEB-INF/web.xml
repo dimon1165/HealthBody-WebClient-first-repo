@@ -26,22 +26,8 @@
 		<url-pattern>/calendar</url-pattern>
 	</servlet-mapping>
 -->
-    <servlet>
-        <servlet-name>main</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-	<servlet-mapping>
-        <servlet-name>main</servlet-name>
-        <url-pattern>/main</url-pattern>
-    </servlet-mapping>
-
-    <session-config>
-        <session-timeout>120</session-timeout>
-    </session-config>
 
 	<welcome-file-list>
- 	    <welcome-file>main</welcome-file>
 		<welcome-file>googleTest</welcome-file>
 	</welcome-file-list>
 </web-app>

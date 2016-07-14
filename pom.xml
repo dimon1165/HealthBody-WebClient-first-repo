@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.softserveinc.healthbody</groupId>
-
 	<artifactId>webclient</artifactId>
-	<packaging>jar</packaging>
-
+	
+	<packaging>war</packaging>
 	<version>1.0</version>
+	
 	<name>webclient</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -108,9 +108,8 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven.war.plugin.version}</version>
 				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warName>resources</warName>
+					<warName>HealthBodyWebClient</warName>
 				</configuration>
 			</plugin>
 		</plugins>
