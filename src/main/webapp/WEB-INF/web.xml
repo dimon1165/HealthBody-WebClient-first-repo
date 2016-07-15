@@ -28,6 +28,6 @@
 -->
 
 	<welcome-file-list>
-		<welcome-file>googleTest</welcome-file>
+		<welcome-file>HomePage.html</welcome-file>
 	</welcome-file-list>
 </web-app>
