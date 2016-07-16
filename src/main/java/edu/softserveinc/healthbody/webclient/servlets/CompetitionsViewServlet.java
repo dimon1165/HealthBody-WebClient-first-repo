@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import edu.softserveinc.healthbody.webclient.api.GetAllCompetitions;
 import edu.softserveinc.healthbody.webclient.utils.RequestParamUtils;
 
 /**
@@ -17,12 +20,13 @@ import edu.softserveinc.healthbody.webclient.utils.RequestParamUtils;
 @WebServlet("/competitions")
 public class CompetitionsViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private final Gson gson;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public CompetitionsViewServlet() {
 		super();
+		this.gson = new Gson();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,6 +39,10 @@ public class CompetitionsViewServlet extends HttpServlet {
 		
 		int partNumber = getPartNumber(request);
 		int partSize = getPartSize(request);
+		 GetAllCompetitions com = new GetAllCompetitions();
+         com.setArg0(partNumber);
+         com.setArg1(partSize);
+         writeResponse(com, response);
 }
 
 	/**
@@ -51,7 +59,7 @@ public class CompetitionsViewServlet extends HttpServlet {
 			throws IOException {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		out.print(object);
+		out.print(gson.toJson(object));
 		out.flush();
 
 	}
