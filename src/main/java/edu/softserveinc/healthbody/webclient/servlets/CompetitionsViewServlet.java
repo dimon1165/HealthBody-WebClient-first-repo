@@ -11,16 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import edu.softserveinc.healthbody.webclient.api.GetAllCompetitions;
+import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.utils.RequestParamUtils;
 
 /**
  * Servlet implementation class CompetitionsViewServlet
  */
-@WebServlet("/competitions")
+@WebServlet("/competition")
 public class CompetitionsViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final Gson gson;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -36,14 +37,13 @@ public class CompetitionsViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		int partNumber = getPartNumber(request);
 		int partSize = getPartSize(request);
-		 GetAllCompetitions com = new GetAllCompetitions();
-         com.setArg0(partNumber);
-         com.setArg1(partSize);
-         writeResponse(com, response);
-}
+		HealthBodyServiceImplService healthBody = new HealthBodyServiceImplService();
+	
+		writeResponse(healthBody.getHealthBodyServiceImplPort().getAllCompetitions(partNumber, partSize), response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -54,16 +54,14 @@ public class CompetitionsViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	private void writeResponse(Object object, HttpServletResponse response)
-			throws IOException {
+
+	private void writeResponse(Object object, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		out.print(gson.toJson(object));
 		out.flush();
 
 	}
-
 
 	private int getPartNumber(HttpServletRequest request) {
 		String partNumberString = request.getParameter("partNumber");
