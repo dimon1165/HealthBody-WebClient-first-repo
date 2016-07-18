@@ -2,6 +2,7 @@ package edu.softserveinc.healthbody.webclient.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import edu.softserveinc.healthbody.webclient.api.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.utils.RequestParamUtils;
 
@@ -41,8 +43,9 @@ public class CompetitionsViewServlet extends HttpServlet {
 		int partNumber = getPartNumber(request);
 		int partSize = getPartSize(request);
 		HealthBodyServiceImplService healthBody = new HealthBodyServiceImplService();
-	
-		writeResponse(healthBody.getHealthBodyServiceImplPort().getAllCompetitions(partNumber, partSize), response);
+		List<CompetitionDTO> competitions = healthBody.getHealthBodyServiceImplPort().
+		getAllCompetitions(partNumber, partSize);
+		writeResponse(competitions, response);
 	}
 
 	/**
