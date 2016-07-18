@@ -122,7 +122,7 @@
 					<!-- using wsdl from an url -->
 					<wsdlUrls>
 						<wsdlUrl>
-							http://localhost:8080/lv185/HealthBodyService?wsdl
+							http://ws-healthbody.rhcloud.com/HealthBody-WebService/HealthBodyService?wsdl
 						</wsdlUrl>
 					</wsdlUrls>
 					<!-- Keep generated files -->
