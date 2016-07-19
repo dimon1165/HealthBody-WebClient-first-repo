@@ -19,14 +19,14 @@ import javax.xml.transform.stream.StreamSource;
 /**
  * Servlet implementation class PdfGiverServlet
  */
-@WebServlet(urlPatterns = { "/pdf" })
-public class PdfGiverServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/html" })
+public class XslTransformerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PdfGiverServlet() {
+    public XslTransformerServlet() {
     }
 
 	/**
