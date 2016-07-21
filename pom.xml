@@ -81,13 +81,35 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
 		<!-- - - - Dom4j - - - -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>${dom4j.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- - - - Spring - - - -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.3.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.3.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.1.RELEASE</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -105,7 +127,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven.war.plugin.version}</version>
 				<configuration>
-<!-- 					<warSourceDirectory>WebContent</warSourceDirectory> -->
+					<!-- <warSourceDirectory>WebContent</warSourceDirectory> -->
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<warName>HealthBody</warName>
 				</configuration>

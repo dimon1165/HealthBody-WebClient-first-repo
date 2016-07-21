@@ -152,6 +152,7 @@ public class SOAPHandler {
 	}
 
 	public boolean convertXmlToHtml(String xml, String xsl, String htmlReport) throws SOAPCustomException {
+		boolean result = false;
 		try {
 			StreamSource streamSource = new StreamSource(LOADER.getResourceAsStream(xsl));
 
@@ -171,17 +172,17 @@ public class SOAPHandler {
 			XMLWriter writer;			
 			OutputFormat format = OutputFormat.createPrettyPrint();
 			format = OutputFormat.createCompactFormat();
-	        writer = new XMLWriter( new FileWriter("WebContent/"+htmlReport), format );
+	        writer = new XMLWriter( new FileWriter(htmlReport), format );
 	        writer.write(htmlDoc);
 	        writer.close();
 
-			Desktop.getDesktop().browse(new File("WebContent/"+htmlReport).toURI());
+			Desktop.getDesktop().browse(new File(htmlReport).toURI());
 
-			return true;
+			result = true;
 
 		} catch (Exception e) {
 			throw new SOAPCustomException("Problem with convertation xml "+xml+" to html "+htmlReport, e);
-			return false;
 		}
+		return result;
 	}
 }
