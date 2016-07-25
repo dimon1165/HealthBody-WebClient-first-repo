@@ -14,12 +14,12 @@ import edu.softserveinc.healthbody.webclient.api.UserDTO;
 @Controller
 public class MainController {
 
-	@RequestMapping(value = "userlist", method = RequestMethod.GET)
+	@RequestMapping(value = "/userlist.html", method = RequestMethod.GET)
 	public String getBudget(@ModelAttribute("user") UserDTO user, Model model) {
 
 		List<UserDTO> userDTO = HealthBodyService.getAllUsers(1, 5);
 
-		model.addAttribute("user", userDTO);
+		model.addAttribute("GetAllUsers", userDTO);
 
 		return "userlist";
 
