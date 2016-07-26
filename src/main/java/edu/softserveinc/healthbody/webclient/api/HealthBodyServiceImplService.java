@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "HealthBodyServiceImplService", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", wsdlLocation = "http://ws-healthbody.rhcloud.com/HealthBody-WebService/HealthBodyService?wsdl")
+@WebServiceClient(name = "HealthBodyServiceImplService", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", wsdlLocation = "http://localhost:8080/HealthBody-WebService/HealthBodyService?wsdl")
 public class HealthBodyServiceImplService
     extends Service
 {
@@ -30,7 +30,7 @@ public class HealthBodyServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://ws-healthbody.rhcloud.com/HealthBody-WebService/HealthBodyService?wsdl");
+            url = new URL("http://localhost:8080/HealthBody-WebService/HealthBodyService?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
