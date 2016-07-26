@@ -15,7 +15,7 @@
 			<th>Surname</th>
 			<th>Age</th>
 		</tr>
-		<c:forEach items="${GetAllUsers}" var="p">
+		<c:forEach items="${AllUsers}" var="p">
 			<tr>
 				<td>${p.login}</td>
 				<td>${p.firstname}</td>
