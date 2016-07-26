@@ -11,7 +11,7 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 public class MainController {
 
 	@RequestMapping(value = "/userlist.html")
-	public String getBudget(Model model) {
+	public String getUserList(Model model) {
 		HealthBodyServiceImplService healthBody = new HealthBodyServiceImplService();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("AllUsers", service.getAllUsers(1, 5));
