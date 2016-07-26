@@ -134,27 +134,27 @@
 					<warName>HealthBody</warName>
 				</configuration>
 			</plugin>
-			<plugin>
+		 	<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
 				<version>2.4.1</version>
-				<executions>
+			<!-- 	<executions>
 					<execution>
 						<id>wsimport-from-jdk</id>
 						<goals>
 							<goal>wsimport</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions> -->
 				<configuration>
 					<vmArgs>
 						<vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
 						<vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
-					</vmArgs>
+					</vmArgs> 
 					<!-- using wsdl from an url -->
 					<wsdlUrls>
 						<wsdlUrl>
-							http://ws-healthbody.rhcloud.com/HealthBody-WebService/HealthBodyService?wsdl
+							http://localhost:8080/HealthBody-WebService/HealthBodyService?wsdl
 						</wsdlUrl>
 					</wsdlUrls>
 					<!-- Keep generated files -->
@@ -164,7 +164,7 @@
 					<!-- generated source files destination -->
 					<sourceDestDir>src/main/java</sourceDestDir>
 				</configuration>
-			</plugin>
+			</plugin> 
 		</plugins>
 	</build>
 	<profiles>
