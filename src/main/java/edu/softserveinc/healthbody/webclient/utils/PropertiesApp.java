@@ -9,8 +9,7 @@ public class PropertiesApp {
 	public static void main(String[] args) {
 		applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 		ServiceSideConf ssconf = applicationContext.getBean(ServiceSideConf.class);
-		/* System.out.println("login = " + mongo.getOpenShiftLogin()); */
-		System.out.println();
+		System.out.println(ssconf.getProps().getDb());
 
 	}
 

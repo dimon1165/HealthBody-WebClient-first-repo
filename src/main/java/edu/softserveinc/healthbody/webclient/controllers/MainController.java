@@ -12,9 +12,11 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 @Controller
 public class MainController {
 
+	private ApplicationContext context;
+
 	@RequestMapping(value = "/userlist.html")
 	public String getUserList(Model model) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(HealthBodyServiceImplService.class);
+		context = new AnnotationConfigApplicationContext(HealthBodyServiceImplService.class);
 		HealthBodyServiceImplService healthBody = context.getBean(HealthBodyServiceImplService.class);
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("AllUsers", service.getAllUsers(1, 5));
