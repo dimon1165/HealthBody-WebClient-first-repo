@@ -10,11 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+
+import edu.softserveinc.healthbody.webclient.log.Loggable;
+
 /**
  * Servlet implementation class GoogleTestServlet
  */
 @WebServlet("/gt")
 public class GoogleTestServlet extends HttpServlet {
+	@Loggable Logger logger;
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -77,8 +83,8 @@ public class GoogleTestServlet extends HttpServlet {
 		} catch (Exception e) {
 		}
 
-		System.out.println("DO POST was here");
-		System.out.println(sb.toString());
+		logger.info("DO POST was here");
+		logger.info(sb.toString());
 	}
 
 }
