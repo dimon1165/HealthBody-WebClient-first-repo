@@ -139,6 +139,10 @@ public class SOAPHandler {
 		 */
 		Document document = parseXmlFile(outputString);
 		NodeList nodeLst = document.getElementsByTagName("ns2:" + nameMethod + "Response");
+		//my be a solution
+		/*Element eElement=null;
+		eElement =  (Element) nodeLst.item(0);
+		String entityInXml = eElement.getText()*/;
 		String entityInXml = nodeLst.item(0).getTextContent();
 		out.close();
 		return entityInXml;
