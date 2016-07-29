@@ -1,3 +1,4 @@
+<!DOCTYPE xml>
 <Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
 	<Body>
 		<getAllCompetitionsResponse

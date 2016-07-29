@@ -247,14 +247,11 @@ public interface HealthBodyService {
     @RequestWrapper(localName = "getAllUsers", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.api.GetAllUsers")
     @ResponseWrapper(localName = "getAllUsersResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.api.GetAllUsersResponse")
     @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllUsersRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllUsersResponse")
-    public static List<UserDTO> getAllUsers(
+    public List<UserDTO> getAllUsers(
         @WebParam(name = "arg0", targetNamespace = "")
         int arg0,
         @WebParam(name = "arg1", targetNamespace = "")
-        int arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        int arg1);
 
     /**
      * 
