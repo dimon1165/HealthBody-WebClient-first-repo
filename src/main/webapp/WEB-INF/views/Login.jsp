@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Health body Web-Client</title>
+<title>JSP Health body Web-Client</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
@@ -54,10 +54,10 @@
 	<script>
 		function onLogin() {
 			var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance 
-			xmlhttp.open("POST", "gt");
+			xmlhttp.open("POST", "/Login.html");
 			xmlhttp
 					.setRequestHeader("Content-Type",
-							"text/plain;charset=UTF-8");
+							"application/x-www-form-urlencoded");
 			var req = "username="
 					+ document.getElementById('login-username').value;
 			req = req + "&password="
@@ -83,7 +83,7 @@
 					<div style="display: none" id="login-alert"
 						class="alert alert-danger col-sm-12"></div>
 					<form id="loginform" class="form-horizontal" role="form"
-						action="gt" method="post">
+						action="Login.html" method="post">
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"> <i
 								class="glyphicon glyphicon-user"></i>
@@ -107,48 +107,52 @@
 						<div style="margin-top: 10px" class="form-group">
 							<!-- Button -->
 							<div class="col-sm-12 controls">
-								<a id="btn-login" href="#" class="btn btn-success"
-									onclick="onLogin();">Login</a>
+								<button class="btn btn-success" type="submit">
+									Login</button>
+<!-- 								<a id="btn-login" href="#" class="btn btn-success" -->
+<!-- 									onclick="onLogin();">Login</a> -->
 
-								<div class="g-signin2" data-onsuccess="onSignIn"
-									data-theme="dark"></div>
-								<script>
-									function onSignIn(googleUser) {
-										// Useful data for your client-side scripts:
-										var profile = googleUser
-												.getBasicProfile();
-										console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-										console.log('Full Name: '
-												+ profile.getName());
-										console.log('Given Name: '
-												+ profile.getGivenName());
-										console.log('Family Name: '
-												+ profile.getFamilyName());
-										console.log("Image URL: "
-												+ profile.getImageUrl());
-										console.log("Email: "
-												+ profile.getEmail());
-										// The ID token you need to pass to your backend:
-										var id_token = googleUser
-												.getAuthResponse().id_token;
-										console.log("ID Token: " + id_token);
-										console.log("JSON: "
-												+ JSON.stringify(googleUser));
-										var user_json = JSON
-												.stringify(googleUser);
-										var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance 
-										xmlhttp.open("POST", "gt");
-										//			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-										//			xmlhttp.send(user_json);
-										xmlhttp.setRequestHeader(
-												"Content-Type",
-												"text/plain;charset=UTF-8");
-										xmlhttp.send(id_token);
-									};
-								</script>
-								<!-- <a id="btn-glogin" href="#" class="btn btn-primary"
-									onclick="onSignIn(googleUser);"> Login with <i class="fa fa-google"></i>oogle
-								</a> -->
+<!-- 								<div class="g-signin2" data-onsuccess="onSignIn" -->
+<!-- 									data-theme="dark"></div> -->
+<!-- 								<script> -->
+<!-- // 									function onSignIn(googleUser) { -->
+<!-- // 										// Useful data for your client-side scripts: -->
+<!-- // 										var profile = googleUser -->
+<!-- // 												.getBasicProfile(); -->
+<!-- // 										console.log("ID: " + profile.getId()); // Don't send this directly to your server! -->
+<!-- // 										console.log('Full Name: ' -->
+<!-- // 												+ profile.getName()); -->
+<!-- // 										console.log('Given Name: ' -->
+<!-- // 												+ profile.getGivenName()); -->
+<!-- // 										console.log('Family Name: ' -->
+<!-- // 												+ profile.getFamilyName()); -->
+<!-- // 										console.log("Image URL: " -->
+<!-- // 												+ profile.getImageUrl()); -->
+<!-- // 										console.log("Email: " -->
+<!-- // 												+ profile.getEmail()); -->
+<!-- // 										// The ID token you need to pass to your backend: -->
+<!-- // 										var id_token = googleUser -->
+<!-- // 												.getAuthResponse().id_token; -->
+<!-- // 										console.log("ID Token: " + id_token); -->
+<!-- // 										console.log("JSON: " -->
+<!-- // 												+ JSON.stringify(googleUser)); -->
+<!-- // 										var user_json = JSON -->
+<!-- // 												.stringify(googleUser); -->
+<!-- // 										var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance  -->
+<!-- // 										xmlhttp.open("POST", "gt"); -->
+<!-- // 										//			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); -->
+<!-- // 										//			xmlhttp.send(user_json); -->
+<!-- // 										xmlhttp.setRequestHeader( -->
+<!-- // 												"Content-Type", -->
+<!-- // 												"text/plain;charset=UTF-8"); -->
+<!-- // 										xmlhttp.send(id_token); -->
+<!-- // 									}; -->
+<!-- 								</script> -->
+
+								<a id="btn-glogin" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read%20https://www.googleapis.com/auth/fitness.nutrition.read&redirect_uri=http://localhost:8080/HealthBody-WebService/GoogleAuth&response_type=code&client_id=48524677967-juniqolaio06efre3m3q7774097q50u8.apps.googleusercontent.com&approval_prompt=auto&access_type=offline"
+										class="btn btn-primary" data-onsuccess="onSignIn"
+										onclick="onSignIn(googleUser);"> Login with <i class="fa fa-google"></i>oogle
+								</a>
 							</div>
 							
 						</div>
