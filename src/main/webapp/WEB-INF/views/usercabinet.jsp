@@ -83,7 +83,7 @@
 			</tr>
 			<tr class="info">
 				<c:forEach items="${getUser.groups}" var="p">
-					<td><a href="${p.name}">${p.name}</a></td>
+					<td><a href="group.html?name=${p.name}">${p.name}</a></td>
 				</c:forEach>
 			</tr>
 		</table>
