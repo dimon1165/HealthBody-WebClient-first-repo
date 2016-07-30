@@ -8,12 +8,18 @@
 <title>usercabinet</title>
 </head>
 <body>
-	<table cellpadding="5" cellspacing="30">
+	<table cellpadding="2" cellspacing="30">
 			<tr><td>Login : ${getUser.login}</td></tr>
 			<tr><td>Name : ${getUser.firstname}</td></tr>
 			<tr><td>Surname : ${getUser.lastname}</td></tr>
 			<tr><td>Age : ${getUser.age}</td></tr>
-			<tr><td>Groups : </td></tr>
+			<tr><td>Weight : ${getUser.weight}</td></tr>
+			<tr><td>Gender : ${getUser.gender}</td></tr>
+			<tr><td>photoURL : ${getUser.photoURL}</td></tr>
+			<tr><td>Role : ${getUser.roleName}</td></tr>
+			<tr><td>Status : ${getUser.status}</td></tr>
+			<tr><td>Score : ${getUser.score}</td></tr>
+			<tr><td>Groups : </td></tr>			
 			<c:forEach items="${getUser.groups}" var="p">
 			 <td>${p.name}</td> 
 			</c:forEach>
