@@ -39,6 +39,9 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li>
+                        <a href="userlist.html">User List</a>
+                    </li>
                 </ul>
         </div>
 
