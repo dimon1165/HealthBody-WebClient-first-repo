@@ -12,6 +12,7 @@ import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
+@ComponentScan
 @WebServiceClient(name = "HealthBodyServiceImplService", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", wsdlLocation = "http://localhost:8080/HealthBody-WebService/HealthBodyService?wsdl")
 public class HealthBodyServiceImplService
     extends Service

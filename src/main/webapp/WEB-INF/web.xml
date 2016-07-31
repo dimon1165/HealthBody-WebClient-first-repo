@@ -21,7 +21,13 @@
 		<servlet-name>googleTest</servlet-name>
 		<url-pattern>/googleTest</url-pattern>
 	</servlet-mapping>
-
+	<!-- - - - - - - - - - - - Spring IoC - - - - - - - - - - -->
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/beans.xml</param-value>
+	</context-param>
+	
 	<!-- - - - - - - - - - - - Spring MVC - - - - - - - - - - -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
