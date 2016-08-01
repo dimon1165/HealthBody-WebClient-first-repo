@@ -29,28 +29,17 @@
             <span class="icon-bar">3</span>
           </button>
           <a class="navbar-brand" href="HomePage.html">Health Body</a>
-           <ul class="nav navbar-nav">
-                    <li>
-                        <a href="usercabinet.html">My Cabinet</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <a href="userlist.html">User List</a>
-                    </li>
-                </ul>
-        </div>
+				<ul class="nav navbar-nav">
+					<li><a href="usercabinet.html">My Cabinet</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="userlist.html">User List</a></li>
+				</ul>
+			</div>
 
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
             <a class="btn btn-success" type="submit" href="Login.html">Sign in</a>
-          </form>
-          <form class="navbar-form navbar-right" role="form">
-            <a class="btn btn-primary" type="submit" href="#" onClick="$('#carousel-home').hide(); $('#signupbox').show()">Sign up</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>

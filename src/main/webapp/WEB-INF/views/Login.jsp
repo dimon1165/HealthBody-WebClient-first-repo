@@ -28,36 +28,31 @@
 		
 	</script>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar">1</span>
-            <span class="icon-bar">2</span>
-            <span class="icon-bar">3</span>
-          </button>
-          <a class="navbar-brand" href="HomePage.html">Health Body</a>
-           <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-        </div>
-        </div>
-        </nav>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar">1</span> <span class="icon-bar">2</span> <span
+						class="icon-bar">3</span>
+				</button>
+				<a class="navbar-brand" href="HomePage.html">Health Body</a>
+				<ul class="nav navbar-nav">
+					<li><a href="usercabinet.html">My Cabinet</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="userlist.html">User List</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 	<script>
 		function onLogin() {
 			var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance 
 			xmlhttp.open("POST", "/Login.html");
-			xmlhttp
-					.setRequestHeader("Content-Type",
-							"application/x-www-form-urlencoded");
+			xmlhttp.setRequestHeader("Content-Type",
+					"application/x-www-form-urlencoded");
 			var req = "username="
 					+ document.getElementById('login-username').value;
 			req = req + "&password="
@@ -67,7 +62,7 @@
 			xmlhttp.send(req);
 		};
 	</script>
-<hr>
+	<hr>
 	<div class="container">
 		<div id="loginbox" style="margin-top: 50px;"
 			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -107,64 +102,53 @@
 						<div style="margin-top: 10px" class="form-group">
 							<!-- Button -->
 							<div class="col-sm-12 controls">
-								<button class="btn btn-success" type="submit">
-									Login</button>
-<!-- 								<a id="btn-login" href="#" class="btn btn-success" -->
-<!-- 									onclick="onLogin();">Login</a> -->
+								<button class="btn btn-success" type="submit">Login</button>
+								<!-- 								<a id="btn-login" href="#" class="btn btn-success" -->
+								<!-- 									onclick="onLogin();">Login</a> -->
 
-<!-- 								<div class="g-signin2" data-onsuccess="onSignIn" -->
-<!-- 									data-theme="dark"></div> -->
-<!-- 								<script> -->
-<!-- // 									function onSignIn(googleUser) { -->
-<!-- // 										// Useful data for your client-side scripts: -->
-<!-- // 										var profile = googleUser -->
-<!-- // 												.getBasicProfile(); -->
-<!-- // 										console.log("ID: " + profile.getId()); // Don't send this directly to your server! -->
-<!-- // 										console.log('Full Name: ' -->
-<!-- // 												+ profile.getName()); -->
-<!-- // 										console.log('Given Name: ' -->
-<!-- // 												+ profile.getGivenName()); -->
-<!-- // 										console.log('Family Name: ' -->
-<!-- // 												+ profile.getFamilyName()); -->
-<!-- // 										console.log("Image URL: " -->
-<!-- // 												+ profile.getImageUrl()); -->
-<!-- // 										console.log("Email: " -->
-<!-- // 												+ profile.getEmail()); -->
-<!-- // 										// The ID token you need to pass to your backend: -->
-<!-- // 										var id_token = googleUser -->
-<!-- // 												.getAuthResponse().id_token; -->
-<!-- // 										console.log("ID Token: " + id_token); -->
-<!-- // 										console.log("JSON: " -->
-<!-- // 												+ JSON.stringify(googleUser)); -->
-<!-- // 										var user_json = JSON -->
-<!-- // 												.stringify(googleUser); -->
-<!-- // 										var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance  -->
-<!-- // 										xmlhttp.open("POST", "gt"); -->
-<!-- // 										//			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); -->
-<!-- // 										//			xmlhttp.send(user_json); -->
-<!-- // 										xmlhttp.setRequestHeader( -->
-<!-- // 												"Content-Type", -->
-<!-- // 												"text/plain;charset=UTF-8"); -->
-<!-- // 										xmlhttp.send(id_token); -->
-<!-- // 									}; -->
-<!-- 								</script> -->
+								<!-- 								<div class="g-signin2" data-onsuccess="onSignIn" -->
+								<!-- 									data-theme="dark"></div> -->
+								<!-- 								<script> -->
+								<!-- // 									function onSignIn(googleUser) { -->
+								<!-- // 										// Useful data for your client-side scripts: -->
+								<!-- // 										var profile = googleUser -->
+								<!-- // 												.getBasicProfile(); -->
+								<!-- // 										console.log("ID: " + profile.getId()); // Don't send this directly to your server! -->
+								<!-- // 										console.log('Full Name: ' -->
+								<!-- // 												+ profile.getName()); -->
+								<!-- // 										console.log('Given Name: ' -->
+								<!-- // 												+ profile.getGivenName()); -->
+								<!-- // 										console.log('Family Name: ' -->
+								<!-- // 												+ profile.getFamilyName()); -->
+								<!-- // 										console.log("Image URL: " -->
+								<!-- // 												+ profile.getImageUrl()); -->
+								<!-- // 										console.log("Email: " -->
+								<!-- // 												+ profile.getEmail()); -->
+								<!-- // 										// The ID token you need to pass to your backend: -->
+								<!-- // 										var id_token = googleUser -->
+								<!-- // 												.getAuthResponse().id_token; -->
+								<!-- // 										console.log("ID Token: " + id_token); -->
+								<!-- // 										console.log("JSON: " -->
+								<!-- // 												+ JSON.stringify(googleUser)); -->
+								<!-- // 										var user_json = JSON -->
+								<!-- // 												.stringify(googleUser); -->
+								<!-- // 										var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance  -->
+								<!-- // 										xmlhttp.open("POST", "gt"); -->
+								<!-- // 										//			xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); -->
+								<!-- // 										//			xmlhttp.send(user_json); -->
+								<!-- // 										xmlhttp.setRequestHeader( -->
+								<!-- // 												"Content-Type", -->
+								<!-- // 												"text/plain;charset=UTF-8"); -->
+								<!-- // 										xmlhttp.send(id_token); -->
+								<!-- // 									}; -->
+								<!-- 								</script> -->
 
-								<a id="btn-glogin" href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read%20https://www.googleapis.com/auth/fitness.nutrition.read&redirect_uri=http://localhost:8080/HealthBody-WebService/GoogleAuth&response_type=code&client_id=48524677967-juniqolaio06efre3m3q7774097q50u8.apps.googleusercontent.com&approval_prompt=auto&access_type=offline"
-										class="btn btn-primary" data-onsuccess="onSignIn"
-										onclick="onSignIn(googleUser);"> Login with <i class="fa fa-google"></i>oogle
+								<a class="btn btn-success" type="submit"
+									href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read%20https://www.googleapis.com/auth/fitness.nutrition.read&redirect_uri=http://localhost:8080/HealthBody-WebClient/GoogleAuthServ&response_type=code&client_id=48524677967-juniqolaio06efre3m3q7774097q50u8.apps.googleusercontent.com&approval_prompt=auto&access_type=offline">
+									Login with <i class="fa fa-google"></i>oogle
 								</a>
 							</div>
-							
-						</div>
-						<div class="form-group">
-							<div class="col-md-12 control">
-								<div
-									style="border-top: 1px solid #888; padding-top: 15px; font-size: 85%">
-									Don't have an account! <a href="#"
-										onClick="$('#loginbox').hide(); $('#signupbox').show()">
-										Sign Up Here </a>
-								</div>
-							</div>
+
 						</div>
 					</form>
 
@@ -172,9 +156,9 @@
 
 				</div>
 			</div>
-			      <footer>
-        <p class="site-info">&copy; 2016 softserve IT Academy, Inc.</p>
-      </footer>
+			<footer>
+				<p class="site-info">&copy; 2016 softserve IT Academy, Inc.</p>
+			</footer>
 		</div>
 		<div id="signupbox" style="display: none; margin-top: 50px"
 			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
