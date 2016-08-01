@@ -333,7 +333,7 @@ public class ObjectFactory {
      * 
      */
     public GroupDTO createGroupDTO() {
-        return new GroupDTO();
+        return new GroupDTO(null, null, null, null, null);
     }
 
     /**
@@ -341,7 +341,7 @@ public class ObjectFactory {
      * 
      */
     public UserDTO createUserDTO() {
-        return new UserDTO();
+        return new UserDTO(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     /**

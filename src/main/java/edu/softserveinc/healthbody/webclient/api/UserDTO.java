@@ -82,7 +82,13 @@ public class UserDTO {
     protected String status;
     protected String weight;
 
-    /**
+    public UserDTO(String string, String login2, Object object, String firstname2, String lastname2, String email2,
+			String string2, String string3, String gender2, String photoURL2, String string4, Object object2,
+			String string5, List<GroupDTO> groups2, String string6) {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * Gets the value of the age property.
      * 
      * @return

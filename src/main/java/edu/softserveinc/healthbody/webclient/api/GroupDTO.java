@@ -42,7 +42,11 @@ public class GroupDTO {
     protected String name;
     protected String scoreGroup;
 
-    /**
+    public GroupDTO(String string, String string2, String string3, String string4, String string5) {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * Gets the value of the count property.
      * 
      * @return
