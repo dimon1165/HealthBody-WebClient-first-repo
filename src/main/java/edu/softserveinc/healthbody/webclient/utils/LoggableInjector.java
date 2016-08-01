@@ -1,4 +1,4 @@
-package edu.softserveinc.healthbody.webclient.log;
+package edu.softserveinc.healthbody.webclient.utils;
 
 import java.lang.reflect.Field;
 

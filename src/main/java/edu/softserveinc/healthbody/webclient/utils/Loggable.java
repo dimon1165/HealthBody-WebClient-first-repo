@@ -1,4 +1,4 @@
-package edu.softserveinc.healthbody.webclient.log;
+package edu.softserveinc.healthbody.webclient.utils;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
  
