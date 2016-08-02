@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class HttpURLConnectionREST {
 
 	private static volatile HttpURLConnectionREST instance;
@@ -35,11 +38,11 @@ public class HttpURLConnectionREST {
 		BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
 		StringBuilder sb = new StringBuilder();
 		String output;
-		System.out.println("Output REST for REST method - " + controllerREST.getClass().getName() + " \n");
+		log.info("Output REST for REST method - " + controllerREST.getClass().getName() + " \n");
 		while ((output = br.readLine()) != null) {
 			sb.append(output);
 		}
-		System.out.println(sb.toString());
+		log.info(sb.toString());
 		br.close();
 		connection.disconnect();
 	}

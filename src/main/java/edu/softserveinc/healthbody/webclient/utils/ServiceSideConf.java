@@ -1,6 +1,5 @@
 package edu.softserveinc.healthbody.webclient.utils;
 
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,18 +7,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
 @ComponentScan(basePackages = { "edu.softserveinc.healthbody.webclient.utils" })
 @PropertySource("classpath:serviceside.properties")
+@Slf4j
 public class ServiceSideConf {
-	@Loggable Logger logger;
 
 	@Autowired
 	private Environment env;
 
 	@Bean
 	public DataBaseTemplate getProps() {
-		logger.info("I am"); 
+		log.info("I am"); 
 
 		String openShiftLogin = env.getProperty("postgres.open_shift_login");
 		String openShiftUrl = env.getProperty("postgres.open_shift_url");

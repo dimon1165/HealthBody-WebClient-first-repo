@@ -3,6 +3,9 @@ package edu.softserveinc.healthbody.webclient.wrapper;
 import java.io.IOException;
 import java.net.URL;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class GroupREST implements ControllerRESTStrategy{
 	
 	private int constructor;
@@ -35,17 +38,17 @@ public class GroupREST implements ControllerRESTStrategy{
 		URL url;
 		if (constructor == 1) {
 			url = new URL(BASE_URL + nameMethod + "?groupName=" + groupName);
-			System.out.println(url);
+			log.info(url.toString());
 			return url;
 		} 
 		if (constructor == 2) {
 			url = new URL(BASE_URL + nameMethod + "?partNumber=" + partNumber + "&partSize=" + partSize);
-			System.out.println(url);
+			log.info(url.toString());
 			return url;
 		} else {
-			System.out.println("Created unless constructor of " + getClass().getName());
+			log.info("Created unless constructor of " + getClass().getName());
 			url = null;
-			System.out.println(url);
+			log.info(url.toString());
 			return url;
 		}
 	}

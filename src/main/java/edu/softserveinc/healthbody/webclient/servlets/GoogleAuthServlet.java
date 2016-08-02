@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -28,11 +26,11 @@ import edu.softserveinc.healthbody.webclient.api.GroupDTO;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.api.UserDTO;
-import edu.softserveinc.healthbody.webclient.utils.Loggable;
+import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")
+@Slf4j
 public class GoogleAuthServlet extends HttpServlet {
-	@Loggable Logger logger;
 	private static final long serialVersionUID = 1L;
 
 	public GoogleAuthServlet() {
@@ -71,18 +69,18 @@ public class GoogleAuthServlet extends HttpServlet {
 			while ((line = reader.readLine()) != null) {
 				outputString += line;
 			}
-			logger.info(outputString + rn);
+			log.info(outputString + rn);
 
 			// get Access Token
 			JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
 			String access_token = json.get("access_token").getAsString();
-			logger.info(access_token + rn);
+			log.info(access_token + rn);
 
 			// get User Info
 			url = new URL("https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + access_token);
 			urlConn = url.openConnection();
 			GooglePojo data = new Gson().fromJson(new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8), GooglePojo.class);
-			logger.info(data.toString() + rn);
+			log.info(data.toString() + rn);
 			writer.close();
 			reader.close();
 
@@ -98,7 +96,7 @@ public class GoogleAuthServlet extends HttpServlet {
 			groups.add(new GroupDTO(UUID.randomUUID().toString(), "Name group number 1", "0", "", ""));
 			UserDTO userDTO = new UserDTO(UUID.randomUUID().toString(), login, null, firstname, lastname, email, "0", "0.0", gender, photoURL, "user",
 					null, "0", groups, "false");
-			logger.info(userDTO.toString());
+			log.info(userDTO.toString());
 
 			// work with base
 			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
@@ -114,7 +112,7 @@ public class GoogleAuthServlet extends HttpServlet {
 				}
 
 		} catch (IOException e) {
-			logger.error("IOException catched" + e);
+			log.error("IOException catched" + e);
 			return;
 		}
 	}
