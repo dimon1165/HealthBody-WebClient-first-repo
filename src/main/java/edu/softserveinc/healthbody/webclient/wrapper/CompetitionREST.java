@@ -6,7 +6,7 @@ import java.net.URL;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class CompettionREST implements ControllerRESTStrategy {
+public class CompetitionREST implements ControllerRESTStrategy {
 
 	private int constructor;
 	private String nameMethod;
@@ -14,14 +14,14 @@ public class CompettionREST implements ControllerRESTStrategy {
 	private int partSize;
 	private String login;
 
-	public CompettionREST(String nameMethod, int partNumber, int partSize) {
+	public CompetitionREST(String nameMethod, int partNumber, int partSize) {
 		this.constructor = 1;
 		this.nameMethod = nameMethod;
 		this.partNumber = partNumber;
 		this.partSize = partSize;
 	}
 
-	public CompettionREST(String nameMethod, int partNumber, int partSize, String login) {
+	public CompetitionREST(String nameMethod, int partNumber, int partSize, String login) {
 		this.constructor = 2;
 		this.nameMethod = nameMethod;
 		this.partNumber = partNumber;

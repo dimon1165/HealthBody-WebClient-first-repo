@@ -8,8 +8,6 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -22,10 +20,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-//import edu.softserveinc.healthbody.webclient.api.GroupDTO;
-//import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
-//import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
-//import edu.softserveinc.healthbody.webclient.api.UserDTO;
+import edu.softserveinc.healthbody.webclient.api.GroupDTO;
+import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
+import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.api.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")
@@ -93,31 +91,43 @@ public class GoogleAuthServlet extends HttpServlet {
 			String fullgender = data.getGender();
 			String gender = getGoogleGender(fullgender);
 			
-//			GroupDTO gg = new GroupDTO();
-//			gg.setName(value);
-//			gg.setCount(value);
-//			gg.setDescriptions(value);
-//			
-//			gg.setScoreGroup(value);
-//			List<GroupDTO> groups = new ArrayList<GroupDTO>();
-////			groups.add(new GroupDTO(UUID.randomUUID().toString(), "Name group number 1", "0", "", ""));
-//			groups.add(new GroupDTO());
-//			UserDTO userDTO = new UserDTO(UUID.randomUUID().toString(), login, null, firstname, lastname, email, "0", "0.0", gender, photoURL, "user",
-//					null, "0", groups, "false");
-//			log.info(userDTO.toString());
-//
-//			// work with base
-//			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
-//				if (service.getUserByLogin(login) == null) {
-//					service.createUser(userDTO);
-//					UserDTO ud = service.getUserByLogin(login);
-//					out.append(login + ", wellcome! You've singed up HealthBody!" + rn);
-//					out.flush();
-//				} else {
-//					UserDTO ud = service.getUserByLogin(login);
-//					out.append(login + ", wellcome HealthBody!");
-//					out.flush();
-//				}
+			GroupDTO gg = new GroupDTO();
+			gg.setIdGroup(UUID.randomUUID().toString());
+			gg.setName("Name group number 1");
+			gg.setCount("0");
+			gg.setDescriptions("");
+			gg.setScoreGroup("");
+
+			UserDTO userDTO = new UserDTO();
+			userDTO.setIdUser(UUID.randomUUID().toString());
+			userDTO.setLogin(login);
+			userDTO.setPassword(null);
+			userDTO.setFirstname(firstname);
+			userDTO.setLastname(lastname);
+			userDTO.setEmail(email);
+			userDTO.setAge("0");
+			userDTO.setWeight("0.0");
+			userDTO.setGender(gender);
+			userDTO.setPhotoURL(photoURL);
+			userDTO.setRoleName("user");
+			userDTO.setStatus(null);
+			userDTO.setScore("0");
+			userDTO.getGroups().add(gg);
+			userDTO.setIsDisabled("false");
+			log.info(userDTO.toString());
+
+			// work with base
+			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
+				if (service.getUserByLogin(login) == null) {
+					service.createUser(userDTO);
+					UserDTO ud = service.getUserByLogin(login);
+					out.append(login + ", wellcome! You've singed up HealthBody!" + rn);
+					out.flush();
+				} else {
+					UserDTO ud = service.getUserByLogin(login);
+					out.append(login + ", wellcome HealthBody!");
+					out.flush();
+				}
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);
