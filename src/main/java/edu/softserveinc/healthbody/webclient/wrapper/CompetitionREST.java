@@ -3,7 +3,10 @@ package edu.softserveinc.healthbody.webclient.wrapper;
 import java.io.IOException;
 import java.net.URL;
 
-public class CompetitionREST implements ControllerRESTStrategy {
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class CompettionREST implements ControllerRESTStrategy {
 
 	private int constructor;
 	private String nameMethod;
@@ -48,18 +51,18 @@ public class CompetitionREST implements ControllerRESTStrategy {
 		URL url;
 		if (constructor == 1) {
 			url = new URL(BASE_URL + nameMethod + "?partNumber=" + partNumber + "&partSize=" + partSize);
-			System.out.println(url);
+			log.info(url.toString());
 			return url;
 		} 
 		if (constructor == 2) {
 			url = new URL(BASE_URL + nameMethod + "?partNumber=" + partNumber + "&partSize=" + partSize 
 					+ "&login=" + login);
-			System.out.println(url);
+			log.info(url.toString());
 			return url;
 		} else {
-			System.out.println("Created unless constructor of " + getClass().getName());
+			log.info("Created unless constructor of " + getClass().getName());
 			url = null;
-			System.out.println(url);
+			log.info(url.toString());
 			return url;
 		}
 	}

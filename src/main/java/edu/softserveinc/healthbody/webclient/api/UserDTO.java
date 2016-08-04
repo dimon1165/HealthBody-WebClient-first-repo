@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="googleApi" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="groups" type="{http://webservice.healthbody.softserveinc.edu/}groupDTO" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="health" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="idUser" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="isDisabled" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="lastname" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="login" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -52,6 +53,7 @@ import javax.xml.bind.annotation.XmlType;
     "googleApi",
     "groups",
     "health",
+    "idUser",
     "isDisabled",
     "lastname",
     "login",
@@ -72,6 +74,7 @@ public class UserDTO {
     @XmlElement(nillable = true)
     protected List<GroupDTO> groups;
     protected String health;
+    protected String idUser;
     protected String isDisabled;
     protected String lastname;
     protected String login;
@@ -253,6 +256,30 @@ public class UserDTO {
      */
     public void setHealth(String value) {
         this.health = value;
+    }
+
+    /**
+     * Gets the value of the idUser property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdUser() {
+        return idUser;
+    }
+
+    /**
+     * Sets the value of the idUser property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdUser(String value) {
+        this.idUser = value;
     }
 
     /**

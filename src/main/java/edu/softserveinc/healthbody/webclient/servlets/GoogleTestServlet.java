@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Servlet implementation class GoogleTestServlet
  */
 @WebServlet("/gt")
+@Slf4j
 public class GoogleTestServlet extends HttpServlet {	
 	private static final long serialVersionUID = 1L;
 
@@ -77,8 +80,8 @@ public class GoogleTestServlet extends HttpServlet {
 		} catch (Exception e) {
 		}
 
-		System.out.println("DO POST was here");
-		System.out.println(sb.toString());
+		log.info("DO POST was here");
+		log.info(sb.toString());
 	}
 
 }

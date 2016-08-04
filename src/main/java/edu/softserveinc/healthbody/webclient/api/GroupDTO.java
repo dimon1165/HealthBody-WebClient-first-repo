@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="count" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descriptions" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="idGroup" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="scoreGroup" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "groupDTO", propOrder = {
     "count",
     "descriptions",
+    "idGroup",
     "name",
     "scoreGroup"
 })
@@ -39,6 +41,7 @@ public class GroupDTO {
 
     protected String count;
     protected String descriptions;
+    protected String idGroup;
     protected String name;
     protected String scoreGroup;
 
@@ -88,6 +91,30 @@ public class GroupDTO {
      */
     public void setDescriptions(String value) {
         this.descriptions = value;
+    }
+
+    /**
+     * Gets the value of the idGroup property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdGroup() {
+        return idGroup;
+    }
+
+    /**
+     * Sets the value of the idGroup property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdGroup(String value) {
+        this.idGroup = value;
     }
 
     /**

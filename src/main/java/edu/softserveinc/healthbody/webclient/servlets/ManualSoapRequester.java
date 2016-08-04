@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import lombok.extern.slf4j.Slf4j;
+
 /**
  * Servlet implementation class ManualSoapRequester
  */
 @WebServlet("/soap")
+//@Slf4j
 public class ManualSoapRequester extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -75,10 +78,10 @@ public class ManualSoapRequester extends HttpServlet {
 // 	        try {
 // 	            int result = httpclient.executeMethod(post);
 // 	            // Display status code
-// 	            System.out.println("Response status code: " + result);
+// 	            log.info("Response status code: " + result);
 // 	            // Display response
-// 	            System.out.println("Response body: ");
-// 	            System.out.println(post.getResponseBodyAsString());
+// 	            log.info("Response body: ");
+// 	            log.info(post.getResponseBodyAsString());
 // 	        } finally {
 // 	            // Release current connection to the connection pool once you are done
 // 	            post.releaseConnection();
