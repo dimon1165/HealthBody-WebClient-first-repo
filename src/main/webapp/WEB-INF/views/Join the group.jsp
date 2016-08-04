@@ -53,6 +53,7 @@
 				<td>${getGroup.descriptions}</td>
 				<td>${getGroup.count}</td>
 				<td>${getGroup.scoreGroup}</td>
+				<td><li><a href="Join the group.html?nameGroup=${getGroup.name}&userLogin=${getUser.login}">Join the group</a></li></td>
 			</tr>
 		</table>
 	</div>

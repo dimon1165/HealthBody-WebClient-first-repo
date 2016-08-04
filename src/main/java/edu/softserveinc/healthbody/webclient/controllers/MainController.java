@@ -13,7 +13,6 @@ public class MainController {
 
 	@RequestMapping(value = "/userlist.html")
 	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody) {
-
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("AllUsers", service.getAllUsers(1, 5));
 		return "userlist";

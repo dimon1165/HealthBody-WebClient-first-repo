@@ -3,17 +3,12 @@ package edu.softserveinc.healthbody.webclient.api;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 
 /**
@@ -22,8 +17,6 @@ import org.springframework.stereotype.Component;
  * Generated source version: 2.2
  * 
  */
-@Component
-@ComponentScan
 @WebServiceClient(name = "HealthBodyServiceImplService", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", wsdlLocation = "http://localhost:8080/HealthBody-WebService/HealthBodyService?wsdl")
 public class HealthBodyServiceImplService
     extends Service
@@ -44,7 +37,7 @@ public class HealthBodyServiceImplService
         HEALTHBODYSERVICEIMPLSERVICE_WSDL_LOCATION = url;
         HEALTHBODYSERVICEIMPLSERVICE_EXCEPTION = e;
     }
-  
+
     public HealthBodyServiceImplService() {
         super(__getWsdlLocation(), HEALTHBODYSERVICEIMPLSERVICE_QNAME);
     }
@@ -74,7 +67,6 @@ public class HealthBodyServiceImplService
      * @return
      *     returns HealthBodyService
      */
-    @Bean
     @WebEndpoint(name = "HealthBodyServiceImplPort")
     public HealthBodyService getHealthBodyServiceImplPort() {
         return super.getPort(new QName("http://webservice.healthbody.softserveinc.edu/", "HealthBodyServiceImplPort"), HealthBodyService.class);
@@ -87,12 +79,11 @@ public class HealthBodyServiceImplService
      * @return
      *     returns HealthBodyService
      */
-    @Bean
     @WebEndpoint(name = "HealthBodyServiceImplPort")
     public HealthBodyService getHealthBodyServiceImplPort(WebServiceFeature... features) {
         return super.getPort(new QName("http://webservice.healthbody.softserveinc.edu/", "HealthBodyServiceImplPort"), HealthBodyService.class, features);
     }
-    @Bean
+
     private static URL __getWsdlLocation() {
         if (HEALTHBODYSERVICEIMPLSERVICE_EXCEPTION!= null) {
             throw HEALTHBODYSERVICEIMPLSERVICE_EXCEPTION;

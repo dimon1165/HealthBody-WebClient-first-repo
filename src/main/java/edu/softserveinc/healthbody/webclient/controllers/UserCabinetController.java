@@ -12,10 +12,10 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 public class UserCabinetController {
 
 	@RequestMapping(value = "/usercabinet.html")
-	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody) {
+	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody, String userLogin) {
 
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		model.addAttribute("getUser", service.getUserByLogin("Login 5"));
+		model.addAttribute("getUser", service.getUserByLogin(userLogin));
 		return "usercabinet";
 	}
 	

@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="finishDate" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="groups" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="idCompetition" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="logins" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="nameCriteria" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlType;
     "description",
     "finishDate",
     "groups",
+    "idCompetition",
     "logins",
     "name",
     "nameCriteria",
@@ -53,6 +55,7 @@ public class CompetitionDTO {
     protected String finishDate;
     @XmlElement(nillable = true)
     protected List<String> groups;
+    protected String idCompetition;
     @XmlElement(nillable = true)
     protected List<String> logins;
     protected String name;
@@ -158,6 +161,30 @@ public class CompetitionDTO {
             groups = new ArrayList<String>();
         }
         return this.groups;
+    }
+
+    /**
+     * Gets the value of the idCompetition property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdCompetition() {
+        return idCompetition;
+    }
+
+    /**
+     * Sets the value of the idCompetition property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdCompetition(String value) {
+        this.idCompetition = value;
     }
 
     /**

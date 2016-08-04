@@ -31,7 +31,7 @@
           <a class="navbar-brand" href="HomePage.html">Health Body</a>
            <ul class="nav navbar-nav">
                     <li>
-                        <a href="usercabinet.html">My Cabinet</a>
+                        <a href="usercabinet.html?userLogin=${getUser.login}">My Cabinet</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -83,7 +83,7 @@
 			</tr>
 			<tr class="info">
 				<c:forEach items="${getUser.groups}" var="p">
-					<td><a href="group.html?name=${p.name}">${p.name}</a></td>
+					<td><a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a></td>
 				</c:forEach>
 			</tr>
 		</table>
