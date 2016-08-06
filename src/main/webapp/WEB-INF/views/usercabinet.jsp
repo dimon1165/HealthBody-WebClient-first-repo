@@ -48,11 +48,9 @@
         </nav>
          <br>
          <br>
-         <br>
-         <br>
     <div class="container">
-		<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQo61fUpFp4AoZ4p4r-PgDnQY99i5wYz2AlwAttAB1ZO9ViPotK" class="img-responsive"
-			alt="Cinque Terre" width="304" height="236">
+		<img src="${getUser.photoURL}"
+			alt="Cinque Terre" width="334" height="336">
 		<table class="table">
 			<tr class="info">
 				<th>Login :</th>
