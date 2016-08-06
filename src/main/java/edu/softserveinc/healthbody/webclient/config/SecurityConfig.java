@@ -1,4 +1,4 @@
-package edu.softserve.healthbody.webclient.config;
+package edu.softserveinc.healthbody.webclient.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,12 +15,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ComponentScan
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	UserDetailService userDetailService;
+	CustomAuthenticationProvider authProvider;
+	//UserDetailService userDetailService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.userDetailsService(userDetailService);
+		auth.authenticationProvider(authProvider);
+		//auth.userDetailsService(userDetailService);
 	}
 
 	@Override
