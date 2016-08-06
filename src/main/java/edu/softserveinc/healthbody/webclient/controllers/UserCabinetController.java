@@ -15,7 +15,7 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 public class UserCabinetController {
 
 	@RequestMapping(value = "/usercabinet.html",method = RequestMethod.GET)
-	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody,HttpServletRequest request) {
+	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
 		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("getUser", service.getUserByLogin(userLogin));

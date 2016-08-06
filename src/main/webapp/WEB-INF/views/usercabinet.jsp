@@ -31,7 +31,7 @@
           <a class="navbar-brand" href="HomePage.html">Health Body</a>
            <ul class="nav navbar-nav">
                     <li>
-                        <a href="usercabinet.html?userLogin=${getUser.login}">My Cabinet</a>
+                        <a href="usercabinet.html">My Cabinet</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
