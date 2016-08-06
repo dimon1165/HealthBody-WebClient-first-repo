@@ -31,7 +31,7 @@
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li><a href="userlist.html">User List</a></li>
-				<li><a href="listGroups.html">Groups</a></li>
+				<li><a href="listGroups.html">Groups</a>
 			</ul>
 		</div>
 	</div>
@@ -40,23 +40,10 @@
 	<br>
 	<br>
 	<br>
+	Groups :<br><br>
+	<c:forEach items="${getGroups}" var="p">
+					<a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br><br>
+				</c:forEach>
 
-	<div class="container">
-		<table class="table">
-			<tr class="info">
-				<th>Name :</th>
-				<th>Description :</th>
-				<th>Count:</th>
-				<th>Score of group :</th>
-			</tr>
-			<tr>
-				<td>${getGroup.name}</td>
-				<td>${getGroup.descriptions}</td>
-				<td>${getGroup.count}</td>
-				<td>${getGroup.scoreGroup}</td>
-				<td><li><a href="Join the group.html?nameGroup=${getGroup.name}&userLogin=${getUser.login}">Join the group</a></li></td>
-			</tr>
-		</table>
-	</div>
 </body>
 </html>

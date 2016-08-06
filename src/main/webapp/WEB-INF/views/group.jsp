@@ -31,6 +31,7 @@
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li><a href="userlist.html">User List</a></li>
+				<li><a href="listGroups.html">Groups</a></li>
 			</ul>
 		</div>
 	</div>

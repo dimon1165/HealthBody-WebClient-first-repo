@@ -16,8 +16,18 @@ import edu.softserveinc.healthbody.webclient.api.UserDTO;
 @Controller
 public class GroupController {
 	
+	@RequestMapping(value = "/listGroups.html", method = RequestMethod.GET)
+	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
+		String userLogin = request.getUserPrincipal().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		model.addAttribute("getUser", service.getUserByLogin(userLogin));
+		model.addAttribute("getGroups", service.getAllGroups(1, 6));
+		return "listGroups";
+	}
+	
 	@RequestMapping(value = "/group.html", method = RequestMethod.GET)
-	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, String userLogin) {
+	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, HttpServletRequest request) {
+		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
 		for (GroupDTO group : service.getUserByLogin(userLogin).getGroups()) {
