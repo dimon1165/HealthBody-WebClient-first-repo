@@ -1,5 +1,7 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +35,8 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "/Join the group.html",  method = RequestMethod.GET)
-	public String joinGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, String userLogin) {
+	public String joinGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, HttpServletRequest request) {
+		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		UserDTO user = service.getUserByLogin(userLogin);
 		user.getGroups().add(service.getGroupByName(nameGroup));
