@@ -131,6 +131,11 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.0.10.RELEASE</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -164,14 +169,8 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxws-maven-plugin</artifactId>
 				<version>2.4.1</version>
-		 <!-- 		<executions>
-			 		<execution>
-			 		 <id>wsimport-from-jdk</id> 
-			 			<goals>
-			 				<goal>wsimport</goal> 
-						</goals>
-					 </execution>
-				</executions> -->
+				<!-- <executions> <execution> <id>wsimport-from-jdk</id> <goals> <goal>wsimport</goal> 
+					</goals> </execution> </executions> -->
 				<configuration>
 					<vmArgs>
 						<vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
