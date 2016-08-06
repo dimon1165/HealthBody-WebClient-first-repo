@@ -1,4 +1,4 @@
-package edu.softserve.healthbody.webclient.config;
+package edu.softserveinc.healthbody.webclient.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
