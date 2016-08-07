@@ -291,5 +291,23 @@ public interface HealthBodyService {
         int arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         int arg1);
+    
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<edu.softserveinc.healthbody.webclient.api.GroupDTO>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllGroupsParticipants", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.api.GetAllGroupsParticipants")
+    @ResponseWrapper(localName = "getAllGroupsParticipantsResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.api.GetAllGroupsParticipantsResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllGroupsParticipantsRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllGroupsParticipantsResponse")
+    public List<GroupDTO> getAllGroupsParticipants(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1);
 
 }

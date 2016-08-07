@@ -32,6 +32,7 @@ public class ObjectFactory {
     private final static QName _GetAllUsersinCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUsersinCompetitionResponse");
     private final static QName _GetAllGroupsResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroupsResponse");
     private final static QName _LockUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "lockUserResponse");
+    private final static QName _GetAllGroupsParticipants_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroupsParticipants");
     private final static QName _GetAllGroups_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroups");
     private final static QName _GetAllUsersinCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUsersinCompetition");
     private final static QName _GetDescriptionOfGroup_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getDescriptionOfGroup");
@@ -51,6 +52,7 @@ public class ObjectFactory {
     private final static QName _CreateUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createUser");
     private final static QName _GetAllCompetitions_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitions");
     private final static QName _UpdateGroupResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "updateGroupResponse");
+    private final static QName _GetAllGroupsParticipantsResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroupsParticipantsResponse");
     private final static QName _CreateCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createCompetition");
     private final static QName _GetAllCompetitionsByUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitionsByUserResponse");
     private final static QName _GetAllUsersResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUsersResponse");
@@ -102,6 +104,14 @@ public class ObjectFactory {
      */
     public LockUserResponse createLockUserResponse() {
         return new LockUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAllGroupsParticipants }
+     * 
+     */
+    public GetAllGroupsParticipants createGetAllGroupsParticipants() {
+        return new GetAllGroupsParticipants();
     }
 
     /**
@@ -281,6 +291,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllGroupsParticipantsResponse }
+     * 
+     */
+    public GetAllGroupsParticipantsResponse createGetAllGroupsParticipantsResponse() {
+        return new GetAllGroupsParticipantsResponse();
+    }
+
+    /**
      * Create an instance of {@link CreateCompetition }
      * 
      */
@@ -414,6 +432,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "lockUserResponse")
     public JAXBElement<LockUserResponse> createLockUserResponse(LockUserResponse value) {
         return new JAXBElement<LockUserResponse>(_LockUserResponse_QNAME, LockUserResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllGroupsParticipants }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getAllGroupsParticipants")
+    public JAXBElement<GetAllGroupsParticipants> createGetAllGroupsParticipants(GetAllGroupsParticipants value) {
+        return new JAXBElement<GetAllGroupsParticipants>(_GetAllGroupsParticipants_QNAME, GetAllGroupsParticipants.class, null, value);
     }
 
     /**
@@ -585,6 +612,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "updateGroupResponse")
     public JAXBElement<UpdateGroupResponse> createUpdateGroupResponse(UpdateGroupResponse value) {
         return new JAXBElement<UpdateGroupResponse>(_UpdateGroupResponse_QNAME, UpdateGroupResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllGroupsParticipantsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getAllGroupsParticipantsResponse")
+    public JAXBElement<GetAllGroupsParticipantsResponse> createGetAllGroupsParticipantsResponse(GetAllGroupsParticipantsResponse value) {
+        return new JAXBElement<GetAllGroupsParticipantsResponse>(_GetAllGroupsParticipantsResponse_QNAME, GetAllGroupsParticipantsResponse.class, null, value);
     }
 
     /**
