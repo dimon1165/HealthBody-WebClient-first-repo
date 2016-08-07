@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,35 +42,31 @@
 	<br>
 	<br>	
 		<div class="container">
-		<table class="table">
+		<table class="table" >
 			<tr class="info">
 				<th>Name:</th>
 				<th>Status:</th>
-				<th>Participants Logins:</th>
-				<th>Participants First Names:</th>
-				<th>Participants Last Names:</th>				
+				<th>Participants:</th>			
 			</tr>
 			<tr>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					<a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.status}<br><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.users}<br><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.firstname}<br><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.lastname}<br><br><br>
-				</c:forEach></td>
+		
+				<c:forEach items="${getGroups}" var="p" >
+				<tr>
+					<td>
+						<a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br><br>
+							<td>
+								${p.status}<br><br>
+							<td/>
+						 <c:forEach  begin="0" end="${fn:length(p.users)}" var="index">
+								<c:out value="${p.users[index]}" /><br>
+								<c:out value="${p.firstname[index]}" /><br>
+								<c:out value="${p.lastname[index]}" /><br><br>
+						</c:forEach>		
+					<td/>        
+				</tr>
+				</c:forEach>	
 			</tr>
 		</table>
 	</div>
-	
-
-
 </body>
 </html>
