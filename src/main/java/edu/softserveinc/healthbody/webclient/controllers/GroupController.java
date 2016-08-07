@@ -21,7 +21,7 @@ public class GroupController {
 		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("getUser", service.getUserByLogin(userLogin));
-		model.addAttribute("getGroups", service.getAllGroups(1, 6));
+		model.addAttribute("getGroups", service.getAllGroupsParticipants(1, 3));
 		return "listGroups";
 	}
 	
