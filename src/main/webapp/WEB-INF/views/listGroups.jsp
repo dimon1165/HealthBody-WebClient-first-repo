@@ -49,27 +49,16 @@
 				<th>Participants First Names:</th>
 				<th>Participants Last Names:</th>				
 			</tr>
-			<tr>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					<a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.status}<br><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.users}<br><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.firstname}<br><br><br>
-				</c:forEach></td>
-				<td>	<c:forEach items="${getGroups}" var="p">
-					${p.lastname}<br><br><br>
-				</c:forEach></td>
-			</tr>
+			<c:forEach items="${getGroups}" var="p">
+				<tr>
+					<td><a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a></td>
+					<td>${p.status}</td>
+					<td>${p.users}</td>
+					<td>${p.firstname}</td>
+					<td>${p.lastname}</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
-	
-
-
 </body>
 </html>
