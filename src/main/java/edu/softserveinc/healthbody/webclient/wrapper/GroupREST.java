@@ -6,7 +6,7 @@ import java.net.URL;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GroupREST implements ControllerRESTStrategy{
+public class GroupREST implements IControllerREST{
 	
 	private int constructor;
 	private String nameMethod;
