@@ -67,5 +67,18 @@
 			</tr>
 		</table>
 	</div>
+
+ <div class="container" align="center">
+		<ul class="pagination">
+		<li><a href="<c:url value="/listGroups.html" >
+        <c:param name="groupsParticipantsPartnumber" value="${currentPage - 1}"/>${p}</c:url>">«</a></li>
+        <li><c:forEach begin="${startPartNumber}" end="${endpagePartNumber}" var="p">
+        <a href="<c:url value="/listGroups.html" >
+        <c:param name="groupsParticipantsPartnumber" value="${p}"/>${p}</c:url>">${p}</a>
+        </c:forEach>
+        <li><a href="<c:url value="/listGroups.html" >
+        <c:param name="groupsParticipantsPartnumber" value="${currentPage + 1}"/>${p}</c:url>">»</a></li>
+    </ul>
+</div> 
 </body>
 </html>
