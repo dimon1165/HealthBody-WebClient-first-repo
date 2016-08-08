@@ -27,10 +27,11 @@
 			</button>
 			<a class="navbar-brand" href="HomePage.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="usercabinet.html?userLogin=${getUser.login}">My Cabinet</a></li>
+				<li><a href="usercabinet.html">My Cabinet</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li><a href="userlist.html">User List</a></li>
+				<li><a href="listGroups.html">Groups</a></li>
 			</ul>
 		</div>
 	</div>

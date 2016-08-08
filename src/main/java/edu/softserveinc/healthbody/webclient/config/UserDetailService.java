@@ -1,4 +1,4 @@
-package edu.softserve.healthbody.webclient.config;
+package edu.softserveinc.healthbody.webclient.config;
 
 import java.util.ArrayList;
 import java.util.List;

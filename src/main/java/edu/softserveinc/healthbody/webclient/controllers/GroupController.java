@@ -1,5 +1,7 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +16,18 @@ import edu.softserveinc.healthbody.webclient.api.UserDTO;
 @Controller
 public class GroupController {
 	
+	@RequestMapping(value = "/listGroups.html", method = RequestMethod.GET)
+	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
+		String userLogin = request.getUserPrincipal().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		model.addAttribute("getUser", service.getUserByLogin(userLogin));
+		model.addAttribute("getGroups", service.getAllGroupsParticipants(1, 3));
+		return "listGroups";
+	}
+	
 	@RequestMapping(value = "/group.html", method = RequestMethod.GET)
-	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, String userLogin) {
+	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, HttpServletRequest request) {
+		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
 		for (GroupDTO group : service.getUserByLogin(userLogin).getGroups()) {
@@ -33,7 +45,8 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "/Join the group.html",  method = RequestMethod.GET)
-	public String joinGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, String userLogin) {
+	public String joinGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, HttpServletRequest request) {
+		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		UserDTO user = service.getUserByLogin(userLogin);
 		user.getGroups().add(service.getGroupByName(nameGroup));

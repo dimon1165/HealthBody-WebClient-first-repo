@@ -31,7 +31,7 @@
           <a class="navbar-brand" href="HomePage.html">Health Body</a>
            <ul class="nav navbar-nav">
                     <li>
-                        <a href="usercabinet.html?userLogin=${getUser.login}">My Cabinet</a>
+                        <a href="usercabinet.html">My Cabinet</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -42,17 +42,18 @@
                     <li>
                         <a href="userlist.html">User List</a>
                     </li>
+                    <li>
+                    <a href="listGroups.html">Groups</a>
+                    </li>
                 </ul>
                 </div>
         </div>
         </nav>
          <br>
          <br>
-         <br>
-         <br>
     <div class="container">
-		<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQo61fUpFp4AoZ4p4r-PgDnQY99i5wYz2AlwAttAB1ZO9ViPotK" class="img-responsive"
-			alt="Cinque Terre" width="304" height="236">
+		<img src="${getUser.photoURL}"
+			alt="Cinque Terre" width="334" height="336">
 		<table class="table">
 			<tr class="info">
 				<th>Login :</th>

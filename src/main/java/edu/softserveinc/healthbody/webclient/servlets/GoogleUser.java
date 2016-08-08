@@ -1,6 +1,6 @@
 package edu.softserveinc.healthbody.webclient.servlets;
 
-public class GooglePojo {
+public class GoogleUser {
 	String id;
 	String email;
 	String name;

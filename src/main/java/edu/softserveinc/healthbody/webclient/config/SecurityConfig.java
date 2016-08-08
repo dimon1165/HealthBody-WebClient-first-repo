@@ -1,4 +1,4 @@
-package edu.softserve.healthbody.webclient.config;
+package edu.softserveinc.healthbody.webclient.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,23 +15,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ComponentScan
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	UserDetailService userDetailService;
+	CustomAuthenticationProvider authProvider;
+	//UserDetailService userDetailService;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		/*
-		 * auth.inMemoryAuthentication()
-		 * .withUser("user").password("password").roles("USER") .and()
-		 * .withUser("admin").password("password").roles("ADMIN");
-		 */
-		auth.userDetailsService(userDetailService);
+		auth.authenticationProvider(authProvider);
+		//auth.userDetailsService(userDetailService);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/Login*", "/", "/HomePage.html", "/resources/**")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/Login.html")
-				.defaultSuccessUrl("/HomePage.html").failureUrl("/Login.html?error=true").and().logout()
+				.defaultSuccessUrl("/usercabinet.html").failureUrl("/Login.html?error=true").and().logout()
 				.logoutSuccessUrl("/Login.html");
 	}
 }
