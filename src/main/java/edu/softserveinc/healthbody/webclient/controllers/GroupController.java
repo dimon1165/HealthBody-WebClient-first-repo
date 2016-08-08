@@ -26,6 +26,9 @@ public class GroupController {
 			if(groupsParticipantsPartnumber == null){
 				groupsParticipantsPartnumber = 1;
 			}
+			if(groupsParticipantsPartnumber <= 0){
+				groupsParticipantsPartnumber = 1;
+			} 
 		int currentPage = groupsParticipantsPartnumber;
 		int startPartNumber = (int) (groupsParticipantsPartnumber - 5 > 0?groupsParticipantsPartnumber - 5:1);
 		int endpagePartNumber = startPartNumber + 2;
