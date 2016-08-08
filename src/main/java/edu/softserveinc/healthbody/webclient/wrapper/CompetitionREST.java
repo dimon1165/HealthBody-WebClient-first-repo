@@ -6,7 +6,7 @@ import java.net.URL;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class CompetitionREST implements ControllerRESTStrategy {
+public class CompetitionREST implements IControllerREST {
 
 	private int constructor;
 	private String nameMethod;

@@ -27,7 +27,7 @@ public class HttpURLConnectionREST {
 		return instance;
 	}
 
-	public void sendGet(ControllerRESTStrategy controllerREST) throws IOException {
+	public void sendGet(IControllerREST controllerREST) throws IOException {
 		URL url = controllerREST.createRESTRequest();
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
