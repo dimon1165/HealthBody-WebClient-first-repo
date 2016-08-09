@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +32,8 @@
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li><a href="userlist.html">User List</a></li>
-				<li><a href="listGroups.html">Groups</a>
+				<li><a href="listGroups.html">Groups</a></li>
+				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
 		</div>
 	</div>
@@ -40,45 +41,54 @@
 	<br>
 	<br>
 	<br>
-	<br>	
-		<div class="container">
-		<table class="table" >
+	<br>
+	<div class="container">
+		<table class="table">
 			<tr class="info">
 				<th>Name:</th>
 				<th>Status:</th>
-				<th>Participants:</th>			
+				<th>Participants:</th>
 			</tr>
 			<tr>
-				<c:forEach items="${getGroups}" var="p" >
-				<tr>
-					<td>
-						<a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br><br>
-							<td>
-								${p.status}<br><br>
-							<td/>
-						 <c:forEach  begin="0" end="${fn:length(p.users)}" var="index">
-								<c:out value="${p.users[index]}" /><br>
-								<c:out value="${p.firstname[index]}" /><br>
-								<c:out value="${p.lastname[index]}" /><br><br>
-						</c:forEach>		
-					<td/>        
-				</tr>
-				</c:forEach>	
+				<c:forEach items="${getGroups}" var="p">
+					<tr>
+						<td><a
+							href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br>
+						<br>
+						<td>${p.status}<br>
+						<br>
+						<td />
+						<c:forEach begin="0" end="${fn:length(p.users)}" var="index">
+							<c:out value="${p.users[index]}" />
+							<br>
+							<c:out value="${p.firstname[index]}" />
+							<br>
+							<c:out value="${p.lastname[index]}" />
+							<br>
+							<br>
+						</c:forEach>
+						<td />
+					</tr>
+				</c:forEach>
 			</tr>
 		</table>
 	</div>
 
- <div class="container" align="center">
+	<div class="container" align="center">
 		<ul class="pagination">
-		<li><a href="<c:url value="/listGroups.html" >
+			<li><a
+				href="<c:url value="/listGroups.html" >
         <c:param name="groupsParticipantsPartnumber" value="${currentPage - 1}"/>${p}</c:url>">«</a></li>
-        <li><c:forEach begin="${startPartNumber}" end="${endpagePartNumber}" var="p">
-        <a href="<c:url value="/listGroups.html" >
+			<li><c:forEach begin="${startPartNumber}"
+					end="${endpagePartNumber}" var="p">
+					<a
+						href="<c:url value="/listGroups.html" >
         <c:param name="groupsParticipantsPartnumber" value="${p}"/>${p}</c:url>">${p}</a>
-        </c:forEach>
-        <li><a href="<c:url value="/listGroups.html" >
+				</c:forEach>
+			<li><a
+				href="<c:url value="/listGroups.html" >
         <c:param name="groupsParticipantsPartnumber" value="${currentPage + 1}"/>${p}</c:url>">»</a></li>
-    </ul>
-</div> 
+		</ul>
+	</div>
 </body>
 </html>
