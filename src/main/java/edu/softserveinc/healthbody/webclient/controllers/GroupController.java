@@ -23,12 +23,9 @@ public class GroupController {
 			HttpServletRequest request) {
 		
 		final Integer DEFAULT_QUONTITY_GROUPS_PER_PAGE = 1;
-			if(groupsParticipantsPartnumber == null){
+			if(groupsParticipantsPartnumber == null || groupsParticipantsPartnumber <= 0){
 				groupsParticipantsPartnumber = 1;
 			}
-			if(groupsParticipantsPartnumber <= 0){
-				groupsParticipantsPartnumber = 1;
-			} 
 		int currentPage = groupsParticipantsPartnumber;
 		int startPartNumber = (int) (groupsParticipantsPartnumber - 5 > 0?groupsParticipantsPartnumber - 5:1);
 		int endpagePartNumber = startPartNumber + 2;
