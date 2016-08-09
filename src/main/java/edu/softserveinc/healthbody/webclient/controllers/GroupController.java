@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.softserveinc.healthbody.webclient.api.GroupDTO;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
@@ -17,13 +18,30 @@ import edu.softserveinc.healthbody.webclient.api.UserDTO;
 public class GroupController {
 	
 	@RequestMapping(value = "/listGroups.html", method = RequestMethod.GET)
-	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
-		String userLogin = request.getUserPrincipal().getName();
+	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			@RequestParam(value="groupsParticipantsPartnumber", required=false) Integer groupsParticipantsPartnumber,
+			HttpServletRequest request) {
+		
+		final Integer DEFAULT_QUONTITY_GROUPS_PER_PAGE = 1;
+			if(groupsParticipantsPartnumber == null || groupsParticipantsPartnumber <= 0){
+				groupsParticipantsPartnumber = 1;
+			}
+		int currentPage = groupsParticipantsPartnumber;
+		int startPartNumber = (int) (groupsParticipantsPartnumber - 5 > 0?groupsParticipantsPartnumber - 5:1);
+		int endpagePartNumber = startPartNumber + 2;
+			
+		String userLogin = request.getUserPrincipal().getName();	
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		
 		model.addAttribute("getUser", service.getUserByLogin(userLogin));
-		model.addAttribute("getGroups", service.getAllGroupsParticipants(1, 3));
+	    model.addAttribute("startPartNumber",startPartNumber);
+	    model.addAttribute("endpagePartNumber",endpagePartNumber);
+	    model.addAttribute("currentPage",currentPage);
+		model.addAttribute("getGroups", service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUONTITY_GROUPS_PER_PAGE));
 		return "listGroups";
 	}
+	
+	
 	
 	@RequestMapping(value = "/group.html", method = RequestMethod.GET)
 	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup, HttpServletRequest request) {
