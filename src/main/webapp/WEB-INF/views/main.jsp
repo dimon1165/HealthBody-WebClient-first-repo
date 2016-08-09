@@ -39,7 +39,7 @@
 
 	<div class="container">
 		<table class="table table-hover">
-			<tr class="info" style="width: 832px; height: 48px; ">
+			<tr class="info">
 				<th>Name of Competition</th>
 				<th>Amount</th>
 				<th>Start Date</th>
@@ -47,13 +47,13 @@
 				<th>Take part</th>
 			</tr>
 			<c:forEach items="${getAllComp}" var="v">
-				<tr class="info">
-					<td>${v.name}</td>
-					<td>${v.count}</td>
-					<td>${v.startDate}</td>
-					<td>${v.finishDate}</td>
-					<td><a href="register_in_comp">Take part</a></td>
-				</tr>
+			<tr class="info">
+				<td>${v.name}</td>
+				<td>${v.count}</td>
+				<td>${v.startDate}</td>
+				<td>${v.finishDate}</td>
+				<td><a href="register_in_comp">Take part</a></td>
+			</tr>
 			</c:forEach>
 	</table>
 	</div>
