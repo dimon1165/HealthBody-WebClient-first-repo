@@ -50,10 +50,10 @@
 				<th>Score of group :</th>
 			</tr>
 			<tr>
-				<td>${getGroup.name}</td>
-				<td>${getGroup.descriptions}</td>
-				<td>${getGroup.count}</td>
-				<td>${getGroup.scoreGroup}</td>
+				<td>${group.name}</td>
+				<td>${group.descriptions}</td>
+				<td>${group.count}</td>
+				<td>${group.scoreGroup}</td>
 			</tr>
 		</table>
 	</div>

@@ -50,11 +50,11 @@
 				<th>Score of group :</th>
 			</tr>
 			<tr>
-				<td>${getGroup.name}</td>
-				<td>${getGroup.descriptions}</td>
-				<td>${getGroup.count}</td>
-				<td>${getGroup.scoreGroup}</td>
-				<td><li><a href="Join the group.html?nameGroup=${getGroup.name}&userLogin=${getUser.login}">Join the group</a></li></td>
+				<td>${group.name}</td>
+				<td>${group.descriptions}</td>
+				<td>${group.count}</td>
+				<td>${group.scoreGroup}</td>
+				<td><a href="Join the group.html?nameGroup=${group.name}&userLogin=${user.login}">Join the group</a></td>
 			</tr>
 		</table>
 	</div>

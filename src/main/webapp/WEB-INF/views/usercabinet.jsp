@@ -52,7 +52,7 @@
          <br>
          <br>
     <div class="container">
-		<img src="${getUser.photoURL}"
+		<img src="${user.photoURL}"
 			alt="Cinque Terre" width="334" height="336">
 		<table class="table">
 			<tr class="info">
@@ -62,20 +62,19 @@
 				<th>Age :</th>
 				<th>Weight :</th>
 				<th>Gender :</th>
+				<th>Health :</th>
 				<th>Role :</th>
-				<th>Status :</th>
-				<th>Score :</th>
 			</tr>
 			<tr class="info">
-				<td>${getUser.login}</td>
-				<td>${getUser.firstname}</td>
-				<td>${getUser.lastname}</td>
-				<td>${getUser.age}</td>
-				<td>${getUser.weight}</td>
-				<td>${getUser.gender}</td>
-				<td>${getUser.roleName}</td>
-				<td>${getUser.status}</td>
-				<td>${getUser.score}</td>
+				<td>${user.login}</td>
+				<td>${user.firstname}</td>
+				<td>${user.lastname}</td>
+				<td>${user.age}</td>
+				<td>${user.weight}</td>
+				<td>${user.gender}</td>
+				<td>${user.health}</td>
+				<td>${user.roleName}</td>
+				<td><a href="editUser.html?userLogin=${user.login}">Edit</a></td>
 			</tr>
 		</table>
 		<table class="table">
@@ -83,8 +82,8 @@
 				<th>Groups :</th>
 			</tr>
 			<tr class="info">
-				<c:forEach items="${getUser.groups}" var="p">
-					<td><a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a></td>
+				<c:forEach items="${user.groups}" var="p">
+					<td><a href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
 				</c:forEach>
 			</tr>
 		</table>

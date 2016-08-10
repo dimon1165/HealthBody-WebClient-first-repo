@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>group</title>
+<title>listGroups</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -49,10 +49,10 @@
 				<th>Participants:</th>			
 			</tr>
 			<tr>
-				<c:forEach items="${getGroups}" var="p" >
+				<c:forEach items="${groups}" var="p" >
 				<tr>
 					<td>
-						<a href="group.html?nameGroup=${p.name}&userLogin=${getUser.login}">${p.name}</a><br><br>
+						<a href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a><br><br>
 							<td>
 								${p.status}<br><br>
 							<td/>

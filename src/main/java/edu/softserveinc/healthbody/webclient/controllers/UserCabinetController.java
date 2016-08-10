@@ -18,7 +18,7 @@ public class UserCabinetController {
 	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
 		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		model.addAttribute("getUser", service.getUserByLogin(userLogin));
+		model.addAttribute("user", service.getUserByLogin(userLogin));
 		return "usercabinet";
 	}
 

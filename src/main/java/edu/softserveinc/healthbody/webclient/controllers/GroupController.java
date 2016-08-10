@@ -20,8 +20,8 @@ public class GroupController {
 	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
 		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		model.addAttribute("getUser", service.getUserByLogin(userLogin));
-		model.addAttribute("getGroups", service.getAllGroupsParticipants(1, 3));
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("groups", service.getAllGroupsParticipants(1, 3));
 		return "listGroups";
 	}
 	
@@ -35,8 +35,8 @@ public class GroupController {
 				test = true;
 			}
 		}
-		model.addAttribute("getUser", service.getUserByLogin(userLogin));
-		model.addAttribute("getGroup", service.getGroupByName(nameGroup));
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("group", service.getGroupByName(nameGroup));
 		if (test) {
 			return "group";
 		} else {
@@ -51,7 +51,7 @@ public class GroupController {
 		UserDTO user = service.getUserByLogin(userLogin);
 		user.getGroups().add(service.getGroupByName(nameGroup));
 		service.updateUser(user);
-		model.addAttribute("getUser", service.getUserByLogin(userLogin));
+		model.addAttribute("user", service.getUserByLogin(userLogin));
 		return "usercabinet";
 	}
 }
