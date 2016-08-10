@@ -32,6 +32,7 @@
 				<li><a href="#">Contact</a></li>
 				<li><a href="userlist.html">User List</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
+				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
 		</div>
 	</div>

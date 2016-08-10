@@ -33,6 +33,7 @@
 				<li><a href="#">Contact</a></li>
 				<li><a href="userlist.html">User List</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
+				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
 		</div>
 	</div>
@@ -66,8 +67,8 @@
 					<td><form:input path="weight" /></td>
 				</tr>
 				<tr class="info">
-					 <td><form:radiobutton path="gender" value="MALE"/>Male</td>
-              		 <td><form:radiobutton path="gender" value="FEMALE" />Female</td>
+					<td><form:radiobutton path="gender" value="MALE" />Male</td>
+					<td><form:radiobutton path="gender" value="FEMALE" />Female</td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="health">Health</form:label></td>

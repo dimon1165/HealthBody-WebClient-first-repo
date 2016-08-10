@@ -8,12 +8,21 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -23,6 +32,7 @@ import edu.softserveinc.healthbody.webclient.api.GroupDTO;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.api.UserDTO;
+import edu.softserveinc.healthbody.webclient.config.CustomAuthenticationProvider;
 import edu.softserveinc.healthbody.webclient.constants.GoogleConstants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -101,7 +111,7 @@ public class GoogleAuthServlet extends HttpServlet {
 			UserDTO userDTO = new UserDTO();
 			userDTO.setIdUser(UUID.randomUUID().toString());
 			userDTO.setLogin(login);
-			userDTO.setPassword(null);
+			userDTO.setPassword("123");
 			userDTO.setFirstname(firstname);
 			userDTO.setLastname(lastname);
 			userDTO.setEmail(email);
@@ -120,14 +130,23 @@ public class GoogleAuthServlet extends HttpServlet {
 			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 			if (service.getUserByLogin(login) == null) {
 				service.createUser(userDTO);
-				// UserDTO ud = service.getUserByLogin(login);
-				out.append(login + GoogleConstants.GREATING_NOT_REGISTRED + rn);
-				out.flush();
-			} else {
-				// UserDTO ud = service.getUserByLogin(login);
-				out.append(login + GoogleConstants.GREATING_ALREADY_REGISTRED);
-				out.flush();
 			}
+			/*request.setAttribute("username", login);
+			request.setAttribute("password", userDTO.getPassword());*/
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			if (userDTO.getRoleName().equals("admin")) {
+				authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+			}
+			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+			/*try {*/
+			Authentication authentication = new UsernamePasswordAuthenticationToken(login,userDTO.getPassword(),authorities);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				/*getServletContext().getRequestDispatcher("/usercabinet.html").forward(request, response);*/
+			/*} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			response.sendRedirect("http://localhost:8080/HealthBody-WebClient/usercabinet.html");
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);

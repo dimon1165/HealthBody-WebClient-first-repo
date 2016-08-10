@@ -19,41 +19,33 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
- <nav class="navbar navbar-inverse navbar-fixed-top">
- <div class="container">
-	<div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar">1</span>
-            <span class="icon-bar">2</span>
-            <span class="icon-bar">3</span>
-          </button>
-          <a class="navbar-brand" href="HomePage.html">Health Body</a>
-           <ul class="nav navbar-nav">
-                    <li>
-                        <a href="usercabinet.html">My Cabinet</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <a href="userlist.html">User List</a>
-                    </li>
-                    <li>
-                    <a href="listGroups.html">Groups</a>
-                    </li>
-                </ul>
-                </div>
-        </div>
-        </nav>
-         <br>
-         <br>
-    <div class="container">
-		<img src="${user.photoURL}"
-			alt="Cinque Terre" width="334" height="336">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar">1</span> <span class="icon-bar">2</span> <span
+					class="icon-bar">3</span>
+			</button>
+			<a class="navbar-brand" href="HomePage.html">Health Body</a>
+			<ul class="nav navbar-nav">
+				<li><a href="usercabinet.html">My Cabinet</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Contact</a></li>
+				<li><a href="userlist.html">User List</a></li>
+				<li><a href="listGroups.html">Groups</a></li>
+				<li><a href="listCompetitions.html">Competitions</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<br>
+	<br>
+	<div class="container">
+		<img src="${user.photoURL}" alt="Cinque Terre" width="334"
+			height="336">
 		<table class="table">
 			<tr class="info">
 				<th>Login :</th>
@@ -87,9 +79,10 @@
 				</c:forEach>
 			</tr>
 		</table>
-		</div>
+	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="resources/js/bootstrap.min.js"></script>
 </body>

@@ -2,9 +2,8 @@ package edu.softserveinc.healthbody.webclient.controllers;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +18,8 @@ import edu.softserveinc.healthbody.webclient.api.UserDTO;
 public class EditUserController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getUserForEdit(Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
-		String userLogin = request.getUserPrincipal().getName();
+	public String getUserForEdit(Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		UserDTO userToEdit = service.getUserByLogin(userLogin);
 		model.put("userToEdit", userToEdit);
@@ -28,9 +27,9 @@ public class EditUserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveEdit(@ModelAttribute("userToEdit") UserDTO userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
+	public String saveEdit(@ModelAttribute("userToEdit") UserDTO userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		String userLogin = request.getUserPrincipal().getName();
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserDTO user = service.getUserByLogin(userLogin);
 		user.setFirstname(userToEdit.getFirstname());
 		user.setLastname(userToEdit.getLastname());
