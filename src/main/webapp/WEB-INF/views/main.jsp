@@ -52,7 +52,7 @@
 				<td>${v.count}</td>
 				<td>${v.startDate}</td>
 				<td>${v.finishDate}</td>
-				<td><a href="register_in_comp">Take part</a></td>
+				<td><a href="register_in_comp.html">Take part</a></td>
 			</tr>
 			</c:forEach>
 	</table>

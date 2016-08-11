@@ -14,8 +14,8 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 public class MainPageController {
 	
 	@RequestMapping(value = "/main.html",method = RequestMethod.GET)
-	public String getListCurrentCompetitions(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			@RequestParam(value = "partNumber") Integer partNumber, @RequestParam(value = "partSize") Integer partSize){
+	public String getListCurrentCompetitions(Model model, @Autowired HealthBodyServiceImplService healthBody){
+//			@RequestParam(value = "partNumber") Integer partNumber, @RequestParam(value = "partSize") Integer partSize){
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("getAllComp", service.getAllActiveCompetitions(1, 10));
 		return "main";
@@ -23,7 +23,7 @@ public class MainPageController {
 	
 	@RequestMapping(value = "/register_in_comp.html",method = RequestMethod.GET)
 	public String takePartInCompettion(){		
-		return "redirect:register_in_comp";
+		return "register_in_comp";
 	}
 
 }
