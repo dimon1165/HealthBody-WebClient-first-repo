@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,11 +26,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import edu.softserveinc.healthbody.webclient.api.GroupDTO;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.api.UserDTO;
-import edu.softserveinc.healthbody.webclient.config.CustomAuthenticationProvider;
 import edu.softserveinc.healthbody.webclient.constants.GoogleConstants;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,7 +51,6 @@ public class GoogleAuthServlet extends HttpServlet {
 		BufferedReader reader = null;
 
 		try {
-			PrintWriter out = response.getWriter();
 			// get code
 			String code = request.getParameter("code");
 			// format parameters to post
@@ -89,64 +84,33 @@ public class GoogleAuthServlet extends HttpServlet {
 			urlConn = url.openConnection();
 			GoogleUser data = new Gson().fromJson(
 					new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8), GoogleUser.class);
-			log.info(data.toString() + rn);
 
 			// form UserDTO
 			String email = data.getEmail();
 			String login = email.substring(0, email.indexOf("@")).toString();
-			String firstname = data.getGiven_name();
-			String lastname = data.getFamily_name();
-			String photoURL = data.getPicture();
-			String fullgender = data.getGender();
-			String gender = getGoogleGender(fullgender);
 
-			GroupDTO gg = new GroupDTO();
-			gg.setIdGroup(UUID.randomUUID().toString());
-			gg.setName(GoogleConstants.DEFAULT_GROUP_NAME);
-			gg.setCount("0");
-			gg.setDescriptions("");
-			gg.setScoreGroup("");
-			gg.setStatus("");
-
-			UserDTO userDTO = new UserDTO();
-			userDTO.setIdUser(UUID.randomUUID().toString());
-			userDTO.setLogin(login);
-			userDTO.setPassword("123");
-			userDTO.setFirstname(firstname);
-			userDTO.setLastname(lastname);
-			userDTO.setEmail(email);
-			userDTO.setAge("0");
-			userDTO.setWeight("0.0");
-			userDTO.setGender(gender);
-			userDTO.setPhotoURL(photoURL);
-			userDTO.setRoleName(GoogleConstants.DEFAULT_ROLE_NAME);
-			userDTO.setStatus(null);
-			userDTO.setScore("0");
-			userDTO.getGroups().add(gg);
-			userDTO.setIsDisabled(GoogleConstants.DEFAULT_USER_DISABLED);
-			log.info(userDTO.toString());
-
-			// work with base
 			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 			if (service.getUserByLogin(login) == null) {
+				UserDTO userDTO = makeNewUser(data);
+				userDTO.setIdUser(UUID.randomUUID().toString());
+				userDTO.setPassword(access_token.substring(0, 15));
 				service.createUser(userDTO);
+			} else {
+				UserDTO userDTO = service.getUserByLogin(login);
+				userDTO.setPassword(access_token.substring(0, 15));
+				service.updateUser(userDTO);
 			}
-			/*request.setAttribute("username", login);
-			request.setAttribute("password", userDTO.getPassword());*/
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			if (userDTO.getRoleName().equals("admin")) {
+			if (service.getUserByLogin(login).getRoleName().equals("admin")) {
 				authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 			}
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-			/*try {*/
-			Authentication authentication = new UsernamePasswordAuthenticationToken(login,userDTO.getPassword(),authorities);
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-				/*getServletContext().getRequestDispatcher("/usercabinet.html").forward(request, response);*/
-			/*} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			response.sendRedirect("http://localhost:8080/HealthBody-WebClient/usercabinet.html");
+
+			Authentication authentication = new UsernamePasswordAuthenticationToken(login,
+					service.getUserByLogin(login).getPassword(), authorities);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			response.sendRedirect("usercabinet.html");
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);
@@ -174,5 +138,35 @@ public class GoogleAuthServlet extends HttpServlet {
 		else
 			b = GoogleConstants.GOOGLE_OTHER_GENDER;
 		return b;
+	}
+
+	public UserDTO makeNewUser(GoogleUser data) {
+		// form UserDTO
+		String email = data.getEmail();
+		String login = email.substring(0, email.indexOf("@")).toString();
+		String firstname = data.getGiven_name();
+		String lastname = data.getFamily_name();
+		String photoURL = data.getPicture();
+		String fullgender = data.getGender();
+		String gender = getGoogleGender(fullgender);
+		HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
+		UserDTO userDTO = new UserDTO();
+
+		userDTO.setLogin(login);
+		userDTO.setFirstname(firstname);
+		userDTO.setLastname(lastname);
+		userDTO.setPassword("");
+		userDTO.setEmail(email);
+		userDTO.setAge("0");
+		userDTO.setWeight("0.0");
+		userDTO.setGender(gender);
+		userDTO.setPhotoURL(photoURL);
+		userDTO.setRoleName(GoogleConstants.DEFAULT_ROLE_NAME);
+		userDTO.setStatus(null);
+		userDTO.setScore("0");
+		userDTO.getGroups().add(service.getGroupByName(GoogleConstants.DEFAULT_GROUP_NAME));
+		userDTO.setIsDisabled(GoogleConstants.DEFAULT_USER_DISABLED);
+		log.info(userDTO.toString());
+		return userDTO;
 	}
 }
