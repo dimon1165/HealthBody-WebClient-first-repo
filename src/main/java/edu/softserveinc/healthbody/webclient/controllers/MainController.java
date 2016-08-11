@@ -10,7 +10,7 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 
 @Controller
 public class MainController {
-
+	
 	@RequestMapping(value = "/userlist.html")
 	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody) {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();

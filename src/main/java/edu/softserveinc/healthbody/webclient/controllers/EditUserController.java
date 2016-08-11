@@ -1,10 +1,10 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,25 +14,34 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.api.UserDTO;
 
 @Controller
+@RequestMapping(value = "/editUser.html")
 public class EditUserController {
 	
-	@RequestMapping(value = "/editUser.html",method = RequestMethod.GET)
-	public String getUserForEdit(Model model, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
-		String userLogin = request.getUserPrincipal().getName();
+	@RequestMapping(method = RequestMethod.GET)
+	public String getUserForEdit(Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		UserDTO userToEdit = service.getUserByLogin(userLogin);
-		model.addAttribute("getUser", userToEdit);
+		model.put("userToEdit", userToEdit);
 		return "editUser";
 	}
 	
-	@RequestMapping(value = "/editUser.html",method = RequestMethod.POST)
-	public String saveEdit(Model model, @ModelAttribute("getUser") UserDTO userToEdit, @Autowired HealthBodyServiceImplService healthBody, HttpServletRequest request) {
-		String userLogin = request.getUserPrincipal().getName();
+	@RequestMapping(method = RequestMethod.POST)
+	public String saveEdit(@ModelAttribute("userToEdit") UserDTO userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-	//	user = service.getUserByLogin(userLogin);
-		userToEdit.setLogin(userLogin);
-		service.updateUser(userToEdit);
-		model.addAttribute("getUser", service.getUserByLogin(userLogin));
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		UserDTO user = service.getUserByLogin(userLogin);
+		user.setFirstname(userToEdit.getFirstname());
+		user.setLastname(userToEdit.getLastname());
+		user.setAge(userToEdit.getAge());
+		user.setWeight(userToEdit.getWeight());
+		user.setGender(userToEdit.getGender());
+		user.setHealth(userToEdit.getHealth());
+		service.updateUser(user);
+		model.put("user", service.getUserByLogin(userLogin));
+//		userToEdit.setLogin(userLogin);
+//		service.updateUser(userToEdit);
+//		model.put("user", userToEdit);
 		return "usercabinet";
 	}
 

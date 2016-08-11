@@ -43,47 +43,60 @@
 	</nav>
 	<br>
 	<br>
+	<br>
+	<br>
 	<div class="container">
-		<img src="${user.photoURL}" alt="Cinque Terre" width="334"
-			height="336">
 		<table class="table">
 			<tr class="info">
-				<th>Login :</th>
 				<th>Name :</th>
-				<th>Surname :</th>
-				<th>Age :</th>
-				<th>Weight :</th>
-				<th>Gender :</th>
-				<th>Health :</th>
-				<th>Role :</th>
+				<th>Users Count :</th>
+				<th>StartDate :</th>
+				<th>FinishDate :</th>
 			</tr>
-			<tr class="info">
-				<td>${user.login}</td>
-				<td>${user.firstname}</td>
-				<td>${user.lastname}</td>
-				<td>${user.age}</td>
-				<td>${user.weight}</td>
-				<td>${user.gender}</td>
-				<td>${user.health}</td>
-				<td>${user.roleName}</td>
-				<td><a href="editUser.html?userLogin=${user.login}">Edit</a></td>
-			</tr>
+			<c:forEach items="${getCompetitions}" var="p">
+				<tr>
+					<td>${p.name}</td>
+					<td>${p.count}</td>
+					<td>${p.startDate}</td>
+					<td>${p.finishDate}</td>
+				</tr>
+			</c:forEach>
 		</table>
-		<table class="table">
-			<tr class="info">
-				<th>Groups :</th>
-			</tr>
-			<tr class="info">
-				<c:forEach items="${user.groups}" var="p">
-					<td><a href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
-				</c:forEach>
-			</tr>
-		</table>
+
 	</div>
+
+	<div class="container" align="center">
+		<ul class="pagination">
+
+			<%--For displaying Previous link --%>
+			<li><c:if test="${currentPage != 1}">
+					<a
+						href="<c:url value="/listCompetitions.html" >
+        <c:param name="partNumber" value="${currentPage - 1}"/>${p}</c:url>">«</a>
+				</c:if></li>
+
+			<%--For displaying Page numbers --%>
+			<li><c:forEach begin="${startPartNumber}"
+					end="${lastPartNumber}" var="p">
+					<a
+						href="<c:url value="/listCompetitions.html" >
+        <c:param name="partNumber" value="${p}"/>${p}</c:url>">${p}</a>
+				</c:forEach></li>
+
+			<%--For displaying Next link --%>
+			<li><c:if test="${currentPage lt lastPartNumber}">
+					<a
+						href="<c:url value="/listCompetitions.html" >
+        <c:param name="partNumber" value="${currentPage + 1}"/>${p}</c:url>">»</a>
+				</c:if></li>
+		</ul>
+	</div>
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="resources/js/bootstrap.min.js"></script>
+
 </body>
 </html>
