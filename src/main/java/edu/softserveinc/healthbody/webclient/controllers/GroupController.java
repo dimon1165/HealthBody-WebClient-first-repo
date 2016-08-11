@@ -20,23 +20,35 @@ public class GroupController {
 	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, 
 			@RequestParam(value="groupsParticipantsPartnumber", required=false) Integer groupsParticipantsPartnumber) {
 		
-		final Integer DEFAULT_QUONTITY_GROUPS_PER_PAGE = 1;
-
-		if (groupsParticipantsPartnumber == null) groupsParticipantsPartnumber = 1;
+		/** Setting default quantity groups per page */
+		final Integer DEFAULT_QUANTITY_GROUPS_PER_PAGE = 1;
+		
+		/** Avoid access to hole list of groups if 
+		 * in URL field will be inputed negative value -1 or lower (by hands)*/
+		if (groupsParticipantsPartnumber == null || groupsParticipantsPartnumber <= 0 ) groupsParticipantsPartnumber = 1;
+		
+		/** Set current page */
 		int currentPage = groupsParticipantsPartnumber;
 		int startPartNumber = 1;
 
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();	
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		
+		/** Getting quantity of records in groups table in DB */
 		int dataBaseRecordsQuontity = service.getAllGroupsParticipants(1, Integer.MAX_VALUE).size();
-		int lastpagePartNumber = (int) Math.ceil(dataBaseRecordsQuontity * 1.0 / DEFAULT_QUONTITY_GROUPS_PER_PAGE);
+		
+		/** Calculating last page number without remain*/
+		int lastpagePartNumber = (int) Math.ceil(dataBaseRecordsQuontity * 1.0 / DEFAULT_QUANTITY_GROUPS_PER_PAGE);
+		
+		/** Avoid access to the blank page if in URL will be 
+		 * inputed value more than last page number (by hands) */
+		if (groupsParticipantsPartnumber > lastpagePartNumber) groupsParticipantsPartnumber = lastpagePartNumber; 
 
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 	    model.addAttribute("startPartNumber",startPartNumber);
 	    model.addAttribute("currentPage",currentPage);
 	    model.addAttribute("lastpagePartNumber",lastpagePartNumber);
-		model.addAttribute("groups", service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUONTITY_GROUPS_PER_PAGE));
+		model.addAttribute("groups", service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUANTITY_GROUPS_PER_PAGE));
 		return "listGroups";
 	}
 	
