@@ -19,20 +19,23 @@ public class GroupController {
 	@RequestMapping(value = "/listGroups.html", method = RequestMethod.GET)
 	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, 
 			@RequestParam(value="groupsParticipantsPartnumber", required=false) Integer groupsParticipantsPartnumber) {
+		
 		final Integer DEFAULT_QUONTITY_GROUPS_PER_PAGE = 1;
-			if(groupsParticipantsPartnumber == null || groupsParticipantsPartnumber <= 0){
-				groupsParticipantsPartnumber = 1;
-			}
+
+		if (groupsParticipantsPartnumber == null) groupsParticipantsPartnumber = 1;
 		int currentPage = groupsParticipantsPartnumber;
-		int startPartNumber = (int) (groupsParticipantsPartnumber - 5 > 0?groupsParticipantsPartnumber - 5:1);
-		int endpagePartNumber = startPartNumber + 2;
-			
+		int startPartNumber = 1;
+
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();	
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		
+		int dataBaseRecordsQuontity = service.getAllGroupsParticipants(1, Integer.MAX_VALUE).size();
+		int lastpagePartNumber = (int) Math.ceil(dataBaseRecordsQuontity * 1.0 / DEFAULT_QUONTITY_GROUPS_PER_PAGE);
+
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 	    model.addAttribute("startPartNumber",startPartNumber);
-	    model.addAttribute("endpagePartNumber",endpagePartNumber);
 	    model.addAttribute("currentPage",currentPage);
+	    model.addAttribute("lastpagePartNumber",lastpagePartNumber);
 		model.addAttribute("groups", service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUONTITY_GROUPS_PER_PAGE));
 		return "listGroups";
 	}
