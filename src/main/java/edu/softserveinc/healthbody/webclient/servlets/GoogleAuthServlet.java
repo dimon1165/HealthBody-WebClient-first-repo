@@ -164,7 +164,9 @@ public class GoogleAuthServlet extends HttpServlet {
 		userDTO.setRoleName(GoogleConstants.DEFAULT_ROLE_NAME);
 		userDTO.setStatus(null);
 		userDTO.setScore("0");
+		if(userDTO.getGroups().isEmpty()) {
 		userDTO.getGroups().add(service.getGroupByName(GoogleConstants.DEFAULT_GROUP_NAME));
+		}
 		userDTO.setIsDisabled(GoogleConstants.DEFAULT_USER_DISABLED);
 		log.info(userDTO.toString());
 		return userDTO;
