@@ -69,7 +69,7 @@
 		<ul class="pagination">
 
 			<%--For displaying Previous link --%>
-			<li><c:if test="${currentPage != 1}">
+			<li><c:if test="${currentPage > 1}">
 					<a
 						href="<c:url value="/listCompetitions.html" >
         <c:param name="partNumber" value="${currentPage - 1}"/>${p}</c:url>">«</a>

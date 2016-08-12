@@ -21,15 +21,16 @@ public class CompetitionController {
 	public String getListCurrentCompetitions(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			@RequestParam(value = "partNumber", required = false) Integer partNumber, HttpServletRequest request) {
 
-		if (partNumber == null) partNumber = 1;
-		int currentPage = partNumber;
-		int startPartNumber = 1;
-
-		String userLogin = request.getUserPrincipal().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 
 		int n = service.getAllActiveCompetitions(1, Integer.MAX_VALUE).size();
 		int lastPartNumber = (int) Math.ceil(n * 1.0 / COMPETITIONS_PER_PAGE);
+		if (partNumber == null || partNumber <= 0) partNumber = 1;
+		if (partNumber > lastPartNumber) partNumber = lastPartNumber;
+		int currentPage = partNumber;
+		int startPartNumber = 1;
+
+		String userLogin = request.getUserPrincipal().getName();
 
 		model.addAttribute("getUser", service.getUserByLogin(userLogin));
 		model.addAttribute("startPartNumber", startPartNumber);
