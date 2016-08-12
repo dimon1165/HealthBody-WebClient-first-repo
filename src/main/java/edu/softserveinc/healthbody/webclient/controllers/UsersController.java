@@ -13,21 +13,26 @@ import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
 @Controller
 public class UsersController {
 	
-	final Integer COMPETITIONS_PER_PAGE = 4;
+	final Integer USERS_PER_PAGE = 4;
 	
 	@RequestMapping(value = "/userlist.html", method = RequestMethod.GET)
 	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			@RequestParam(value = "partNumber", required = false) Integer partNumber) {
-		if (partNumber == null) partNumber = 1;
-		int currentPage = partNumber;
-		int startPartNumber = 1;
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		int n = service.getAllUsers(1, Integer.MAX_VALUE).size();
-		int lastPartNumber = (int) Math.ceil(n * 1.0 / COMPETITIONS_PER_PAGE);
+		int lastPartNumber = (int) Math.ceil(n * 1.0 / USERS_PER_PAGE);
+		if (partNumber == null || partNumber <= 0) {
+			partNumber = 1;
+		}
+		if (partNumber > lastPartNumber) {
+			partNumber = lastPartNumber;
+		}
+		int currentPage = partNumber;
+		int startPartNumber = 1;
 		model.addAttribute("startPartNumber", startPartNumber);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPartNumber", lastPartNumber);
-		model.addAttribute("AllUsers", service.getAllUsers(partNumber, COMPETITIONS_PER_PAGE));
+		model.addAttribute("AllUsers", service.getAllUsers(partNumber, USERS_PER_PAGE));
 		return "userlist";
 	}
 }
