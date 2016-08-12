@@ -41,7 +41,7 @@
 		</div>
 				<div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right" role="form">
-					<a class="btn btn-success" type="submit" href="Logout.html">Logout</a>
+					<a class="btn btn-success" type="submit" href="Logout.html">Sign out</a>
 				</form>
 	</div>
 	</nav>
