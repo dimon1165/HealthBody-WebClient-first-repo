@@ -11,8 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
-import edu.softserveinc.healthbody.webclient.api.UserDTO;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
+
 @Service
 public class UserDetailService implements UserDetailsService{
 	@Override

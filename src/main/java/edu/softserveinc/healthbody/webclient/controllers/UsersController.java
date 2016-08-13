@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 
 @Controller
 public class UsersController {
-	
+
 	final Integer USERS_PER_PAGE = 4;
-	
+
 	@RequestMapping(value = "/userlist.html", method = RequestMethod.GET)
 	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			@RequestParam(value = "partNumber", required = false) Integer partNumber) {

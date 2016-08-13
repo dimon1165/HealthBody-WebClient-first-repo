@@ -8,57 +8,64 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.softserveinc.healthbody.webclient.api.GroupDTO;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
-import edu.softserveinc.healthbody.webclient.api.UserDTO;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 
 @Controller
 public class GroupController {
-	
+
 	@RequestMapping(value = "/listGroups.html", method = RequestMethod.GET)
-	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody, 
-			@RequestParam(value="groupsParticipantsPartnumber", required=false) Integer groupsParticipantsPartnumber) {
-		
+	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			@RequestParam(value = "groupsParticipantsPartnumber", required = false) Integer groupsParticipantsPartnumber) {
+
 		/** Setting default quantity groups per page */
 		final Integer DEFAULT_QUANTITY_GROUPS_PER_PAGE = 1;
-		
-		/** Avoid access to hole list of groups if 
-		 * in URL field will be inputed negative value -1 or lower (by hands)*/
-		if (groupsParticipantsPartnumber == null || groupsParticipantsPartnumber <= 0 ) groupsParticipantsPartnumber = 1;
-		
+
+		/**
+		 * Avoid access to hole list of groups if in URL field will be inputed
+		 * negative value -1 or lower (by hands)
+		 */
+		if (groupsParticipantsPartnumber == null || groupsParticipantsPartnumber <= 0)
+			groupsParticipantsPartnumber = 1;
+
 		/** Set current page */
 		int currentPage = groupsParticipantsPartnumber;
 		int startPartNumber = 1;
 
-		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();	
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		
+
 		/** Getting quantity of records in groups table in DB */
 		int dataBaseRecordsQuontity = service.getAllGroupsParticipants(1, Integer.MAX_VALUE).size();
-		
-		/** Calculating last page number without remain*/
+
+		/** Calculating last page number without remain */
 		int lastpagePartNumber = (int) Math.ceil(dataBaseRecordsQuontity * 1.0 / DEFAULT_QUANTITY_GROUPS_PER_PAGE);
-		
-		/** Avoid access to the blank page if in URL will be 
-		 * inputed value more than last page number (by hands) */
-		if (groupsParticipantsPartnumber > lastpagePartNumber) groupsParticipantsPartnumber = lastpagePartNumber; 
+
+		/**
+		 * Avoid access to the blank page if in URL will be inputed value more
+		 * than last page number (by hands)
+		 */
+		if (groupsParticipantsPartnumber > lastpagePartNumber)
+			groupsParticipantsPartnumber = lastpagePartNumber;
 
 		model.addAttribute("user", service.getUserByLogin(userLogin));
-	    model.addAttribute("startPartNumber",startPartNumber);
-	    model.addAttribute("currentPage",currentPage);
-	    model.addAttribute("lastpagePartNumber",lastpagePartNumber);
-		model.addAttribute("groups", service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUANTITY_GROUPS_PER_PAGE));
+		model.addAttribute("startPartNumber", startPartNumber);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastpagePartNumber", lastpagePartNumber);
+		model.addAttribute("groups",
+				service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUANTITY_GROUPS_PER_PAGE));
 		return "listGroups";
 	}
-	
+
 	@RequestMapping(value = "/group.html", method = RequestMethod.GET)
 	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
 		for (GroupDTO group : service.getUserByLogin(userLogin).getGroups()) {
-			if(group.getName().equals(nameGroup)) {
+			if (group.getName().equals(nameGroup)) {
 				test = true;
 			}
 		}
@@ -70,8 +77,8 @@ public class GroupController {
 			return "Join the group";
 		}
 	}
-	
-	@RequestMapping(value = "/Join the group.html",  method = RequestMethod.GET)
+
+	@RequestMapping(value = "/Join the group.html", method = RequestMethod.GET)
 	public String joinGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();

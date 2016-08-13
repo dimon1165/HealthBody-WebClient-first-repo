@@ -26,10 +26,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
-import edu.softserveinc.healthbody.webclient.api.UserDTO;
 import edu.softserveinc.healthbody.webclient.constants.GoogleConstants;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")

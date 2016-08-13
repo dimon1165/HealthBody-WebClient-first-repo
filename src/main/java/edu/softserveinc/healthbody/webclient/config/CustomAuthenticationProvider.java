@@ -11,9 +11,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
-import edu.softserveinc.healthbody.webclient.api.UserDTO;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {

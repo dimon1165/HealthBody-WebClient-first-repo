@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.softserveinc.healthbody.webclient.api.CompetitionDTO;
-import edu.softserveinc.healthbody.webclient.api.GroupDTO;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyService;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 
 @Controller
 public class CompetitionController {
@@ -28,8 +27,10 @@ public class CompetitionController {
 
 		int n = service.getAllActiveCompetitions(1, Integer.MAX_VALUE).size();
 		int lastPartNumber = (int) Math.ceil(n * 1.0 / COMPETITIONS_PER_PAGE);
-		if (partNumber == null || partNumber <= 0) partNumber = 1;
-		if (partNumber > lastPartNumber) partNumber = lastPartNumber;
+		if (partNumber == null || partNumber <= 0)
+			partNumber = 1;
+		if (partNumber > lastPartNumber)
+			partNumber = lastPartNumber;
 		int currentPage = partNumber;
 		int startPartNumber = 1;
 
@@ -42,24 +43,26 @@ public class CompetitionController {
 		model.addAttribute("getCompetitions", service.getAllActiveCompetitions(partNumber, COMPETITIONS_PER_PAGE));
 		return "listCompetitions";
 	}
-	
+
 	@RequestMapping(value = "/competition.html", method = RequestMethod.GET)
-	public String getCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameCompetition) {
+	public String getCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			String nameCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
 		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
-			if(competition.getName().equals(nameCompetition)) {
+			if (competition.getName().equals(nameCompetition)) {
 				test = true;
 			}
 		}
 		model.addAttribute("user", service.getUserByLogin(userLogin));
-//		model.addAttribute("getCompetitions", service.get.getCompetitionbyName(nameCompetition));
-//		if (test) {
-			return "competition";
-//		} else {
-//			return "Join the competition";
-//		}
+		// model.addAttribute("getCompetitions",
+		// service.get.getCompetitionbyName(nameCompetition));
+		// if (test) {
+		return "competition";
+		// } else {
+		// return "Join the competition";
+		// }
 	}
 
 }

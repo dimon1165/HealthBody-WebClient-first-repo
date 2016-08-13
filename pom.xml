@@ -185,7 +185,7 @@
 					<!-- Keep generated files -->
 					<keep>true</keep>
 					<!-- Package name -->
-					<packageName>edu.softserveinc.healthbody.webclient.api</packageName>
+					<packageName>edu.softserveinc.healthbody.webclient.healthbody.webservice</packageName>
 					<!-- generated source files destination -->
 					<sourceDestDir>src/main/java</sourceDestDir>
 				</configuration>
