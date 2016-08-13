@@ -51,10 +51,10 @@
 				<th>FinishDate :</th>
 			</tr>
 			<tr>
-				<td>${getCompetition.name}</td>
-				<td>${getCompetition.description}</td>
-				<td>${getCompetition.startDate}</td>
-				<td>${getCompetition.finishDate}</td>
+				<td>${getCompetitions.name}</td>
+				<td>${getCompetitions.description}</td>
+				<td>${getCompetitions.startDate}</td>
+				<td>${getCompetitions.finishDate}</td>
 			</tr>
 		</table>
 	</div>
