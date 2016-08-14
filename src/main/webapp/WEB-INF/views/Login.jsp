@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP Health body Web-Client</title>
+<title>Log in</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
@@ -39,13 +39,6 @@
 				</button>
 				<a class="navbar-brand" href="HomePage.html">Health Body</a>
 				<ul class="nav navbar-nav">
-					<li><a href="main.html">Main</a></li>
-					<li><a href="usercabinet.html">My Cabinet</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="userlist.html">User List</a></li>
-					<li><a href="listGroups.html">Groups</a></li>
-					<li><a href="listCompetitions.html">Competitions</a></li>
 				</ul>
 			</div>
 		</div>

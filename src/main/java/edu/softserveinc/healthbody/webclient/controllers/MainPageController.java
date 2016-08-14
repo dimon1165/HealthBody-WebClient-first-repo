@@ -42,6 +42,8 @@ public class MainPageController {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		int n = service.getAllActiveCompetitions(1, Integer.MAX_VALUE).size();
 		int lastPartNumber = (int) Math.ceil(n * 1.0 / COMPETITIONS_PER_PAGE);
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addAttribute("login", login);
 		model.addAttribute("startPartNumber", startPartNumber);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPartNumber", lastPartNumber);

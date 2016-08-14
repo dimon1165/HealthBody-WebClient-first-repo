@@ -35,7 +35,7 @@ public class CompetitionController {
 		int startPartNumber = 1;
 
 		String userLogin = request.getUserPrincipal().getName();
-
+		model.addAttribute("login", userLogin);
 		model.addAttribute("getUser", service.getUserByLogin(userLogin));
 		model.addAttribute("startPartNumber", startPartNumber);
 		model.addAttribute("currentPage", currentPage);

@@ -23,15 +23,8 @@
 						class="icon-bar">1</span> <span class="icon-bar">2</span> <span
 						class="icon-bar">3</span>
 				</button>
-				<a class="navbar-brand" href="HomePage.html">Health Body</a>
+				<a class="navbar-brand" href="main.html">Health Body</a>
 				<ul class="nav navbar-nav">
-					<li><a href="main.html">Main</a></li>
-					<li><a href="usercabinet.html">My Cabinet</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
-					<li><a href="userlist.html">User List</a></li>
-					<li><a href="listGroups.html">Groups</a></li>
-					<li><a href="listCompetitions.html">Competitions</a></li>
 				</ul>
 			</div>
 

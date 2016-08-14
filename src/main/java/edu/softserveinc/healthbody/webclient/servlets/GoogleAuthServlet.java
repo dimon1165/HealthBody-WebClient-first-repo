@@ -110,7 +110,7 @@ public class GoogleAuthServlet extends HttpServlet {
 					service.getUserByLogin(login).getPassword(), authorities);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 
-			response.sendRedirect("usercabinet.html");
+			response.sendRedirect("main.html");
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);

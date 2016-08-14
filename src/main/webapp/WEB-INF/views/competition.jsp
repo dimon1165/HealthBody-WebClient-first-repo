@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>group</title>
+<title>Competition</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -25,11 +25,9 @@
 					class="icon-bar">1</span> <span class="icon-bar">2</span> <span
 					class="icon-bar">3</span>
 			</button>
-			<a class="navbar-brand" href="HomePage.html">Health Body</a>
+			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="usercabinet.html">My Cabinet</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a href="usercabinet.html">${user.login}</a></li>
 				<li><a href="userlist.html">User List</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>

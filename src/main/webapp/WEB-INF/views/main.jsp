@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Current Competitions</title>
+<title>Health Body</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -23,15 +23,19 @@
 					class="icon-bar">1</span> <span class="icon-bar">2</span> <span
 					class="icon-bar">3</span>
 			</button>
-			<a class="navbar-brand" href="HomePage.html">Health Body</a>
+			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="usercabinet.html?userLogin=${getUser.login}">My
-						Cabinet</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="userlist.html">User List</a></li>
+				<li><a href="usercabinet.html">${login}</a></li>
+				<li><a href="userlist.html">Users</a></li>
+				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<form class="navbar-form navbar-right" role="form">
+				<a class="btn btn-success" type="submit" href="Logout.html">Sign
+					out</a>
+			</form>
 		</div>
 	</div>
 	</nav>
@@ -55,14 +59,15 @@
 				<th>Take part</th>
 			</tr>
 			<c:forEach items="${getAllComp}" var="comp">
-			<c:url var="reg_in_comp" value="register_in_comp?id=${bet.id}" />
-			<tr class="info">
-				<td>${comp.name}</td>
-				<td>${comp.count}</td>
-				<td>${comp.startDate}</td>
-				<td>${comp.finishDate}</td>
-				<td><a href="register_in_comp?nameCompetition=${comp.name}">Take part</a></td>
-			</tr>
+				<c:url var="reg_in_comp" value="register_in_comp?id=${bet.id}" />
+				<tr class="info">
+					<td>${comp.name}</td>
+					<td>${comp.count}</td>
+					<td>${comp.startDate}</td>
+					<td>${comp.finishDate}</td>
+					<td><a href="register_in_comp?nameCompetition=${comp.name}">Take
+							part</a></td>
+				</tr>
 			</c:forEach>
 		</table>
 	</div>
