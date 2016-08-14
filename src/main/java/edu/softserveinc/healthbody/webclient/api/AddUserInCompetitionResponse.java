@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getGroupByNameResponse complex type.
+ * <p>Java class for addUserInCompetitionResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getGroupByNameResponse">
+ * &lt;complexType name="addUserInCompetitionResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://webservice.healthbody.softserveinc.edu/}groupDTO" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,35 +27,27 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getGroupByNameResponse", propOrder = {
+@XmlType(name = "addUserInCompetitionResponse", propOrder = {
     "_return"
 })
-public class GetGroupByNameResponse {
+public class AddUserInCompetitionResponse {
 
     @XmlElement(name = "return")
-    protected GroupDTO _return;
+    protected boolean _return;
 
     /**
      * Gets the value of the return property.
      * 
-     * @return
-     *     possible object is
-     *     {@link GroupDTO }
-     *     
      */
-    public GroupDTO getReturn() {
+    public boolean isReturn() {
         return _return;
     }
 
     /**
      * Sets the value of the return property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link GroupDTO }
-     *     
      */
-    public void setReturn(GroupDTO value) {
+    public void setReturn(boolean value) {
         this._return = value;
     }
 

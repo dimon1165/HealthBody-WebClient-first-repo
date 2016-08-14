@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the edu.softserveinc.healthbody.webclient.api package. 
+ * generated in the edu.softserveinc.healthbody.webservice package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -33,6 +33,7 @@ public class ObjectFactory {
     private final static QName _GetAllGroupsResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroupsResponse");
     private final static QName _LockUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "lockUserResponse");
     private final static QName _GetAllGroupsParticipants_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroupsParticipants");
+    private final static QName _AddUserInCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "addUserInCompetition");
     private final static QName _GetAllGroups_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroups");
     private final static QName _GetAllUsersinCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUsersinCompetition");
     private final static QName _GetDescriptionOfGroup_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getDescriptionOfGroup");
@@ -47,6 +48,7 @@ public class ObjectFactory {
     private final static QName _CreateCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createCompetitionResponse");
     private final static QName _CreateUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createUserResponse");
     private final static QName _GetGroupByName_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getGroupByName");
+    private final static QName _AddUserInCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "addUserInCompetitionResponse");
     private final static QName _GetAllUsers_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUsers");
     private final static QName _GetAllCompetitionsByUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitionsByUser");
     private final static QName _CreateUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createUser");
@@ -60,10 +62,18 @@ public class ObjectFactory {
     private final static QName _GetAllUserstoAddInCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUserstoAddInCompetition");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: edu.softserveinc.healthbody.webclient.api
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: edu.softserveinc.healthbody.webservice
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link AddUserInCompetition }
+     * 
+     */
+    public AddUserInCompetition createAddUserInCompetition() {
+        return new AddUserInCompetition();
     }
 
     /**
@@ -200,6 +210,14 @@ public class ObjectFactory {
      */
     public UpdateUserResponse createUpdateUserResponse() {
         return new UpdateUserResponse();
+    }
+
+    /**
+     * Create an instance of {@link AddUserInCompetitionResponse }
+     * 
+     */
+    public AddUserInCompetitionResponse createAddUserInCompetitionResponse() {
+        return new AddUserInCompetitionResponse();
     }
 
     /**
@@ -444,6 +462,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AddUserInCompetition }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "addUserInCompetition")
+    public JAXBElement<AddUserInCompetition> createAddUserInCompetition(AddUserInCompetition value) {
+        return new JAXBElement<AddUserInCompetition>(_AddUserInCompetition_QNAME, AddUserInCompetition.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllGroups }{@code >}}
      * 
      */
@@ -567,6 +594,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getGroupByName")
     public JAXBElement<GetGroupByName> createGetGroupByName(GetGroupByName value) {
         return new JAXBElement<GetGroupByName>(_GetGroupByName_QNAME, GetGroupByName.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AddUserInCompetitionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "addUserInCompetitionResponse")
+    public JAXBElement<AddUserInCompetitionResponse> createAddUserInCompetitionResponse(AddUserInCompetitionResponse value) {
+        return new JAXBElement<AddUserInCompetitionResponse>(_AddUserInCompetitionResponse_QNAME, AddUserInCompetitionResponse.class, null, value);
     }
 
     /**
