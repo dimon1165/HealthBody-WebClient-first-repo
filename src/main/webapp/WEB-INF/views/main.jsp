@@ -38,8 +38,13 @@
 	<br>
 	<br>
 	<br>
+	<div class="weather" align="center">
+		<b>Weather in: </b>${city_name}<br> <img
+			src="http://openweathermap.org/img/w/${weather_icon}.png"
+			alt="weather_icon" /><br> <b>Temperature: </b>${temp} C<br>
+		<b>Humidity: </b>${humidity} %<br> <b>Wind: </b>${wind} m/s<br>
+	</div>
 	<br>
-
 	<div class="container">
 		<table class="table table-hover">
 			<tr class="info">
@@ -50,17 +55,17 @@
 				<th>Take part</th>
 			</tr>
 			<c:forEach items="${getAllComp}" var="v">
-			<tr class="info">
-				<td>${v.name}</td>
-				<td>${v.count}</td>
-				<td>${v.startDate}</td>
-				<td>${v.finishDate}</td>
-				<td><a href="register_in_comp.html">Take part</a></td>
-			</tr>
+				<tr class="info">
+					<td>${v.name}</td>
+					<td>${v.count}</td>
+					<td>${v.startDate}</td>
+					<td>${v.finishDate}</td>
+					<td><a href="register_in_comp.html">Take part</a></td>
+				</tr>
 			</c:forEach>
 		</table>
 	</div>
-	
+
 	<div class="container" align="center">
 		<ul class="pagination">
 
@@ -87,5 +92,6 @@
 				</c:if></li>
 		</ul>
 	</div>
+	<script src="resources/js/jquery-1.9.1.min.js"></script>
 </body>
 </html>
