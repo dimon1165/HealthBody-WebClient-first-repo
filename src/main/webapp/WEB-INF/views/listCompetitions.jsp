@@ -54,8 +54,8 @@
 				<th>FinishDate :</th>
 			</tr>
 			<c:forEach items="${getCompetitions}" var="p">
-				<tr>
-					<td>${p.name}</td>
+				<tr class="info">
+					<td><a href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
 					<td>${p.count}</td>
 					<td>${p.startDate}</td>
 					<td>${p.finishDate}</td>
@@ -69,7 +69,7 @@
 		<ul class="pagination">
 
 			<%--For displaying Previous link --%>
-			<li><c:if test="${currentPage != 1}">
+			<li><c:if test="${currentPage > 1}">
 					<a
 						href="<c:url value="/listCompetitions.html" >
         <c:param name="partNumber" value="${currentPage - 1}"/>${p}</c:url>">«</a>

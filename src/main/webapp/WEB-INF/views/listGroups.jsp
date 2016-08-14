@@ -71,19 +71,34 @@
 
 	<div class="container" align="center">
 		<ul class="pagination">
-			<li><a
-				href="<c:url value="/listGroups.html" >
-        <c:param name="groupsParticipantsPartnumber" value="${currentPage - 1}"/>${p}</c:url>">«</a></li>
+
+			<%--For displaying Previous link --%>
+			<li><c:if test="${currentPage != 1}">
+					<a
+						href="<c:url value="/listGroups.html" >
+        <c:param name="groupsParticipantsPartnumber" value="${currentPage - 1}"/>${p}</c:url>">«</a>
+				</c:if></li>
+
+			<%--For displaying Page numbers --%>
 			<li><c:forEach begin="${startPartNumber}"
-					end="${endpagePartNumber}" var="p">
+					end="${lastpagePartNumber}" var="p">
 					<a
 						href="<c:url value="/listGroups.html" >
         <c:param name="groupsParticipantsPartnumber" value="${p}"/>${p}</c:url>">${p}</a>
-				</c:forEach>
-			<li><a
-				href="<c:url value="/listGroups.html" >
-        <c:param name="groupsParticipantsPartnumber" value="${currentPage + 1}"/>${p}</c:url>">»</a></li>
+				</c:forEach></li>
+
+			<%--For displaying Next link --%>
+			<li><c:if test="${currentPage lt lastpagePartNumber}">
+					<a
+						href="<c:url value="/listGroups.html" >
+        <c:param name="groupsParticipantsPartnumber" value="${currentPage + 1}"/>${p}</c:url>">»</a>
+				</c:if></li>
 		</ul>
 	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>

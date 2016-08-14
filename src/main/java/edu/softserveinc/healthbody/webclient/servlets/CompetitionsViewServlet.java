@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import edu.softserveinc.healthbody.webclient.api.CompetitionDTO;
-import edu.softserveinc.healthbody.webclient.api.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.utils.RequestParamUtils;
 
 /**

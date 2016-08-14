@@ -39,6 +39,11 @@
 				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
 		</div>
+				<div id="navbar" class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right" role="form">
+					<a class="btn btn-success" type="submit" href="Logout.html">Sign out</a>
+				</form>
+				</div>
 	</div>
 	</nav>
 	<br>
