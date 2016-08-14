@@ -1,3 +1,4 @@
+
 package edu.softserveinc.healthbody.webclient.healthbody.webservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getDescriptionOfGroupResponse complex type.
+ * <p>Java class for getCompetitionViewByNameResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getDescriptionOfGroupResponse">
+ * &lt;complexType name="getCompetitionViewByNameResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://webservice.healthbody.softserveinc.edu/}competitionDTO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getDescriptionOfGroupResponse", propOrder = {
+@XmlType(name = "getCompetitionViewByNameResponse", propOrder = {
     "_return"
 })
-public class GetDescriptionOfGroupResponse {
+public class GetCompetitionViewByNameResponse {
 
     @XmlElement(name = "return")
-    protected String _return;
+    protected CompetitionDTO _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link CompetitionDTO }
      *     
      */
-    public String getReturn() {
+    public CompetitionDTO getReturn() {
         return _return;
     }
 
@@ -51,10 +52,10 @@ public class GetDescriptionOfGroupResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link CompetitionDTO }
      *     
      */
-    public void setReturn(String value) {
+    public void setReturn(CompetitionDTO value) {
         this._return = value;
     }
 

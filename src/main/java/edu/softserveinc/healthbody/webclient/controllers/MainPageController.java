@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,10 +80,16 @@ public class MainPageController {
 		}
 		return "main";
 	}
-
-	@RequestMapping(value = "/register_in_comp.html", method = RequestMethod.GET)
-	public String takePartInCompettion() {
-		return "register_in_comp";
+	
+	@RequestMapping(value = "/register_in_comp",method = RequestMethod.GET)
+	public String takePartInCompettion(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			String nameCompetition){	
+		String uLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();		
+		service.addUserInCompetition(nameCompetition, uLogin);		
+		model.addAttribute("user", service.getUserByLogin(uLogin));
+		return "redirect:main.html";
 	}
 
 }

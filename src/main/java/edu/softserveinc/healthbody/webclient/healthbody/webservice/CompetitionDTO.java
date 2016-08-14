@@ -1,4 +1,3 @@
-
 package edu.softserveinc.healthbody.webclient.healthbody.webservice;
 
 import java.util.ArrayList;
