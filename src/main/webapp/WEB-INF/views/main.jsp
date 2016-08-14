@@ -66,7 +66,6 @@
 			</c:forEach>
 		</table>
 	</div>
-
 	<div class="container" align="center">
 		<ul class="pagination">
 
