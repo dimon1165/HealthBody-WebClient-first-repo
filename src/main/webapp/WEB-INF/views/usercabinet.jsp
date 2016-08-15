@@ -84,6 +84,17 @@
 				</c:forEach>
 			</tr>
 		</table>
+		<table class="table">
+			<tr class="info">
+				<th>Competitions :</th>
+			</tr>
+			<tr class="info">
+				<c:forEach items="${usercompetitions}" var="p">
+					<td><a
+						href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+				</c:forEach>
+			</tr>
+		</table>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

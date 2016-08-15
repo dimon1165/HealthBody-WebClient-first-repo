@@ -19,6 +19,7 @@ public class UserCabinetController {
 		/* request.getUserPrincipal().getName(); */
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "usercabinet";
 	}
 
