@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
 public class CompetitionController {
 
 	final Integer COMPETITIONS_PER_PAGE = 4;
@@ -51,7 +49,6 @@ public class CompetitionController {
 			String nameCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		log.info(service.getCompetitionViewByName(nameCompetition).toString());
 		boolean test = false;
 		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
 			if (competition.getName().equals(nameCompetition)) {
