@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +32,7 @@ import edu.softserveinc.healthbody.webclient.constants.GoogleConstants;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
+import edu.softserveinc.healthbody.webclient.models.ExeptionResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")
@@ -164,11 +167,24 @@ public class GoogleAuthServlet extends HttpServlet {
 		userDTO.setRoleName(GoogleConstants.DEFAULT_ROLE_NAME);
 		userDTO.setStatus(null);
 		userDTO.setScore("0");
-		if(userDTO.getGroups().isEmpty()) {
-		userDTO.getGroups().add(service.getGroupByName(GoogleConstants.DEFAULT_GROUP_NAME));
+		if (userDTO.getGroups().isEmpty()) {
+			userDTO.getGroups().add(service.getGroupByName(GoogleConstants.DEFAULT_GROUP_NAME));
 		}
 		userDTO.setIsDisabled(GoogleConstants.DEFAULT_USER_DISABLED);
 		log.info(userDTO.toString());
 		return userDTO;
+	}
+
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+		try {
+			super.service(arg0, arg1);
+		} catch (Exception e) {
+
+			ExeptionResponse responsObject = new ExeptionResponse(e.getMessage(), 400);
+			PrintWriter out = arg1.getWriter();
+			out.print(responsObject.getMessage());
+			out.flush();
+		}
 	}
 }
