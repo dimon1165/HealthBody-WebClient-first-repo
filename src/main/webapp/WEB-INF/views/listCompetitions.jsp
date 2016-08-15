@@ -19,7 +19,7 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -31,8 +31,8 @@
 			</button>
 			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="usercabinet.html">${login}</a></li>
-				<li><a href="userlist.html">User List</a></li>
+				<li><a href="usercabinet.html">${user.login}</a></li>
+				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>

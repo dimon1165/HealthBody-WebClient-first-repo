@@ -28,10 +28,16 @@
 			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
 				<li><a href="usercabinet.html">${user.login}</a></li>
-				<li><a href="userlist.html">User List</a></li>
+				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<form class="navbar-form navbar-right" role="form">
+				<a class="btn btn-success" type="submit" href="Logout.html">Sign
+					out</a>
+			</form>
 		</div>
 	</div>
 	</nav>
@@ -49,10 +55,10 @@
 				<th>FinishDate :</th>
 			</tr>
 			<tr>
-				<td>${getCompetitions.name}</td>
-				<td>${getCompetitions.description}</td>
-				<td>${getCompetitions.startDate}</td>
-				<td>${getCompetitions.finishDate}</td>
+				<td>${getCompetition.name}</td>
+				<td>${getCompetition.description}</td>
+				<td>${getCompetition.startDate}</td>
+				<td>${getCompetition.finishDate}</td>
 			</tr>
 		</table>
 	</div>
