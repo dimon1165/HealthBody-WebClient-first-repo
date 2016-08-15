@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
-import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -72,10 +71,9 @@ public class CompetitionController {
 	public String joinCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		UserDTO user = service.getUserByLogin(userLogin);
 		service.addUserInCompetitionView(nameCompetition, userLogin);
-		service.updateUser(user);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "usercabinet";
 	}
 
