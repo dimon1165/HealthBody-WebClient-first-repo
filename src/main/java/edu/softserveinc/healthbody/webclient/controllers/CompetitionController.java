@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -52,19 +53,30 @@ public class CompetitionController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		log.info(service.getCompetitionViewByName(nameCompetition).toString());
-//		boolean test = false;
-//		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
-//			if (competition.getName().equals(nameCompetition)) {
-//				test = true;
-//			}
-//		}
+		boolean test = false;
+		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
+			if (competition.getName().equals(nameCompetition)) {
+				test = true;
+			}
+		}
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
-//		if (test) {
+		if (test) {
 			return "competition";
-//		} else {
-//			return "Join the competition";
-//		}
+		} else {
+			return "Join the competition";
+		}
+	}
+	
+	@RequestMapping(value = "/Join the competition.html", method = RequestMethod.GET)
+	public String joinCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameCompetition) {
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		UserDTO user = service.getUserByLogin(userLogin);
+		service.addUserInCompetitionView(nameCompetition, userLogin);
+		service.updateUser(user);
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		return "usercabinet";
 	}
 
 }

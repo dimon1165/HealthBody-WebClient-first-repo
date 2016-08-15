@@ -1,3 +1,4 @@
+
 package edu.softserveinc.healthbody.webclient.healthbody.webservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
