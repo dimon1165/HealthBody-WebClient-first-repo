@@ -39,9 +39,7 @@ public class EditUserController {
 		user.setHealth(userToEdit.getHealth());
 		service.updateUser(user);
 		model.put("user", service.getUserByLogin(userLogin));
-//		userToEdit.setLogin(userLogin);
-//		service.updateUser(userToEdit);
-//		model.put("user", userToEdit);
+		model.put("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "usercabinet";
 	}
 

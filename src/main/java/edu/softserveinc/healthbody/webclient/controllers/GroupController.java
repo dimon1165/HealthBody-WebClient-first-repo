@@ -86,6 +86,7 @@ public class GroupController {
 		user.getGroups().add(service.getGroupByName(nameGroup));
 		service.updateUser(user);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "usercabinet";
 	}
 }
