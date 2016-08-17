@@ -45,13 +45,14 @@ public class MainPageController {
 			partNumber = lastPartNumber;
 		int currentPage = partNumber;
 		int startPartNumber = 1;
-		
 		String login = request.getUserPrincipal().getName();
+		
 		model.addAttribute("login", login);
 		model.addAttribute("startPartNumber", startPartNumber);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPartNumber", lastPartNumber);
 		model.addAttribute("getAllComp", service.getAllActiveCompetitions(partNumber, COMPETITIONS_PER_PAGE));
+		model.addAttribute("getAllCompTakePart", service.getAllActiveCompetitionsByUser(partNumber, COMPETITIONS_PER_PAGE, login));
 
 		OpenWeatherMap weatherService = new OpenWeatherMap(Units.METRIC, "b117631346fcc98856c5dbfddf9a7245");
 		CurrentWeather weather = null;
@@ -87,12 +88,11 @@ public class MainPageController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "/take_part.html", method = RequestMethod.GET)
-	public String getCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
+	@RequestMapping(value = "/check_take_part.html", method = RequestMethod.GET)
+	public String checkCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			String nameCompetition) {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		log.info(service.getCompetitionViewByName(nameCompetition).toString());
 		boolean test = false;
 		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, login)) {
 			if (competition.getName().equals(nameCompetition)) {
@@ -102,10 +102,23 @@ public class MainPageController {
 		model.addAttribute("user", service.getUserByLogin(login));
 		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
 		if (test) {
-			return "main";
+			return "Get out of competition";
 		} else {
 			return "Join the competition";
 		}
+	}
+	
+	
+	@RequestMapping(value = "/Get out of competition.html", method = RequestMethod.GET)
+	public String getOutCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			String nameCompetition) {
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		service.addUserInCompetitionView(nameCompetition, login);
+		model.addAttribute("user", service.getUserByLogin(login));
+		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));		
+		return "Get out of competition";
+		
 	}
 
 }

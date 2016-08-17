@@ -60,12 +60,27 @@
 			</tr>
 			<c:forEach items="${getAllComp}" var="comp">
 				<tr class="info">
+					<c:set var="check" value="false"/>
 					<td>${comp.name}</td>
 					<td>${comp.count}</td>
 					<td>${comp.startDate}</td>
 					<td>${comp.finishDate}</td>
 					<td>
-						<a href="take_part.html?nameCompetition=${comp.name}&userLogin=${login}">Take part</a>
+						<a href="check_take_part.html?nameCompetition=${comp.name}&userLogin=${login}">
+							<c:forEach items="${getAllCompTakePart}" var="t">
+							    <c:if test="${t.name == comp.name}"> 
+							    	<c:set var="check" value="true"/>							    													
+							    </c:if>    
+				    		</c:forEach>
+						    <c:choose>	
+						    	<c:when test="${check}"> 	
+						    		Get out						    	
+				    			</c:when> 
+							    <c:otherwise>						    	
+							    	Take part					    	
+							    </c:otherwise>
+							</c:choose>
+						</a>	
 					</td>
 				</tr>
 			</c:forEach>
