@@ -57,6 +57,7 @@ public class CompetitionController {
 		}
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
+		model.addAttribute("getScore", service.getUserCompetition(nameCompetition, userLogin));
 		if (test) {
 			return "competition";
 		} else {
