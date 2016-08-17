@@ -55,14 +55,14 @@ public class GoogleAuthServlet extends HttpServlet {
 		OutputStreamWriter writer = null;
 		BufferedReader reader = null;
 
+		// get code
+		String code = request.getParameter("code");
+		// format parameters to post
+		String urlParameters = "code=" + code + "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
+				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
+				+ GoogleConstants.GRANT_TYPE;
+		
 		try {
-			// get code
-			String code = request.getParameter("code");
-			// format parameters to post
-			String urlParameters = "code=" + code + "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
-					+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
-					+ GoogleConstants.GRANT_TYPE;
-
 			// post parameters
 			URL url = new URL(GoogleConstants.TOKEN_URL);
 			URLConnection urlConn = url.openConnection();
