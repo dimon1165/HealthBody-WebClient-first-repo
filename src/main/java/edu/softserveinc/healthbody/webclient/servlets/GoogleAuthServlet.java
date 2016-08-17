@@ -100,20 +100,17 @@ public class GoogleAuthServlet extends HttpServlet {
 				userDTO.setIdUser(UUID.randomUUID().toString());
 				userDTO.setPassword(access_token.substring(0, 15));
 				service.createUser(userDTO);
-				try {
-					EmailSender.sendMail(userDTO.getEmail(), "Health Body Service Registration", "Dear " + userDTO.getFirstname() + " You just have been logged in " + "<a href=http://localhost:8080/HealthBody-WebClient/usercabinet.html>Health Body Service</a>");
-				} catch (MessagingException e) {
-					request.setAttribute("notification", "can_not_send_email");
-					System.out.println("can_not_send_email");
-					return;
-				}
+				EmailSender.sendMail(email, "Health Body Service Registration", "Dear " + userDTO.getFirstname()
+						+ " You just have been logged in "
+						+ "<a href=http://localhost:8080/HealthBody-WebClient/usercabinet.html>Health Body Service</a>");
+
 			} else {
 				UserDTO userDTO = service.getUserByLogin(login);
 				userDTO.setPassword(access_token.substring(0, 15));
 				service.updateUser(userDTO);
 			}
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			if (service.getUserByLogin(login).getRoleName().equals("admin")) {
+			if ("admin".equals(service.getUserByLogin(login).getRoleName())) {
 				authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 			}
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
@@ -127,7 +124,11 @@ public class GoogleAuthServlet extends HttpServlet {
 		} catch (IOException e) {
 			log.error("IOException catched" + e);
 			return;
-		} finally {
+		} catch (MessagingException e) {
+			log.error("failed to send email", e);
+		}
+
+		finally {
 			if (writer != null && reader != null) {
 				try {
 					writer.close();
@@ -141,17 +142,6 @@ public class GoogleAuthServlet extends HttpServlet {
 		}
 	}
 
-	public String getGoogleGender(String a) {
-		String b = null;
-		if ("male".equalsIgnoreCase(a))
-			b = GoogleConstants.GOOGLE_MAIL_GENDER;
-		else if ("female".equalsIgnoreCase(a))
-			b = GoogleConstants.GOOGLE_FEMALE_GENDER;
-		else
-			b = GoogleConstants.GOOGLE_OTHER_GENDER;
-		return b;
-	}
-
 	public UserDTO makeNewUser(GoogleUser data) {
 		// form UserDTO
 		String email = data.getEmail();
@@ -159,8 +149,7 @@ public class GoogleAuthServlet extends HttpServlet {
 		String firstname = data.getGiven_name();
 		String lastname = data.getFamily_name();
 		String photoURL = data.getPicture();
-		String fullgender = data.getGender();
-		String gender = getGoogleGender(fullgender);
+		String gender = data.getGender();
 		HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 		UserDTO userDTO = new UserDTO();
 
