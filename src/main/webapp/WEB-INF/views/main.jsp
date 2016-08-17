@@ -59,14 +59,14 @@
 				<th>Take part</th>
 			</tr>
 			<c:forEach items="${getAllComp}" var="comp">
-				<c:url var="reg_in_comp" value="register_in_comp?id=${bet.id}" />
 				<tr class="info">
 					<td>${comp.name}</td>
 					<td>${comp.count}</td>
 					<td>${comp.startDate}</td>
 					<td>${comp.finishDate}</td>
-					<td><a href="register_in_comp?nameCompetition=${comp.name}">Take
-							part</a></td>
+					<td>
+						<a href="take_part.html?nameCompetition=${comp.name}&userLogin=${login}">Take part</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
