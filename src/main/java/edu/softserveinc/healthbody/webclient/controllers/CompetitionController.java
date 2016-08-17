@@ -50,13 +50,14 @@ public class CompetitionController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
-		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
+		for (CompetitionDTO competition : service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
 			if (competition.getName().equals(nameCompetition)) {
 				test = true;
 			}
 		}
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
+		model.addAttribute("getScore", service.getUserCompetition(nameCompetition, userLogin));
 		if (test) {
 			return "competition";
 		} else {

@@ -52,12 +52,14 @@
 				<th>Description :</th>
 				<th>StartDate :</th>
 				<th>FinishDate :</th>
+				<th>MyScore :</th>
 			</tr>
 			<tr>
 				<td>${getCompetition.name}</td>
 				<td>${getCompetition.description}</td>
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
+				<td>${getScore.userScore}</td>
 			</tr>
 		</table>
 	</div>
