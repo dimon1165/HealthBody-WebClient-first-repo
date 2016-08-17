@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,7 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodySer
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import edu.softserveinc.healthbody.webclient.models.ExeptionResponse;
+import edu.softserveinc.healthbody.webclient.utils.EmailSender;
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")
@@ -98,6 +100,13 @@ public class GoogleAuthServlet extends HttpServlet {
 				userDTO.setIdUser(UUID.randomUUID().toString());
 				userDTO.setPassword(access_token.substring(0, 15));
 				service.createUser(userDTO);
+				try {
+					EmailSender.sendMail(userDTO.getEmail(), "Health Body Service Registration", "Dear " + userDTO.getFirstname() + " You just have been logged in " + "<a href=http://localhost:8080/HealthBody-WebClient/usercabinet.html>Health Body Service</a>");
+				} catch (MessagingException e) {
+					request.setAttribute("notification", "can_not_send_email");
+					System.out.println("can_not_send_email");
+					return;
+				}
 			} else {
 				UserDTO userDTO = service.getUserByLogin(login);
 				userDTO.setPassword(access_token.substring(0, 15));
