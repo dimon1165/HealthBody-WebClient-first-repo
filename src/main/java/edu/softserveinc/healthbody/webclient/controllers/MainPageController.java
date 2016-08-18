@@ -102,22 +102,22 @@ public class MainPageController {
 		model.addAttribute("user", service.getUserByLogin(login));
 		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
 		if (test) {
-			return "Get out of competition";
+			return "getOutOfCompetition";
 		} else {
 			return "joinCompetition";
 		}
 	}
 	
 	
-	@RequestMapping(value = "/Get out of competition.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/getOutOfCompetition.html", method = RequestMethod.GET)
 	public String getOutCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			String nameCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		service.removeUserFromCompetition(nameCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
-		model.addAttribute("getCompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));		
-		return "userCabinet";
+		model.addAttribute("usercompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));		
+		return "redirect:main.html";
 		
 	}
 
