@@ -1,5 +1,7 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -63,6 +65,7 @@ public class GroupController {
 	public String getGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		GroupDTO groupDTO = service.getGroupByName(nameGroup);
 		boolean test = false;
 		for (GroupDTO group : service.getUserByLogin(userLogin).getGroups()) {
 			if (group.getName().equals(nameGroup)) {
@@ -70,12 +73,19 @@ public class GroupController {
 			}
 		}
 		model.addAttribute("user", service.getUserByLogin(userLogin));
-		model.addAttribute("group", service.getGroupByName(nameGroup));
+		model.addAttribute("group", groupDTO);
 		if (test) {
+			if ("admin".equals(service.getUserByLogin(userLogin).getRoleName())) {
+				return "editGroupDescription";
+			}
 			return "group";
 		} else {
+			if ("admin".equals(service.getUserByLogin(userLogin).getRoleName())) {
+				return "editGroupDescription";
+			}
 			return "joinGroup";
 		}
+
 	}
 
 	@RequestMapping(value = "/joinGroup.html", method = RequestMethod.GET)
@@ -88,5 +98,25 @@ public class GroupController {
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "userCabinet";
+	}
+
+	@RequestMapping(value = "/editGroupDescription.html", method = RequestMethod.GET)
+	public String editGroupDescription(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			String nameGroup) {
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		GroupDTO groupDTO = service.getGroupByName(nameGroup);
+		String groupId  = groupDTO.getIdGroup();
+		
+		groupDTO.setIdGroup(groupId);
+		groupDTO.setDescriptions("edit");
+		groupDTO.setCount(groupDTO.getCount());
+		groupDTO.setName(groupDTO.getName());
+		groupDTO.setScoreGroup(groupDTO.getScoreGroup());
+		groupDTO.setStatus(groupDTO.getStatus());
+		service.updateGroup(groupDTO);
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("group", groupDTO);
+		return "group";
 	}
 }
