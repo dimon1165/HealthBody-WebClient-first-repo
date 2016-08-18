@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,22 +34,26 @@ public class MainPageController {
 	@RequestMapping(value = "/main.html", method = RequestMethod.GET)
 	public String getListCurrentCompetitions(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			@RequestParam(value = "partNumber", required = false) Integer partNumber, HttpServletRequest request) {
-		try {
-		if (partNumber == null) {
-			partNumber = 1;
-		}
-		int currentPage = partNumber;
-		int startPartNumber = 1;
+		try {		
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		
 		int n = service.getAllActiveCompetitions(1, Integer.MAX_VALUE).size();
 		int lastPartNumber = (int) Math.ceil(n * 1.0 / COMPETITIONS_PER_PAGE);
-		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		if (partNumber == null || partNumber <= 0)
+			partNumber = 1;
+		if (partNumber > lastPartNumber)
+			partNumber = lastPartNumber;
+		int currentPage = partNumber;
+		int startPartNumber = 1;
+		String login = request.getUserPrincipal().getName();
+		
 		model.addAttribute("login", login);
 		model.addAttribute("startPartNumber", startPartNumber);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPartNumber", lastPartNumber);
 		model.addAttribute("getAllComp", service.getAllActiveCompetitions(partNumber, COMPETITIONS_PER_PAGE));
-
+		model.addAttribute("getAllCompTakePart", service.getAllActiveCompetitionsByUser(partNumber, COMPETITIONS_PER_PAGE, login));
+		
 		OpenWeatherMap weatherService = new OpenWeatherMap(Units.METRIC, "b117631346fcc98856c5dbfddf9a7245");
 		CurrentWeather weather = null;
 
@@ -83,15 +88,37 @@ public class MainPageController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "/register_in_comp",method = RequestMethod.GET)
-	public String takePartInCompettion(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition){	
-		String uLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+	@RequestMapping(value = "/check_take_part.html", method = RequestMethod.GET)
+	public String checkCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			String nameCompetition) {
+		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		boolean test = false;
+		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, login)) {
+			if (competition.getName().equals(nameCompetition)) {
+				test = true;
+			}
+		}
+		model.addAttribute("user", service.getUserByLogin(login));
+		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
+		if (test) {
+			return "Get out of competition";
+		} else {
+			return "joinCompetition";
+		}
+	}
+	
+	
+	@RequestMapping(value = "/Get out of competition.html", method = RequestMethod.GET)
+	public String getOutCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
+			String nameCompetition) {
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		service.removeUserFromCompetition(nameCompetition, userLogin);
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("getCompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));		
+		return "userCabinet";
 		
-		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();		
-		service.addUserInCompetition(nameCompetition, uLogin);		
-		model.addAttribute("user", service.getUserByLogin(uLogin));
-		return "redirect:main.html";
 	}
 
 }

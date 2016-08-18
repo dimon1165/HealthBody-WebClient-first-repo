@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Competition</title>
+<title>Join the competition</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -26,7 +26,7 @@
 			</button>
 			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="userCabinet.html">${user.login}</a></li>
+				<li><a href="usercabinet.html">${login}</a></li>
 				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
@@ -34,7 +34,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<form class="navbar-form navbar-right" role="form">
-				<a class="btn btn-success" type="submit" href="logout.html">Sign
+				<a class="btn btn-success" type="submit" href="Logout.html">Sign
 					out</a>
 			</form>
 		</div>
@@ -45,23 +45,27 @@
 	<br>
 	<br>
 
-	<div class="container">
+		<div class="container">
 		<table class="table">
 			<tr class="info">
 				<th>Name :</th>
 				<th>Description :</th>
 				<th>StartDate :</th>
 				<th>FinishDate :</th>
-				<th>MyScore :</th>
 			</tr>
 			<tr>
 				<td>${getCompetition.name}</td>
 				<td>${getCompetition.description}</td>
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
-				<td>${getScore.userScore}</td>
+				<td><a href="Get out of competition.html?nameCompetition=${getCompetition.name}&userLogin=${login}">Get out of competition</a></td>
 			</tr>
 		</table>
 	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>
