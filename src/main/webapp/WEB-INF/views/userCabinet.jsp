@@ -76,8 +76,8 @@
 		<table class="table">
 			<tr class="info">
 				<th>Groups :</th>
-			<!-- </tr>
-			<tr> -->
+			</tr>
+			<tr>
 				<c:forEach items="${user.groups}" var="p">
 					<td><a
 						href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
@@ -85,22 +85,33 @@
 			</tr>
 		</table>
 		<table class="table">
-			<tr class="info">
-				<th>Competitions :</th>
-			<!-- </tr>
-			<tr class="info"> -->
-	<td><c:if test="${empty usercompetitions}"><td align="left">You		don't	have 	any		competitions 	yet, chose	some	competition	from	list <a href ="listCompetitions.html">	competitions</a></td></c:if>
-				<c:forEach items="${usercompetitions}" var="p">
-					<td><a
-						href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
-				</c:forEach>
-			</tr>
+			<c:if test="${empty usercompetitions}">
+				<tr class="info">
+					<th>Competitions :</th>
+					<td><td align="left">You don't have any competitions yet, chose
+						some competition from list <a href="listCompetitions.html">
+							competitions</a>
+					</td>
+			
+			</c:if>
+			<c:if test="${not empty usercompetitions}">
+				<tr class="info">
+					<th>Competitions :</th>
+				</tr>
+				<tr>
+					<c:forEach items="${usercompetitions}" var="p">
+						<td><a
+							href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+					</c:forEach>
+				</tr>
+			</c:if>
 		</table>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script
+							src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+						<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="resources/js/bootstrap.min.js"></script>
-</body>
+
+					</body>
 </html>
