@@ -46,19 +46,19 @@
 			<table class="table">
 				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>
-					<td><form:input path="name"/></td>
+					<td>${group.name}</td>
 				</tr>
-				<tr class="info">
-					<td><form:label path="count">Count:</form:label></td>
-					<td><form:input path="count" /></td>
+				<tr>
+					<td bgcolor="#CCCCCC"><form:label path="descriptions">Descriptions</form:label></td>
+					<td bgcolor="#CCCCCC"><form:input  path="descriptions" /></td>
 				</tr>
-				<tr class="info">
-					<td><form:label path="descriptions">descriptions</form:label></td>
-					<td><form:input path="descriptions" /></td>
+				<tr>
+					<td bgcolor="#CCCCCC"><form:label path="count">Users Count:</form:label></td>
+					<td bgcolor="#CCCCCC">${group.count}</td>
 				</tr>
-				<tr class="info">
-					<td><form:label path="scoreGroup">score</form:label></td>
-					<td><form:input path="scoreGroup" /></td>
+				<tr>
+					<td bgcolor="#CCCCCC"><form:label path="scoreGroup">Group Score</form:label></td>
+					<td bgcolor="#CCCCCC">${group.scoreGroup}</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
