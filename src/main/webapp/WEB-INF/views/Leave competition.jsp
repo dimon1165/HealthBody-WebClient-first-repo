@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Competition</title>
+<title>Join the competition</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -60,8 +60,17 @@
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
 				<td>${getScore.userScore}</td>
+				<td><a
+					href="Leave competition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}"
+					onclick="return confirm('Are you sure? All your scores and awards in this competition will be lost!')">Leave
+						competition</a></td>
 			</tr>
 		</table>
 	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>

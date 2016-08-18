@@ -50,27 +50,39 @@ public class CompetitionController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
-		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
+		for (CompetitionDTO competition : service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
 			if (competition.getName().equals(nameCompetition)) {
 				test = true;
 			}
-		}
+		}	
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
+		model.addAttribute("getScore", service.getUserCompetition(nameCompetition, userLogin));
 		if (test) {
-			return "competition";
+			return "Leave competition";
 		} else {
-			return "Join the competition";
+			return "Join competition";
 		}
 	}
 	
-	@RequestMapping(value = "/Join the competition.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/Join competition.html", method = RequestMethod.GET)
 	public String joinCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		service.addUserInCompetitionView(nameCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
+		return "usercabinet";
+	}
+	
+	@RequestMapping(value = "/Leave competition.html", method = RequestMethod.GET)
+	public String leaveCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameCompetition) {
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		service.deleteUserCompetition(nameCompetition, userLogin);
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
+		model.addAttribute("getScore", service.getUserCompetition(nameCompetition, userLogin));
 		return "usercabinet";
 	}
 
