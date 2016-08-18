@@ -60,10 +60,9 @@
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
 				<td>${getScore.userScore}</td>
-				<td><a
-					href="leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}"
-					onclick="return confirm('Are you sure? All your scores and awards in this competition will be lost!')">Leave
-						competition</a></td>
+				<td>
+					<a class="confirm" href=#>Leave competition</a>
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -72,5 +71,17 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="resources/js/bootstrap.min.js"></script>
+	<!-- bootbox code -->
+    <script src="resources/js/bootbox.min.js"></script>
+    <script>
+        $(document).on("click", ".confirm", function(e) {
+            bootbox.confirm("Are you sure? All your scores and awards in this competition will be lost!", function(result){ 
+					if (result) {
+						location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
+					} else {
+					}
+			});
+        });
+    </script>
 </body>
 </html>
