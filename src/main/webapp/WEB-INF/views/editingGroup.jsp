@@ -28,8 +28,8 @@
 			</button>
 			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="userCabinet.html">${userToEdit.login}</a></li>
-				<li><a href="userlist.html">User List</a></li>
+				<li><a href="userCabinet.html">${user.login}</a></li>
+				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
