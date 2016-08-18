@@ -75,10 +75,11 @@ public class GroupController {
 		}
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("group", groupDTO);
-		if (test && "admin".equals(service.getUserByLogin(userLogin).getRoleName())) {
+		if("admin".equals(service.getUserByLogin(userLogin).getRoleName())) {
 			return "editGroupDescription";
-		} else if ("admin".equals(service.getUserByLogin(userLogin).getRoleName())) {
-			return "editGroupDescription";
+		}
+		if (test) {
+			return "group";
 		} else {
 			return "joinGroup";
 		}
@@ -89,19 +90,10 @@ public class GroupController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		UserDTO user = service.getUserByLogin(userLogin);
-		for (GroupDTO group : service.getUserByLogin(userLogin).getGroups()) {
-			if (group.getName().equals(nameGroup)) {
-				model.addAttribute("user", service.getUserByLogin(userLogin));
-				model.addAttribute("group", group);
-				return "userCabinet";
-			} else {
-				user.getGroups().add(service.getGroupByName(nameGroup));
-				service.updateUser(user);
-				model.addAttribute("user", service.getUserByLogin(userLogin));
-				model.addAttribute("usercompetitions",
-						service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
-			}
-		}
+		user.getGroups().add(service.getGroupByName(nameGroup));
+		service.updateUser(user);
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "userCabinet";
 	}
 
@@ -127,7 +119,7 @@ public class GroupController {
 		groupDTO.setName(groupEdit.getName());
 		groupDTO.setScoreGroup(groupEdit.getScoreGroup());
 		groupDTO.setStatus(groupEdit.getStatus());
-
+		
 		service.updateGroup(groupDTO);
 		model.put("user", service.getUserByLogin(userLogin));
 		model.put("group", groupDTO);

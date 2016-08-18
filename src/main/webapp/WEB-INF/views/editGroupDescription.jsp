@@ -54,7 +54,7 @@
 				<td>${group.count}</td>
 				<td>${group.scoreGroup}</td>
 				<td><a href="editGroupDescription.html?nameGroup=${group.name}">Edit</a></td>
-				<td><a href="joinGroup.html?nameGroup=${group.name}&userLogin=${user.login}">Join Group</a></td>
+				<%-- <td><a href="joinGroup.html?nameGroup=${group.name}&userLogin=${user.login}">Join Group</a></td> --%>
 			</tr>
 		</table>
 	</div>
