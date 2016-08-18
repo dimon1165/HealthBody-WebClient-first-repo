@@ -45,7 +45,7 @@
 	<br>
 	<br>
 
-		<div class="container">
+	<div class="container">
 		<table class="table">
 			<tr class="info">
 				<th>Name :</th>
@@ -60,7 +60,10 @@
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
 				<td>${getScore.userScore}</td>
-				<td><a href="Leave competition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Leave competition</a></td>
+				<td><a
+					href="Leave competition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}"
+					onclick="return confirm('Are you sure? All your scores and awards in this competition will be lost!')">Leave
+						competition</a></td>
 			</tr>
 		</table>
 	</div>
