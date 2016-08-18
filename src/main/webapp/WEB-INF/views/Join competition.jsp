@@ -58,7 +58,7 @@
 				<td>${getCompetition.description}</td>
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
-				<td><a href="Join the competition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join the competition</a></td>
+				<td><a href="Join competition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join competition</a></td>
 			</tr>
 		</table>
 	</div>
