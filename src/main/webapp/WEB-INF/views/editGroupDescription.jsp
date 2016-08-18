@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Join Group</title>
+<title>Edit Group</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -50,10 +50,10 @@
 			</tr>
 			<tr>
 				<td>${group.name}</td>
-				<td>${group.descriptions}</td>
+				<td><a title="edit description" href="editGroupDescription.html?nameGroup=${group.name}" style="color: black">${group.descriptions}</a></td>
 				<td>${group.count}</td>
 				<td>${group.scoreGroup}</td>
-				<td><a href="editGroupDescription.html?nameGroup=${group.name}">Edit</a></td>
+				<%-- <td><a href="editGroupDescription.html?nameGroup=${group.name}">Edit</a></td> --%>
 				<%-- <td><a href="joinGroup.html?nameGroup=${group.name}&userLogin=${user.login}">Join Group</a></td> --%>
 			</tr>
 		</table>

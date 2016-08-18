@@ -61,7 +61,7 @@
 				<th>Health :</th>
 				<th>Role :</th>
 			</tr>
-			<tr class="info">
+			<tr>
 				<td>${user.login}</td>
 				<td>${user.firstname}</td>
 				<td>${user.lastname}</td>
@@ -76,8 +76,8 @@
 		<table class="table">
 			<tr class="info">
 				<th>Groups :</th>
-			</tr>
-			<tr class="info">
+			<!-- </tr>
+			<tr> -->
 				<c:forEach items="${user.groups}" var="p">
 					<td><a
 						href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
@@ -87,8 +87,9 @@
 		<table class="table">
 			<tr class="info">
 				<th>Competitions :</th>
-			</tr>
-			<tr class="info">
+			<!-- </tr>
+			<tr class="info"> -->
+	<td><c:if test="${empty usercompetitions}"><td align="left">You		don't	have 	any		competitions 	yet, chose	some	competition	from	list <a href ="listCompetitions.html">	competitions</a></td></c:if>
 				<c:forEach items="${usercompetitions}" var="p">
 					<td><a
 						href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
