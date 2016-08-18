@@ -104,7 +104,7 @@ public class MainPageController {
 		if (test) {
 			return "Get out of competition";
 		} else {
-			return "Join the competition";
+			return "Join competition";
 		}
 	}
 	
