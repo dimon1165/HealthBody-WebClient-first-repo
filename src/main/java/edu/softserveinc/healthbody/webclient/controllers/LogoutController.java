@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LogoutController {
-	@RequestMapping(value = "/Logout*")
+	@RequestMapping(value = "/logout*")
 	public String logoutSpringSecurity(Model model) {
 		SecurityContextHolder.clearContext();
-		return "Login";
+		return "login";
 	}
 }

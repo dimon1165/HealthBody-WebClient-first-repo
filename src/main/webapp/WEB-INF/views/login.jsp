@@ -37,7 +37,7 @@
 						class="icon-bar">1</span> <span class="icon-bar">2</span> <span
 						class="icon-bar">3</span>
 				</button>
-				<a class="navbar-brand" href="HomePage.html">Health Body</a>
+				<a class="navbar-brand" href="homePage.html">Health Body</a>
 				<ul class="nav navbar-nav">
 				</ul>
 			</div>
@@ -46,7 +46,7 @@
 	<script>
 		function onLogin() {
 			var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance 
-			xmlhttp.open("POST", "/Login.html");
+			xmlhttp.open("POST", "/login.html");
 			xmlhttp.setRequestHeader("Content-Type",
 					"application/x-www-form-urlencoded");
 			var req = "username="
@@ -74,7 +74,7 @@
 					<div style="display: none" id="login-alert"
 						class="alert alert-danger col-sm-12"></div>
 					<form id="loginform" class="form-horizontal" role="form"
-						action="Login.html" method="post">
+						action="login.html" method="post">
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"> <i
 								class="glyphicon glyphicon-user"></i>

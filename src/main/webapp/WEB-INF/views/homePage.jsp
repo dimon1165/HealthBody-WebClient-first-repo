@@ -30,7 +30,7 @@
 
 			<div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right" role="form">
-					<a class="btn btn-success" type="submit" href="Login.html">Sign
+					<a class="btn btn-success" type="submit" href="login.html">Sign
 						in</a>
 				</form>
 			</div>

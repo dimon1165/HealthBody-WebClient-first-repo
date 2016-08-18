@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-	@RequestMapping(value= "/Login*")
+	@RequestMapping(value= "/login*")
 	public String loginSpringSecurity(Model model) {
-		return "Login";
+		return "login";
 	}
 }

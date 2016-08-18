@@ -36,6 +36,6 @@ public class UsersController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPartNumber", lastPartNumber);
 		model.addAttribute("AllUsers", service.getAllUsers(partNumber, USERS_PER_PAGE));
-		return "userlist";
+		return "userList";
 	}
 }

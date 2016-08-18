@@ -40,7 +40,7 @@ public class EditUserController {
 		service.updateUser(user);
 		model.put("user", service.getUserByLogin(userLogin));
 		model.put("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
-		return "usercabinet";
+		return "userCabinet";
 	}
 
 }

@@ -2,13 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Join Group</title>
+<title>Join the competition</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -27,11 +26,17 @@
 			</button>
 			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="usercabinet.html">${user.login}</a></li>
-				<li><a href="userlist.html">User List</a></li>
+				<li><a href="userCabinet.html">${user.login}</a></li>
+				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
 			</ul>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<form class="navbar-form navbar-right" role="form">
+				<a class="btn btn-success" type="submit" href="logout.html">Sign
+					out</a>
+			</form>
 		</div>
 	</div>
 	</nav>
@@ -40,20 +45,20 @@
 	<br>
 	<br>
 
-	<div class="container">
+		<div class="container">
 		<table class="table">
 			<tr class="info">
 				<th>Name :</th>
 				<th>Description :</th>
-				<th>Count:</th>
-				<th>Score of group :</th>
+				<th>StartDate :</th>
+				<th>FinishDate :</th>
 			</tr>
 			<tr>
-				<td>${group.name}</td>
-				<td>${group.descriptions}</td>
-				<td>${group.count}</td>
-				<td>${group.scoreGroup}</td>
-				<td><a href="Join the group.html?nameGroup=${group.name}&userLogin=${user.login}">Join the group</a></td>
+				<td>${getCompetition.name}</td>
+				<td>${getCompetition.description}</td>
+				<td>${getCompetition.startDate}</td>
+				<td>${getCompetition.finishDate}</td>
+				<td><a href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join Competition</a></td>
 			</tr>
 		</table>
 	</div>

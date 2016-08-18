@@ -60,18 +60,18 @@ public class CompetitionController {
 		if (test) {
 			return "competition";
 		} else {
-			return "Join the competition";
+			return "joinCompetition";
 		}
 	}
 	
-	@RequestMapping(value = "/Join the competition.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinCompetition.html", method = RequestMethod.GET)
 	public String joinCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		service.addUserInCompetitionView(nameCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
-		return "usercabinet";
+		return "userCabinet";
 	}
 
 }

@@ -74,11 +74,11 @@ public class GroupController {
 		if (test) {
 			return "group";
 		} else {
-			return "Join the group";
+			return "joinGroup";
 		}
 	}
 
-	@RequestMapping(value = "/Join the group.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinGroup.html", method = RequestMethod.GET)
 	public String joinGroup(Model model, @Autowired HealthBodyServiceImplService healthBody, String nameGroup) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
@@ -87,6 +87,6 @@ public class GroupController {
 		service.updateUser(user);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
-		return "usercabinet";
+		return "userCabinet";
 	}
 }

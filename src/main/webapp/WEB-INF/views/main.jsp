@@ -25,7 +25,7 @@
 			</button>
 			<a class="navbar-brand" href="main.html">Health Body</a>
 			<ul class="nav navbar-nav">
-				<li><a href="usercabinet.html">${login}</a></li>
+				<li><a href="userCabinet.html">${login}</a></li>
 				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
@@ -33,7 +33,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<form class="navbar-form navbar-right" role="form">
-				<a class="btn btn-success" type="submit" href="Logout.html">Sign
+				<a class="btn btn-success" type="submit" href="logout.html">Sign
 					out</a>
 			</form>
 		</div>

@@ -13,14 +13,14 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodySer
 @Controller
 public class UserCabinetController {
 
-	@RequestMapping(value = "/usercabinet.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/userCabinet.html", method = RequestMethod.GET)
 	public String getUserList(Model model, @Autowired HealthBodyServiceImplService healthBody) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		/* request.getUserPrincipal().getName(); */
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
-		return "usercabinet";
+		return "userCabinet";
 	}
 
 }
