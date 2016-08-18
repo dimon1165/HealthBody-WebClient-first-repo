@@ -53,7 +53,7 @@ public class MainPageController {
 		model.addAttribute("lastPartNumber", lastPartNumber);
 		model.addAttribute("getAllComp", service.getAllActiveCompetitions(partNumber, COMPETITIONS_PER_PAGE));
 		model.addAttribute("getAllCompTakePart", service.getAllActiveCompetitionsByUser(partNumber, COMPETITIONS_PER_PAGE, login));
-
+		
 		OpenWeatherMap weatherService = new OpenWeatherMap(Units.METRIC, "b117631346fcc98856c5dbfddf9a7245");
 		CurrentWeather weather = null;
 
@@ -112,12 +112,12 @@ public class MainPageController {
 	@RequestMapping(value = "/Get out of competition.html", method = RequestMethod.GET)
 	public String getOutCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			String nameCompetition) {
-		String login = SecurityContextHolder.getContext().getAuthentication().getName();
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		service.addUserInCompetitionView(nameCompetition, login);
-		model.addAttribute("user", service.getUserByLogin(login));
-		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));		
-		return "Get out of competition";
+		service.removeUserFromCompetition(nameCompetition, userLogin);
+		model.addAttribute("user", service.getUserByLogin(userLogin));
+		model.addAttribute("getCompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));		
+		return "usercabinet";
 		
 	}
 
