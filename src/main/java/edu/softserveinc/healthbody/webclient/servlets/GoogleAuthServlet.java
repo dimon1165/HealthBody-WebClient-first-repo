@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,7 +60,7 @@ public class GoogleAuthServlet extends HttpServlet {
 		String urlParameters = "code=" + code + "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
 				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
 				+ GoogleConstants.GRANT_TYPE;
-		
+
 		try {
 			// post parameters
 			URL url = new URL(GoogleConstants.TOKEN_URL);
@@ -100,9 +99,14 @@ public class GoogleAuthServlet extends HttpServlet {
 				userDTO.setIdUser(UUID.randomUUID().toString());
 				userDTO.setPassword(access_token.substring(0, 15));
 				service.createUser(userDTO);
-				EmailSender.sendMail(email, "Health Body Service Registration", "Dear " + userDTO.getFirstname()
+				EmailSender emailSender = EmailSender.getInstance();
+						emailSender.setParameters("Health Body Service Registration","Dear "
+						+ userDTO.getFirstname() 
 						+ " You just have been logged in "
-						+ "<a href=http://localhost:8080/HealthBody-WebClient/usercabinet.html>Health Body Service</a>");
+						+ "<a href=http://localhost:8080/HealthBody-WebClient/userCabinet.html>Health Body Service</a>",
+						email);
+				Thread thread = new Thread(emailSender);
+				thread.start();
 
 			} else {
 				UserDTO userDTO = service.getUserByLogin(login);
@@ -124,8 +128,6 @@ public class GoogleAuthServlet extends HttpServlet {
 		} catch (IOException e) {
 			log.error("IOException catched" + e);
 			return;
-		} catch (MessagingException e) {
-			log.error("failed to send email", e);
 		}
 
 		finally {
