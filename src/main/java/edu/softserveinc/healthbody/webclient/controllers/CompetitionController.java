@@ -41,7 +41,11 @@ public class CompetitionController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPartNumber", lastPartNumber);
 		model.addAttribute("getCompetitions", service.getAllActiveCompetitions(partNumber, COMPETITIONS_PER_PAGE));
-		return "listCompetitions";
+		if("admin".equals(service.getUserByLogin(userLogin).getRoleName())) {
+			return "listCompetitionsAdmin";
+		} else {
+			return "listCompetitions";
+		}
 	}
 
 	@RequestMapping(value = "/competition.html", method = RequestMethod.GET)
