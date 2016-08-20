@@ -47,71 +47,129 @@
 	</nav>
 	<br>
 	<br>
+	<br>
 	<div class="container">
-		<img src="${user.photoURL}" alt="Cinque Terre" width="334"
-			height="336">
-		<table class="table">
-			<tr class="info">
-				<th>Login :</th>
-				<th>Name :</th>
-				<th>Surname :</th>
-				<th>Age :</th>
-				<th>Weight :</th>
-				<th>Gender :</th>
-				<th>Health :</th>
-				<th>Role :</th>
-			</tr>
-			<tr>
-				<td>${user.login}</td>
-				<td>${user.firstname}</td>
-				<td>${user.lastname}</td>
-				<td>${user.age}</td>
-				<td>${user.weight}</td>
-				<td>${user.gender}</td>
-				<td>${user.health}</td>
-				<td>${user.roleName}</td>
-				<td><a href="editUser.html?userLogin=${user.login}">Edit</a></td>
-			</tr>
-		</table>
-		<table class="table">
-			<tr class="info">
-				<th>Groups :</th>
-			</tr>
-			<tr>
-				<c:forEach items="${user.groups}" var="p">
-					<td><a
-						href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
-				</c:forEach>
-			</tr>
-		</table>
-		<table class="table">
-			<c:if test="${empty usercompetitions}">
-				<tr class="info">
-					<th>Competitions :</th>
-					<td><td align="left">You don't have any competitions yet, chose
-						some competition from list <a href="listCompetitions.html">
-							competitions</a>
-					</td>
-			
-			</c:if>
-			<c:if test="${not empty usercompetitions}">
-				<tr class="info">
-					<th>Competitions :</th>
-				</tr>
-				<tr>
-					<c:forEach items="${usercompetitions}" var="p">
-						<td><a
-							href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
-					</c:forEach>
-				</tr>
-			</c:if>
-		</table>
+		<div class="row">
+			<div class="panel panel-info">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 col-lg-3 " align="center">
+							<img alt="User Pic" src="${user.photoURL}"
+								class="img-circle img-responsive">
+						</div>
+						<div class=" col-md-9 col-lg-9 ">
+							<table class="table table-user-information">
+								<tbody>
+									<tr>
+										<td>Role :</td>
+										<td>${user.roleName}</td>
+									</tr>
+									<tr>
+										<td>Name :</td>
+										<td>${user.firstname}</td>
+									</tr>
+									<tr>
+										<td>Surname :</td>
+										<td>${user.lastname}</td>
+									</tr>
+									<tr>
+										<td>Age :</td>
+										<td>${user.age}</td>
+									</tr>
+
+									<tr>
+									<tr>
+										<td>Gender :</td>
+										<td>${user.gender}</td>
+									</tr>
+									<tr>
+										<td>Weight :</td>
+										<td>${user.weight}</td>
+									</tr>
+									<tr>
+										<td>Email :</td>
+										<td>${user.email}</td>
+									</tr>
+									<tr>
+										<td>Health :</td>
+										<td>${user.health}</td>
+									</tr>
+								</tbody>
+							</table>
+							<a href="editUser.html?userLogin=${user.login}"
+								class="btn btn-primary">Edit</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="container">
+			<div class="row">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Groups :</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<table class="table table-user-information">
+								<tr>
+									<c:forEach items="${user.groups}" var="p">
+										<td><a
+											href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+									</c:forEach>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Competitions :</h3>
+					</div>
+					<c:if test="${empty usercompetitions}">
+						<div class="panel-body">
+							<div class="row">
+								<table class="table table-user-information">
+									<tr>
+										<td align="left">You don't have any competitions yet,
+											chose some competition from list <a
+											href="listCompetitions.html"> competitions</a>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</c:if>
+					<c:if test="${not empty usercompetitions}">
+						<div class="panel-body">
+							<div class="row">
+								<table class="table table-user-information">
+									<tr>
+										<c:forEach items="${usercompetitions}" var="p">
+											<td><a
+												href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+
+										</c:forEach>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-							src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-						<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="resources/js/bootstrap.min.js"></script>
 
-					</body>
+</body>
 </html>
