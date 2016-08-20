@@ -45,8 +45,8 @@
 			commandName="group">
 			<table class="table">
 				<tr>
-					<td><form:label path="idGroup">Group id :</form:label></td>
-					<td><form:input path="idGroup" readonly="true" name="name" value="${group.idGroup}"></form:input></td>
+					<td><form:label path="idGroup">Edit Group</form:label></td>
+					<td><form:input path="idGroup" readonly="true" name="name" type="hidden" value="${group.idGroup}"></form:input></td>
 				</tr>
 				<tr class = "info">
 					<td><form:label path="name">Name:</form:label></td>
