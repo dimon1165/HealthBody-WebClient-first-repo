@@ -7,15 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.sofserveinc.healthbody.webclient.persistence.entity.Statistics;
-import edu.sofserveinc.healthbody.webclient.service.impl.StatisticsServiceImpl;
+import edu.softserveinc.healthbody.webclient.persistence.dto.StatisticsDTO;
+import edu.softserveinc.healthbody.webclient.service.impl.StatisticsServiceImpl;
 
 @Controller
 public class StatisticsController {
 	
 	@RequestMapping(value= "/statistics.html")
 	public String loginSpringSecurity(@Autowired StatisticsServiceImpl statisticsService, Model model) {
-		Statistics statistics = new Statistics("Kolja", null, null);
+		StatisticsDTO statistics = new StatisticsDTO(null, "Kolja", null, null);
 		statisticsService.addStatistics(statistics);
 //		Date d = new Date();
 		model.addAttribute("ds", statistics);

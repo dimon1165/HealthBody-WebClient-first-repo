@@ -1,4 +1,4 @@
-package edu.sofserveinc.healthbody.webclient.persistence.configuration;
+package edu.softserveinc.healthbody.webclient.persistence.configuration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "edu.sofserveinc.healthbody.webclient.persistence.repository")
+@EnableJpaRepositories(basePackages = "edu.softserveinc.healthbody.webclient.persistence.repository")
 @ComponentScan("edu.softserveinc.healthbody.webclient")
 @PropertySource(value = "/resources/database.properties")
 public class PersistenceJPAConfig {
