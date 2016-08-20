@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Join the competition</title>
+<title>Leave the competition</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -50,9 +50,9 @@
 			<tr class="info">
 				<th>Name :</th>
 				<th>Description :</th>
-				<th>StartDate :</th>
-				<th>FinishDate :</th>
-				<th>MyScore :</th>
+				<th>Start Date :</th>
+				<th>Finish Date :</th>
+				<th>My Score :</th>
 			</tr>
 			<tr>
 				<td>${getCompetition.name}</td>
@@ -60,9 +60,8 @@
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
 				<td>${getScore.userScore}</td>
-				<td>
-					<a class="confirm" href=#>Leave competition</a>
-				</td>
+				<td><a class="confirm btn btn-primary" type="submit" href=#>Leave
+						competition</a></td>
 			</tr>
 		</table>
 	</div>
@@ -72,16 +71,23 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="resources/js/bootstrap.min.js"></script>
 	<!-- bootbox code -->
-    <script src="resources/js/bootbox.min.js"></script>
-    <script>
-        $(document).on("click", ".confirm", function(e) {
-            bootbox.confirm("Are you sure? All your scores and awards in this competition will be lost!", function(result){ 
-					if (result) {
-						location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
-					} else {
-					}
-			});
-        });
-    </script>
+	<script src="resources/js/bootbox.min.js"></script>
+	<script>
+		$(document)
+				.on(
+						"click",
+						".confirm",
+						function(e) {
+							bootbox
+									.confirm(
+											"Are you sure? All your scores and awards in this competition will be lost!",
+											function(result) {
+												if (result) {
+													location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
+												} else {
+												}
+											});
+						});
+	</script>
 </body>
 </html>

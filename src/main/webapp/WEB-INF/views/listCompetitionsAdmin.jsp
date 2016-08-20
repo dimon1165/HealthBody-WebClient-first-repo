@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Join the competition</title>
+<title>Competitions for admin</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
@@ -44,25 +44,62 @@
 	<br>
 	<br>
 	<br>
-
 	<div class="container">
 		<table class="table">
 			<tr class="info">
-				<th>Name :</th>
-				<th>Description :</th>
-				<th>Start Date :</th>
-				<th>Finish Date :</th>
-			</tr>
-			<tr>
-				<td>${getCompetition.name}</td>
-				<td>${getCompetition.description}</td>
-				<td>${getCompetition.startDate}</td>
-				<td>${getCompetition.finishDate}</td>
-				<td><a class="btn btn-primary" type="submit"
-					href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join
-						Competition</a></td>
+				<th><a class="btn btn-primary" type="submit"
+					href="createCompetition.html">Create competition</a></th>
 			</tr>
 		</table>
+		<br>
+		<table class="table">
+			<tr class="info">
+				<th>Name :</th>
+				<th>Users Count :</th>
+				<th>Start Date :</th>
+				<th>Finish Date :</th>
+				<th></th>
+			</tr>
+			<c:forEach items="${getCompetitions}" var="p">
+				<tr class="info">
+					<td><a
+						href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+					<td>${p.count}</td>
+					<td>${p.startDate}</td>
+					<td>${p.finishDate}</td>
+					<td><a class="btn btn-primary" type="submit"
+						href="editCompetition.html?nameCompetition=${p.name}&userLogin=${user.login}">Edit</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+
+	</div>
+
+	<div class="container" align="center">
+		<ul class="pagination">
+
+			<%--For displaying Previous link --%>
+			<li><c:if test="${currentPage > 1}">
+					<a
+						href="<c:url value="/listCompetitions.html" >
+        <c:param name="partNumber" value="${currentPage - 1}"/>${p}</c:url>">«</a>
+				</c:if></li>
+
+			<%--For displaying Page numbers --%>
+			<li><c:forEach begin="${startPartNumber}"
+					end="${lastPartNumber}" var="p">
+					<a
+						href="<c:url value="/listCompetitions.html" >
+        <c:param name="partNumber" value="${p}"/>${p}</c:url>">${p}</a>
+				</c:forEach></li>
+
+			<%--For displaying Next link --%>
+			<li><c:if test="${currentPage lt lastPartNumber}">
+					<a
+						href="<c:url value="/listCompetitions.html" >
+        <c:param name="partNumber" value="${currentPage + 1}"/>${p}</c:url>">»</a>
+				</c:if></li>
+		</ul>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

@@ -50,9 +50,9 @@
 			<tr class="info">
 				<th>Name :</th>
 				<th>Description :</th>
-				<th>StartDate :</th>
-				<th>FinishDate :</th>
-				<th>MyScore :</th>
+				<th>Start Date :</th>
+				<th>Finish Date :</th>
+				<th>My Score :</th>
 			</tr>
 			<tr>
 				<td>${getCompetition.name}</td>

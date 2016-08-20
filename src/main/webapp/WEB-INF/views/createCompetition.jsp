@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Join the competition</title>
+<title>Create competition</title>
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -44,25 +46,32 @@
 	<br>
 	<br>
 	<br>
-
 	<div class="container">
-		<table class="table">
-			<tr class="info">
-				<th>Name :</th>
-				<th>Description :</th>
-				<th>Start Date :</th>
-				<th>Finish Date :</th>
-			</tr>
-			<tr>
-				<td>${getCompetition.name}</td>
-				<td>${getCompetition.description}</td>
-				<td>${getCompetition.startDate}</td>
-				<td>${getCompetition.finishDate}</td>
-				<td><a class="btn btn-primary" type="submit"
-					href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join
-						Competition</a></td>
-			</tr>
-		</table>
+		<form:form action="createCompetition.html" method="POST"
+			commandName="competitionToCreate">
+			<table class="table">
+				<tr class="info">
+					<td><form:label path="name">Name:</form:label></td>
+					<td><form:input path="name" disabled="true" /></td>
+				</tr>
+				<tr class="info">
+					<td><form:label path="description">Description:</form:label></td>
+					<td><form:input path="description" /></td>
+				</tr>
+				<tr class="info">
+					<td><form:label path="startDate">Start Date:</form:label></td>
+					<td><form:input path="startDate" /></td>
+				</tr>
+				<tr class="info">
+					<td><form:label path="finishDate">Finish Date:</form:label></td>
+					<td><form:input path="finishDate" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="submit"
+						value="Save" /></td>
+				</tr>
+			</table>
+		</form:form>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
