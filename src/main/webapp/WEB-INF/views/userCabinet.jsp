@@ -2,11 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>usercabinet</title>
-</head> -->
 <html lang="en">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -117,7 +112,7 @@
 								<tr>
 									<c:forEach items="${user.groups}" var="p">
 										<td><a
-											href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+											href="group.html?nameGroup=${p.name}&userLogin=${user.login}" style="color: black">${p.name}</a></td>
 									</c:forEach>
 								</tr>
 							</table>
@@ -139,7 +134,7 @@
 									<tr>
 										<td align="left">You don't have any competitions yet,
 											chose some competition from list <a
-											href="listCompetitions.html"> competitions</a>
+											href="listCompetitions.html" > competitions</a>
 										</td>
 									</tr>
 								</table>
@@ -153,7 +148,7 @@
 									<tr>
 										<c:forEach items="${usercompetitions}" var="p">
 											<td><a
-												href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+												href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}" style="color: black">${p.name}</a></td>
 
 										</c:forEach>
 									</tr>

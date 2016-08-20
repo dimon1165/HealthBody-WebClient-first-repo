@@ -49,16 +49,16 @@
 					<td><form:input path="name" readonly="true" name="name" value="${group.name}"></form:input></td>
 				</tr>
 				<tr>
-					<td bgcolor="#CCCCCC"><form:label path="descriptions">Descriptions</form:label></td>
-					<td bgcolor="#CCCCCC"><form:input path="descriptions" /></td>
+					<td><form:label path="descriptions">Descriptions</form:label></td>
+					<td><form:input path="descriptions" /></td>
 				</tr>
 				<tr>
-					<td bgcolor="#CCCCCC"><form:label path="count">Users Count:</form:label></td>
-					<td bgcolor="#CCCCCC"><form:input path="count" readonly="true" name="name" value="${group.count}"></form:input></td>
+					<td><form:label path="count">Users Count:</form:label></td>
+					<td><form:input path="count" readonly="true" name="name" value="${group.count}"></form:input></td>
 				</tr>
 				<tr>
-					<td bgcolor="#CCCCCC"><form:label path="scoreGroup">Group Score</form:label></td>
-					<td bgcolor="#CCCCCC"><form:input path="scoreGroup" readonly="true" name="name" value="${group.scoreGroup}"></form:input></td>
+					<td><form:label path="scoreGroup">Group Score</form:label></td>
+					<td><form:input path="scoreGroup" readonly="true" name="name" value="${group.scoreGroup}"></form:input></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"
