@@ -45,20 +45,22 @@
 	<br>
 	<br>
 
-		<div class="container">
+	<div class="container">
 		<table class="table">
 			<tr class="info">
 				<th>Name :</th>
 				<th>Description :</th>
-				<th>StartDate :</th>
-				<th>FinishDate :</th>
+				<th>Start Date :</th>
+				<th>Finish Date :</th>
 			</tr>
 			<tr>
 				<td>${getCompetition.name}</td>
 				<td>${getCompetition.description}</td>
 				<td>${getCompetition.startDate}</td>
 				<td>${getCompetition.finishDate}</td>
-				<td><a href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join Competition</a></td>
+				<td><a class="btn btn-primary" type="submit"
+					href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join
+						Competition</a></td>
 			</tr>
 		</table>
 	</div>

@@ -65,8 +65,8 @@
 					<td><form:input path="weight" /></td>
 				</tr>
 				<tr class="info">
-					<td><form:radiobutton path="gender" value="MALE" />Male</td>
-					<td><form:radiobutton path="gender" value="FEMALE" />Female</td>
+					<td><form:radiobutton path="gender" value="male" />Male</td>
+					<td><form:radiobutton path="gender" value="female" />Female</td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="health">Health</form:label></td>
