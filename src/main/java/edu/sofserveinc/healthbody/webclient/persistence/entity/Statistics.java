@@ -11,7 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "STATISTICS")
+@Table
 public class Statistics {
 	
 	@Id
@@ -21,13 +21,23 @@ public class Statistics {
 	@Column(name = "USER_LOGIN", nullable = false)
 	private String userLogin;
 	
-	@Column(name = "LOGIN_DATE", nullable = false)
+	@Column(name = "LOGIN_DATE", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date loginDate;
 	
-	@Column(name = "LOGOUT_DATE", nullable = false)
+	@Column(name = "LOGOUT_DATE", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date logoutDate;
+	
+	public Statistics() {
+		
+	}
+	
+	public Statistics(String userLogin, Date loginDate, Date logoutDate) {
+		this.userLogin = userLogin;
+		this.loginDate = loginDate;
+		this.logoutDate = logoutDate;
+	}
 	
 	public long getId() {
 		return id;
