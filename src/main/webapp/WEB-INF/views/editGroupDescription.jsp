@@ -50,7 +50,7 @@
 			</tr>
 			<tr>
 				<td>${group.name}</td>
-				<td><a title="edit description" href="editGroupDescription.html?nameGroup=${group.name}" style="color: black">${group.descriptions}</a></td>
+				<td><a title="edit description" href="editGroupDescription.html?nameGroup=${group.idGroup}" style="color: black">${group.descriptions}</a></td>
 				<td>${group.count}</td>
 				<td>${group.scoreGroup}</td>
 				<%-- <td><a href="editGroupDescription.html?nameGroup=${group.name}">Edit</a></td> --%>

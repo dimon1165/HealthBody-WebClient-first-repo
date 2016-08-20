@@ -112,7 +112,7 @@
 								<tr>
 									<c:forEach items="${user.groups}" var="p">
 										<td><a
-											href="group.html?nameGroup=${p.name}&userLogin=${user.login}" style="color: black">${p.name}</a></td>
+											href="group.html?nameGroup=${p.idGroup}&userLogin=${user.login}" style="color: black">${p.name}</a></td>
 									</c:forEach>
 								</tr>
 							</table>

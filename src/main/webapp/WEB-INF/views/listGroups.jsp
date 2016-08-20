@@ -57,7 +57,7 @@
 				<c:forEach items="${groups}" var="p" >
 				<tr>
 					<td>
-						<a href="group.html?nameGroup=${p.name}&userLogin=${user.login}">${p.name}</a><br><br>
+						<a href="group.html?nameGroup=${p.idGroup}&userLogin=${user.login}">${p.name}</a><br><br>
 							<td>
 								${p.status}<br><br>
 							<td/>

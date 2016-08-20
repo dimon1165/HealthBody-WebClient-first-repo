@@ -44,9 +44,13 @@
 		<form:form action="editingGroup.html" method="POST"
 			commandName="group">
 			<table class="table">
+				<tr>
+					<td><form:label path="idGroup">Group id :</form:label></td>
+					<td><form:input path="idGroup" readonly="true" name="name" value="${group.idGroup}"></form:input></td>
+				</tr>
 				<tr class = "info">
 					<td><form:label path="name">Name:</form:label></td>
-					<td><form:input path="name" readonly="true" name="name" value="${group.name}"></form:input></td>
+					<td><form:input path="name"></form:input></td>
 				</tr>
 				<tr>
 					<td><form:label path="descriptions">Descriptions</form:label></td>

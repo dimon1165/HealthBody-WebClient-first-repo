@@ -53,7 +53,7 @@
 				<td>${group.descriptions}</td>
 				<td>${group.count}</td>
 				<td>${group.scoreGroup}</td>
-				<td><a href="joinGroup.html?nameGroup=${group.name}&userLogin=${user.login}">Join Group</a></td>
+				<td><a href="joinGroup.html?nameGroup=${group.idGroup}&userLogin=${user.login}">Join Group</a></td>
 			</tr>
 		</table>
 	</div>
