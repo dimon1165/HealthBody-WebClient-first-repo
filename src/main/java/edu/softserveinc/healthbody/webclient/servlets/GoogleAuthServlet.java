@@ -40,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GoogleAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	public GoogleAuthServlet() {
 		super();
 	}
@@ -107,7 +107,6 @@ public class GoogleAuthServlet extends HttpServlet {
 						email);
 				Thread thread = new Thread(emailSender);
 				thread.start();
-
 			} else {
 				UserDTO userDTO = service.getUserByLogin(login);
 				userDTO.setPassword(access_token.substring(0, 15));
@@ -122,7 +121,7 @@ public class GoogleAuthServlet extends HttpServlet {
 			Authentication authentication = new UsernamePasswordAuthenticationToken(login,
 					service.getUserByLogin(login).getPassword(), authorities);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-
+			
 			response.sendRedirect("main.html");
 
 		} catch (IOException e) {

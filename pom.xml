@@ -40,7 +40,7 @@
 		<org.springframework.security.version>4.1.1.RELEASE</org.springframework.security.version>
 		<!--  - - - - - JPA - - - - - -->
 		<postgresql.connector.version>9.4-1200-jdbc41</postgresql.connector.version>
-	    <hibernate.version>4.3.8.Final</hibernate.version>
+	    <hibernate.version>5.0.0.Final</hibernate.version>
 		<!-- - - - - - Variables - - - - - -->
 		<my.text>Hello World!</my.text>
 	</properties>
@@ -158,9 +158,14 @@
 			<version>1.10.1.RELEASE</version>
 		</dependency>
 		<dependency>
-    		<groupId>org.springframework</groupId>
-    		<artifactId>spring-tx</artifactId>
-    		<version>4.3.1.RELEASE</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>4.3.1.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>

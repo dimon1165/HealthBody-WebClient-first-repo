@@ -49,17 +49,25 @@
 		<table class="table">
 			<tr class="info">
 				<th>Name :</th>
+				<td>${getCompetition.name}</td>
+			</tr>
+			<tr class="info">
 				<th>Description :</th>
+				<td>${getCompetition.description}</td>
+			</tr>
+			<tr class="info">
 				<th>Start Date :</th>
+				<td>${getCompetition.startDate}</td>
+			</tr>
+			<tr class="info">
 				<th>Finish Date :</th>
+				<td>${getCompetition.finishDate}</td>
+			</tr>
+			<tr class="info">
 				<th>My Score :</th>
+				<td>${getScore.userScore}</td>
 			</tr>
 			<tr>
-				<td>${getCompetition.name}</td>
-				<td>${getCompetition.description}</td>
-				<td>${getCompetition.startDate}</td>
-				<td>${getCompetition.finishDate}</td>
-				<td>${getScore.userScore}</td>
 				<td><a class="confirm btn btn-primary" type="submit" href=#>Leave
 						competition</a></td>
 			</tr>

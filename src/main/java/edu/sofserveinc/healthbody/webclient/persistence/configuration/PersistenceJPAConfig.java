@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -24,9 +25,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "edu.sofserveinc.healthbody.webclient.persistence.repository")
-@ComponentScan("edu.softserveinc")
-@PropertySource(value = "classpath:database.properties")
-public class PersistenceConfiguration {
+@ComponentScan("edu.softserveinc.healthbody.webclient")
+@PropertySource(value = "/resources/database.properties")
+public class PersistenceJPAConfig {
     
 	@Autowired
     private Environment env;
@@ -42,9 +43,9 @@ public class PersistenceConfiguration {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPackagesToScan(env.getProperty("em.packagesToScan"));
         entityManagerFactoryBean.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
@@ -53,12 +54,14 @@ public class PersistenceConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory,
-    		DataSource dataSource) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
-        transactionManager.setDataSource(dataSource);
         return transactionManager;
+    }
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+       return new PersistenceExceptionTranslationPostProcessor();
     }
 
     private Map<String, String> jpaProperties() {
