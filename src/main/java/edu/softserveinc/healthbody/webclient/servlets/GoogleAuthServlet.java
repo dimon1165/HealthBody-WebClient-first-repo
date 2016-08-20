@@ -41,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GoogleAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	public GoogleAuthServlet() {
 		super();
 	}
@@ -102,7 +102,7 @@ public class GoogleAuthServlet extends HttpServlet {
 				service.createUser(userDTO);
 				EmailSender.sendMail(email, "Health Body Service Registration", "Dear " + userDTO.getFirstname()
 						+ " You just have been logged in "
-						+ "<a href=http://localhost:8080/HealthBody-WebClient/usercabinet.html>Health Body Service</a>");
+						+ "<a href=http://localhost:8080/HealthBody-WebClient/userCabinet.html>Health Body Service</a>");
 
 			} else {
 				UserDTO userDTO = service.getUserByLogin(login);
@@ -118,7 +118,7 @@ public class GoogleAuthServlet extends HttpServlet {
 			Authentication authentication = new UsernamePasswordAuthenticationToken(login,
 					service.getUserByLogin(login).getPassword(), authorities);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-
+			
 			response.sendRedirect("main.html");
 
 		} catch (IOException e) {
