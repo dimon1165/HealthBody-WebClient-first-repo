@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td><form:label path="descriptions">Description :</form:label></td>
-					<td><textarea name="descriptions" rows="4" cols="50"></textarea></td>
+					<td><textarea name="descriptions"  rows="4" cols="50">${group.descriptions}</textarea></td>
 				</tr>
 				<tr>
 					<td><form:label path="count">Users :</form:label></td>
