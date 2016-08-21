@@ -16,7 +16,7 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -52,7 +52,7 @@
 			<table class="table">
 				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>
-					<td><form:input path="name" disabled="true" /></td>
+					<td><form:input path="name" /></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="description">Description:</form:label></td>
@@ -67,7 +67,7 @@
 					<td><form:input path="finishDate" /></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit"
+					<td colspan="2" align="left"><input class="btn btn-success" type="submit"
 						value="Save" /></td>
 				</tr>
 			</table>

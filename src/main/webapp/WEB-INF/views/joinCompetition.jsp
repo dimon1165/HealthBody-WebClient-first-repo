@@ -64,7 +64,7 @@
 				<td>${getCompetition.finishDate}</td>
 			</tr>
 			<tr>
-				<td><a class="btn btn-primary" type="submit"
+				<td><a class="btn btn-success" type="submit"
 					href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join
 						Competition</a></td>
 			</tr>
