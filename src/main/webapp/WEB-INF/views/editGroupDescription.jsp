@@ -70,8 +70,10 @@
 										<td>${group.scoreGroup}</td>
 									</tr>
 								</tbody>
+								<tr>
+										<td colspan="2" align="left"><a class="btn btn-primary"  type="submit" href="editGroupDescription.html?nameGroup=${group.idGroup}">Edit</a>&nbsp &nbsp<a class="btn btn-primary" type="submit" href="listGroups.html">Groups</a></td>
+									</tr>
 							</table>
-							<a class="btn btn-primary" type="submit" href="editGroupDescription.html?nameGroup=${group.idGroup}">Edit</a>
 						</div>
 					</div>
 				</div>
