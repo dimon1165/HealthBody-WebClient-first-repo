@@ -1,5 +1,6 @@
-package edu.sofserveinc.healthbody.webclient.persistence.entity;
+package edu.softserveinc.healthbody.webclient.persistence.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,21 +12,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table
-public class Statistics {
+@Table(name="statistics")
+public class Statistics implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	
-	@Column(name = "USER_LOGIN", nullable = false)
+	@Column(name = "userlogin", nullable = false)
 	private String userLogin;
 	
-	@Column(name = "LOGIN_DATE", nullable = true)
+	@Column(name = "logindate", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date loginDate;
 	
-	@Column(name = "LOGOUT_DATE", nullable = true)
+	@Column(name = "logoutdate", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date logoutDate;
 	
@@ -33,17 +36,11 @@ public class Statistics {
 		
 	}
 	
-	public Statistics(String userLogin, Date loginDate, Date logoutDate) {
-		this.userLogin = userLogin;
-		this.loginDate = loginDate;
-		this.logoutDate = logoutDate;
-	}
-	
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
