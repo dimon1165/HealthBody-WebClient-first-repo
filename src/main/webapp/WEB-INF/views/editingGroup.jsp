@@ -45,7 +45,7 @@
 			commandName="group">
 			<table class="table">
 				<tr>
-					<td><form:label path="idGroup">Edit Group</form:label></td>
+					<td><form:label path="idGroup">Edit Group :</form:label></td>
 					<td><form:input path="idGroup" readonly="true" name="name" type="hidden" value="${group.idGroup}"></form:input></td>
 				</tr>
 				<tr class = "info">
@@ -53,19 +53,19 @@
 					<td><form:input path="name"></form:input></td>
 				</tr>
 				<tr>
-					<td><form:label path="descriptions">Descriptions</form:label></td>
+					<td><form:label path="descriptions">Description :</form:label></td>
 					<td><form:input path="descriptions" /></td>
 				</tr>
 				<tr>
-					<td><form:label path="count">Users Count:</form:label></td>
+					<td><form:label path="count">Users :</form:label></td>
 					<td><form:input path="count" readonly="true" name="name" value="${group.count}"></form:input></td>
 				</tr>
 				<tr>
-					<td><form:label path="scoreGroup">Group Score</form:label></td>
+					<td><form:label path="scoreGroup">Score :</form:label></td>
 					<td><form:input path="scoreGroup" readonly="true" name="name" value="${group.scoreGroup}"></form:input></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit"
+					<td colspan="2" align="center"><input class="btn btn-success" type="submit"
 						value="Save" /></td>
 				</tr>
 			</table>
