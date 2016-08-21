@@ -44,17 +44,17 @@
 		<form:form action="editingGroup.html" method="POST"
 			commandName="group">
 			<table class="table">
-				<tr>
+				<tr class="info">
 					<td><form:label path="idGroup">Edit Group :</form:label></td>
-					<td><form:input path="idGroup" readonly="true" name="name" type="hidden" value="${group.idGroup}"></form:input></td>
+					<td><form:input path="idGroup" readonly="true" name="name" type="hidden" value="${group.idGroup}"></form:input>${group.name}</td>
 				</tr>
-				<tr class = "info">
+				<tr>
 					<td><form:label path="name">Name:</form:label></td>
 					<td><form:input path="name"></form:input></td>
 				</tr>
 				<tr>
 					<td><form:label path="descriptions">Description :</form:label></td>
-					<td><form:input path="descriptions" /></td>
+					<td><textarea name="descriptions" rows="4" cols="50"></textarea></td>
 				</tr>
 				<tr>
 					<td><form:label path="count">Users :</form:label></td>
