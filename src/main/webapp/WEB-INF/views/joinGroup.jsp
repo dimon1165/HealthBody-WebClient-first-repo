@@ -38,24 +38,47 @@
 	<br>
 	<br>
 	<br>
-	<br>
-
 	<div class="container">
-		<table class="table">
-			<tr class="info">
-				<th>Name :</th>
-				<th>Description :</th>
-				<th>Count:</th>
-				<th>Score of group :</th>
-			</tr>
-			<tr>
-				<td>${group.name}</td>
-				<td>${group.descriptions}</td>
-				<td>${group.count}</td>
-				<td>${group.scoreGroup}</td>
-				<td><a href="joinGroup.html?nameGroup=${group.idGroup}&userLogin=${user.login}">Join Group</a></td>
-			</tr>
-		</table>
+		<div class="row">
+			<div class="panel panel-info">
+			<div class="panel-heading">
+              <h3 class="panel-title">Group</h3>
+            </div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 col-lg-3 " align="center">
+							<img alt="User Pic" src="resources/img/group.png"
+								class="img-circle img-responsive">
+						</div>
+						<div class=" col-md-9 col-lg-9 ">
+							<table class="table table-user-information">
+								<tbody>
+									<tr>
+										<td>Name :</td>
+										<td>${group.name}</td>
+									</tr>
+									<tr>
+										<td>Description :</td>
+										<td>${group.descriptions}</td>
+									</tr>
+									<tr>
+										<td>Users :</td>
+										<td>${group.count}</td>
+									</tr>
+									<tr>
+										<td>Score :</td>
+										<td>${group.scoreGroup}</td>
+									</tr>
+								</tbody>
+								<tr>
+										<td colspan="2" align="left"><a class="btn btn-primary"  type="submit" href="joinGroup.html?nameGroup=${group.idGroup}&userLogin=${user.login}">Join Group</a></td>
+									</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
