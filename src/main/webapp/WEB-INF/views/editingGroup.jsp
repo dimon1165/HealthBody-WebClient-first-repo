@@ -58,11 +58,11 @@
 				</tr>
 				<tr>
 					<td><form:label path="count">Users :</form:label></td>
-					<td><form:input path="count" readonly="true" name="name" value="${group.count}"></form:input></td>
+					<td><form:input path="count" readonly="true" name="name" type="hidden" value="${group.count}"></form:input>${group.count}</td>
 				</tr>
 				<tr>
 					<td><form:label path="scoreGroup">Score :</form:label></td>
-					<td><form:input path="scoreGroup" readonly="true" name="name" value="${group.scoreGroup}"></form:input></td>
+					<td><form:input path="scoreGroup" readonly="true" name="name" type="hidden" value="${group.scoreGroup}"></form:input>${group.scoreGroup}</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input class="btn btn-success" type="submit"
