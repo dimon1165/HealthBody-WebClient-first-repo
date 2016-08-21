@@ -52,11 +52,11 @@
 			<table class="table">
 				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>
-					<td><form:input path="name" disabled="true" /></td>
+					<td><form:input path="name" readonly="true" style="background-color:#DCDCDC" value="${competitionToEdit.name}" /></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="description">Description:</form:label></td>
-					<td><form:input path="description" /></td>
+					<td><textarea name="description"  rows="4" cols="50">${competitionToEdit.description}</textarea></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="startDate">Start Date:</form:label></td>
@@ -67,8 +67,8 @@
 					<td><form:input path="finishDate" /></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="left"><input class="btn btn-success" type="submit"
-						value="Save" /></td>
+					<td colspan="2" align="left"><input class="btn btn-success"
+						type="submit" value="Save" /></td>
 				</tr>
 			</table>
 		</form:form>

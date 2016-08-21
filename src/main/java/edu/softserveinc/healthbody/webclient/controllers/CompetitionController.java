@@ -139,7 +139,7 @@ public class CompetitionController {
 	public String editCompetition(@ModelAttribute("competitionToEdit") CompetitionDTO competitionToEdit, Map<String, Object> model,
 			@Autowired HealthBodyServiceImplService healthBody) {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		CompetitionDTO competitionDTO = competitionToEdit;
+		CompetitionDTO competitionDTO = service.getCompetitionViewByName(competitionToEdit.getName());
 		competitionDTO.setDescription(competitionToEdit.getDescription());
 		competitionDTO.setStartDate(competitionToEdit.getStartDate());
 		competitionDTO.setFinishDate(competitionToEdit.getFinishDate());

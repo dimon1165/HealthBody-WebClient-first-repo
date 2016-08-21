@@ -56,7 +56,7 @@
 				</tr>
 				<tr class="info">
 					<td><form:label path="description">Description:</form:label></td>
-					<td><form:input path="description" /></td>
+					<td><textarea name="description"  rows="4" cols="50"></textarea></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="startDate">Start Date:</form:label></td>
