@@ -20,21 +20,14 @@
 	<!-- bootbox code -->
 	<script src="resources/js/bootbox.min.js" async></script>
 	<script>
-		$(document)
-				.on(
-						"click",
-						".confirm",
-						function(e) {
-							bootbox
-									.confirm(
-											"Are you sure? All your scores and awards in this competition will be lost!",
-											function(result) {
-												if (result) {
-													location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
-												} else {
-												}
-											});
-						});
+		$(document).on("click", ".confirm", function(e) {
+	        bootbox.confirm("Are you sure? All your scores and awards in this competition will be lost!", function(result){ 
+					if (result) {
+						location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
+					} else {
+					}
+			});
+	    });
 	</script>
 </head>
 <body>
