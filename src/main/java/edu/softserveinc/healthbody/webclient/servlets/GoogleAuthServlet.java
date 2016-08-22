@@ -102,8 +102,7 @@ public class GoogleAuthServlet extends HttpServlet {
 				EmailSender emailSender = EmailSender.getInstance();
 						emailSender.setParameters("Health Body Service Registration","Dear "
 						+ userDTO.getFirstname() 
-						+ " You just have been logged in "
-						+ "<a href=http://localhost:8080/HealthBody-WebClient/userCabinet.html>Health Body Service</a>",
+						+ GoogleConstants.SUCSESFULL_REGISTRATION_EMALE,
 						email);
 				Thread thread = new Thread(emailSender);
 				thread.start();
