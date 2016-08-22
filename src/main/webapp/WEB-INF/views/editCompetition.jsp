@@ -14,6 +14,11 @@
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script  type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" async></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script  type="text/javascript" src="resources/js/bootstrap.min.js" async></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -73,10 +78,5 @@
 			</table>
 		</form:form>
 	</div>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>

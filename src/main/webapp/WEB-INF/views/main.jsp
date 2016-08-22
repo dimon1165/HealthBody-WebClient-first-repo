@@ -1,3 +1,4 @@
+<!-- <!DOCTYPE html> -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -11,6 +12,12 @@
 <link rel="icon"
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script  type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" async></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script  type="text/javascript" src="resources/js/bootstrap.min.js" async></script>
+	<script src="resources/js/jquery-1.9.1.min.js" async></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -112,6 +119,5 @@
 				</c:if></li>
 		</ul>
 	</div>
-	<script src="resources/js/jquery-1.9.1.min.js"></script>
 </body>
 </html>

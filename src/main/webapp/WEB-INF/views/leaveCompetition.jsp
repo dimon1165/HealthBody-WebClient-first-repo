@@ -12,6 +12,30 @@
 	href="https://d13yacurqjgara.cloudfront.net/users/678458/screenshots/1856046/h-icon.png">
 <!-- Bootstrap -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script  type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" async></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script  type="text/javascript" src="resources/js/bootstrap.min.js" async></script>
+	<!-- bootbox code -->
+	<script src="resources/js/bootbox.min.js" async></script>
+	<script>
+		$(document)
+				.on(
+						"click",
+						".confirm",
+						function(e) {
+							bootbox
+									.confirm(
+											"Are you sure? All your scores and awards in this competition will be lost!",
+											function(result) {
+												if (result) {
+													location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
+												} else {
+												}
+											});
+						});
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -73,29 +97,5 @@
 			</tr>
 		</table>
 	</div>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="resources/js/bootstrap.min.js"></script>
-	<!-- bootbox code -->
-	<script src="resources/js/bootbox.min.js"></script>
-	<script>
-		$(document)
-				.on(
-						"click",
-						".confirm",
-						function(e) {
-							bootbox
-									.confirm(
-											"Are you sure? All your scores and awards in this competition will be lost!",
-											function(result) {
-												if (result) {
-													location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
-												} else {
-												}
-											});
-						});
-	</script>
 </body>
 </html>

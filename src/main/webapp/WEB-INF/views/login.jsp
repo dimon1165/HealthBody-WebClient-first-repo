@@ -15,6 +15,11 @@
 <meta name="google-signin-client_id"
 	content="48524677967-juniqolaio06efre3m3q7774097q50u8.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script  type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" async></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script  type="text/javascript" src="resources/js/bootstrap.min.js" async></script>
 </head>
 <body>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
