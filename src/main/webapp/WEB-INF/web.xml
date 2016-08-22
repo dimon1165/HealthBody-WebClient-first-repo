@@ -30,17 +30,4 @@
     <servlet-name>googleTest</servlet-name>
     <url-pattern>/googleTest</url-pattern>
   </servlet-mapping>
- <!-- <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/beans.xml</param-value>
-  </context-param> -->
-  <servlet>
-    <servlet-name>dispatcher</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>dispatcher</servlet-name>
-    <url-pattern>*.html</url-pattern>
-  </servlet-mapping>
 </web-app>

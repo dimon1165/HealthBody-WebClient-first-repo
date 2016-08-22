@@ -1,4 +1,4 @@
-package edu.softserveinc.healthbody.webclient.persistence.dto;
+package edu.softserveinc.healthbody.webclient.dto;
 
 import java.util.Date;
 
