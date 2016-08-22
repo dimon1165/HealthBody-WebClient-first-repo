@@ -3,6 +3,7 @@ package edu.softserveinc.healthbody.webclient.wrapperD;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -61,5 +62,21 @@ public class RestConnector {
 				request.disconnect();
 				
 		return jsonElement;
+	}
+	
+	public void sendRequestPOST(URL url, String json) throws IOException {
+		HttpURLConnection request = (HttpURLConnection) url.openConnection();
+		request.setDoOutput(true);
+		request.setRequestMethod("POST");
+		request.setRequestProperty("Content-Type", "application/json");
+			if (request.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + request.getResponseCode());
+			}
+			
+			OutputStream os = request.getOutputStream();
+			os.write(json.getBytes());
+			os.flush();
+
+		request.disconnect();
 	}
 }

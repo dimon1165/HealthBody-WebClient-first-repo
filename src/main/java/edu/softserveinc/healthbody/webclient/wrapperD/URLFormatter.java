@@ -21,8 +21,7 @@ public class URLFormatter {
 
 	@Autowired
 	Formatter formatter = new Formatter();
-	
-	/** URL formatter for Users*/	
+
 	public URL getUsersByPartnumberPartsize(String methodName, Integer partNumber, Integer partSize)
 			throws MalformedURLException {
 				URL urlGetUsersByPartnumberPartsize = 
@@ -31,8 +30,26 @@ public class URLFormatter {
 						 		 	.GET_USERS_PART_NUMBER_PART_SIZE
 						 		 	.getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, methodName, partNumber, partSize)
 						 		 	.toString());
-		formatter.close();
+
 		return urlGetUsersByPartnumberPartsize;
+	}
+
+//========================================================================================================================================================//
+	
+	/** URL formatter for Users
+	 * @throws IOException */	
+	public void updateUser(UserDTORest userDTORest) throws IOException{
+				URL updateUser = new URL(formatter.format(URLEnumForConnectionToService
+						 		 	.Users
+						 		 	.UPDATE_USER_DTO
+						 		 	.getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, userDTORest)
+						 		 	.toString());
+				System.out.println(formatter);
+				UserDTORest dtoRest = new UserDTORest();
+				Gson gson = new Gson();
+				String json = gson.toJson(dtoRest);
+				RestConnector.getInstance().sendRequestPOST(updateUser, json);
+				
 	}
 
 //========================================================================================================================================================//
@@ -50,7 +67,7 @@ public class URLFormatter {
 				String jsonElementTostring = jsonElement.toString();
 				UserDTORest userDTORest = gson.fromJson(jsonElementTostring, UserDTORest.class);
 					System.out.println(userDTORest.toString());
-				formatter.close();
+				
 				
 		return userDTORest;
 	}
@@ -73,8 +90,6 @@ public class URLFormatter {
 				for (int i = 0; i < jsonArray.size(); i++) {
 					listGroupDTORest.add(mapper.readValue(jsonArray.get(i).toString(), GroupDTORest.class));
 				}
-		
-			formatter.close();
 			
 			return listGroupDTORest;
 			
@@ -89,7 +104,7 @@ public class URLFormatter {
 								 .getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, methodName, groupName)
 								 .toString());
 				
-		formatter.close();
+	
 		return urlGetGroupDescription; 
 	}
 
@@ -102,7 +117,7 @@ public class URLFormatter {
 										 .GET_COMPETITIONS_PART_NUMBER_PART_SIZE
 										 .getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, methodName, partNumber, partSize)
 									     .toString());
-		formatter.close();
+
 		return urlGetCompetitionsByPartnumberPartsize; 
 	}
 	
@@ -114,7 +129,7 @@ public class URLFormatter {
 									 .GET_COMPETITIONS_PART_NUMBER_PART_SIZE_LOGIN
 									 .getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, methodName, partNumber, partSize, login)
 									 .toString());
-		formatter.close();
+	
 		return urlGetCompetitionsByPartNumberPartSizeLogin;
 	}
 	
@@ -125,7 +140,7 @@ public class URLFormatter {
 								 .GET_COMPETITION_DESCRIPTION
 								 .getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, competitionName)
 								 .toString());
-		formatter.close();
+		
 		return urlGetCompetitionsDescription;
 	}
 }

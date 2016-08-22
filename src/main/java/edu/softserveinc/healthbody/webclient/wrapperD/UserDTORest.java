@@ -24,9 +24,18 @@ public class UserDTORest {
     private String score;
     private String status;
     private String weight;
+  
 
 
-    public String getAge() {
+    public void setGroups(List<GroupDTO> groups) {
+		this.groups = groups;
+	}
+
+	public void setHealth(String health) {
+		this.health = health;
+	}
+
+	public String getAge() {
         return age;
     }
 

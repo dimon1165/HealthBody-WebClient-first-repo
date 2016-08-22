@@ -1,5 +1,6 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
+import edu.softserveinc.healthbody.webclient.wrapperD.UserDTORest;
 
 @Controller
 @RequestMapping(value = "/editUser.html")
@@ -27,9 +29,11 @@ public class EditUserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveEdit(@ModelAttribute("userToEdit") UserDTO userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
+	public String saveEdit(@ModelAttribute("userToEdit") UserDTORest userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) 
+			throws IOException {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+	
 		UserDTO user = service.getUserByLogin(userLogin);
 		user.setFirstname(userToEdit.getFirstname());
 		user.setLastname(userToEdit.getLastname());
@@ -39,6 +43,19 @@ public class EditUserController {
 		user.setHealth(userToEdit.getHealth());
 		service.updateUser(user);
 		model.put("user", service.getUserByLogin(userLogin));
+
+//		Rest
+//		URLFormatter formatter = new URLFormatter();
+//		UserDTORest user = formatter.getUserByLogin("UserByLogin", userLogin);
+//		user.setFirstname(userToEdit.getFirstname());
+//		user.setLastname(userToEdit.getLastname());
+//		user.setAge(userToEdit.getAge());
+//		user.setWeight(userToEdit.getWeight());
+//		user.setGender(userToEdit.getGender());
+//		user.setHealth(userToEdit.getHealth());
+//		formatter.updateUser(user);
+//		model.put("user", formatter.getUserByLogin("UserByLogin", userLogin));
+		
 		model.put("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "userCabinet";
 	}
