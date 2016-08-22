@@ -32,7 +32,7 @@ public class RestConnector {
 		return instance;
 	}
 
-	public JsonArray sendRequestGet(URL url) throws IOException {
+	public JsonArray sendRequestGetAsJsonArray(URL url) throws IOException {
 		HttpURLConnection request = (HttpURLConnection) url.openConnection();
 		request.setRequestMethod("GET");
 		request.setRequestProperty("Accept", "application/json");
@@ -46,5 +46,20 @@ public class RestConnector {
 				request.disconnect();
 				
 		return jsonArray;
+	}
+	
+	public JsonElement sendRequestGetGetAsJsonElement(URL url) throws IOException {
+		HttpURLConnection request = (HttpURLConnection) url.openConnection();
+		request.setRequestMethod("GET");
+		request.setRequestProperty("Accept", "application/json");
+			if (request.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + request.getResponseCode());
+			}
+				JsonParser jsonParser = new JsonParser();
+				JsonElement jsonElement = jsonParser.parse(new InputStreamReader((InputStream) request.getContent(),StandardCharsets.UTF_8));
+				System.out.println(jsonElement.toString());
+				request.disconnect();
+				
+		return jsonElement;
 	}
 }

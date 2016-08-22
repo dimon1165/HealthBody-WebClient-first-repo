@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 public class URLFormatter {
 
@@ -35,24 +35,27 @@ public class URLFormatter {
 		return urlGetUsersByPartnumberPartsize;
 	}
 
-	public UserDTORest getUserByLogin(String methodName, String login) 
-			throws JsonParseException, JsonMappingException, IOException {
+//========================================================================================================================================================//
+	/** URL formatter for Groups. With help of Jackson 2.0.
+	 * @throws IOException, JsonParseException, JsonMappingException */
+	public UserDTORest getUserByLogin(String methodName, String login) throws IOException {
 				URL urlGetUserByLogin = 
 						new URL(formatter.format(URLEnumForConnectionToService
 							     	.Users
 							     	.GET_USER_BY_LOGIN
 							     	.getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, methodName, login)
 								 	.toString());
-				JsonArray jsonArray = RestConnector.getInstance().sendRequestGet(urlGetUserByLogin);
-				ObjectMapper mapper = new ObjectMapper();
-				UserDTORest userDTORest = mapper.readValue(jsonArray.toString(), UserDTORest.class);
-		
+				JsonElement jsonElement = RestConnector.getInstance().sendRequestGetGetAsJsonElement(urlGetUserByLogin);
+				Gson gson = new Gson();
+				String jsonElementTostring = jsonElement.toString();
+				UserDTORest userDTORest = gson.fromJson(jsonElementTostring, UserDTORest.class);
+					System.out.println(userDTORest.toString());
 				formatter.close();
 				
 		return userDTORest;
 	}
 
-	
+//========================================================================================================================================================//		
 	/** URL formatter for Groups. With help of Jackson 2.0.
 	 * @throws IOException */
 	public List<GroupDTORest> getGroupsByPartnumberPartsize(String methodName, Integer partNumber, Integer partSize) 
@@ -64,7 +67,7 @@ public class URLFormatter {
 									 	.getUrlForConnetionToListener(),BASE_URL_LOCAL_HOST, methodName, partNumber, partSize)
 				  					 	.toString()); 
 				
-			JsonArray jsonArray = RestConnector.getInstance().sendRequestGet(urlGetGroupsByPartnumberPartsize);
+			JsonArray jsonArray = RestConnector.getInstance().sendRequestGetAsJsonArray(urlGetGroupsByPartnumberPartsize);
 			ObjectMapper mapper = new ObjectMapper();			
 			List<GroupDTORest> listGroupDTORest = new ArrayList<>();
 				for (int i = 0; i < jsonArray.size(); i++) {

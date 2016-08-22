@@ -7,25 +7,23 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO;
 
 public class UserDTORest {
 
-public class UserDTO {
-
-    protected String age;
-    protected String email;
-    protected String firstname;
-    protected String gender;
-    protected String googleApi;
-    protected List<GroupDTO> groups;
-    protected String health;
-    protected String idUser;
-    protected String isDisabled;
-    protected String lastname;
-    protected String login;
-    protected String password;
-    protected String photoURL;
-    protected String roleName;
-    protected String score;
-    protected String status;
-    protected String weight;
+    private String age;
+    private String email;
+    private String firstname;
+    private String gender;
+    private String googleApi;
+    private List<GroupDTO> groups;
+    private String health;
+    private String idUser;
+    private String isDisabled;
+    private String lastname;
+    private String login;
+    private String password;
+    private String photoURL;
+    private String roleName;
+    private String score;
+    private String status;
+    private String weight;
 
 
     public String getAge() {
@@ -68,28 +66,6 @@ public class UserDTO {
         this.googleApi = value;
     }
 
-    /**
-     * Gets the value of the groups property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the groups property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGroups().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link GroupDTO }
-     * 
-     * 
-     */
     public List<GroupDTO> getGroups() {
         if (groups == null) {
             groups = new ArrayList<GroupDTO>();
@@ -97,14 +73,6 @@ public class UserDTO {
         return this.groups;
     }
 
-    /**
-     * Gets the value of the health property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getHealth() {
         return health;
     }
@@ -161,26 +129,10 @@ public class UserDTO {
         return photoURL;
     }
 
-    /**
-     * Sets the value of the photoURL property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
     public void setPhotoURL(String value) {
         this.photoURL = value;
     }
 
-    /**
-     * Gets the value of the roleName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
     public String getRoleName() {
         return roleName;
     }
@@ -220,4 +172,3 @@ public class UserDTO {
 
 }
 
-}
