@@ -21,7 +21,7 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodySer
 @Controller
 public class CompetitionController {
 
-	final Integer COMPETITIONS_PER_PAGE = 4;
+	final Integer COMPETITIONS_PER_PAGE = 5;
 
 	@RequestMapping(value = "/listCompetitions.html", method = RequestMethod.GET)
 	public String getListCurrentCompetitions(Model model, @Autowired HealthBodyServiceImplService healthBody,
