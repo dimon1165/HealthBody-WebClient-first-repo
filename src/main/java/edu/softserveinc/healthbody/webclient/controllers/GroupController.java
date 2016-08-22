@@ -1,5 +1,6 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,14 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
+import edu.softserveinc.healthbody.webclient.wrapperD.URLFormatter;
 
 @Controller
 public class GroupController {
 
 	@RequestMapping(value = "/listGroups.html", method = RequestMethod.GET)
 	public String getGroups(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			@RequestParam(value = "groupsParticipantsPartnumber", required = false) Integer groupsParticipantsPartnumber) {
+			@RequestParam(value = "groupsParticipantsPartnumber", required = false) Integer groupsParticipantsPartnumber) throws IOException {
 
 		/** Setting default quantity groups per page */
 		final Integer DEFAULT_QUANTITY_GROUPS_PER_PAGE = 1;
@@ -57,8 +59,14 @@ public class GroupController {
 		model.addAttribute("startPartNumber", startPartNumber);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastpagePartNumber", lastpagePartNumber);
-		model.addAttribute("groups",
-				service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUANTITY_GROUPS_PER_PAGE));
+		
+		/** SOAP*/
+//		model.addAttribute("groups",
+//				service.getAllGroupsParticipants(groupsParticipantsPartnumber, DEFAULT_QUANTITY_GROUPS_PER_PAGE));
+		
+		/** REST*/
+		URLFormatter formatter = new URLFormatter();
+		model.addAttribute("groups", formatter.getGroupsByPartnumberPartsize("GroupsParticipants", groupsParticipantsPartnumber, DEFAULT_QUANTITY_GROUPS_PER_PAGE));
 		return "listGroups";
 	}
 
