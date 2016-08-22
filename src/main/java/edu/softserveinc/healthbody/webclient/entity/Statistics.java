@@ -1,4 +1,4 @@
-package edu.softserveinc.healthbody.webclient.persistence.entity;
+package edu.softserveinc.healthbody.webclient.entity;
 
 import java.io.Serializable;
 import java.util.Date;
