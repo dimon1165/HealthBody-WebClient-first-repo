@@ -89,7 +89,7 @@
 				</c:forEach></li>
 
 			<%--For displaying Next link --%>
-			<li><c:if test="${currentPage lt lastPartNumber}">
+			<li><c:if test="${currentPage < lastPartNumber}">
 					<a
 						href="<c:url value="/listCompetitions.html" >
         <c:param name="partNumber" value="${currentPage + 1}"/>${p}</c:url>">»</a>

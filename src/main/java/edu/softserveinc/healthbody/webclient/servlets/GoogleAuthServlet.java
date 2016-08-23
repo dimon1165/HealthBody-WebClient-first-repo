@@ -56,6 +56,7 @@ public class GoogleAuthServlet extends HttpServlet {
 
 		// get code
 		String code = request.getParameter("code");
+		log.info(code + rn);
 		// format parameters to post
 		String urlParameters = "code=" + code + "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
 				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
@@ -88,8 +89,8 @@ public class GoogleAuthServlet extends HttpServlet {
 			urlConn = url.openConnection();
 			GoogleUser data = new Gson().fromJson(
 					new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8), GoogleUser.class);
-
-			// form UserDTO
+			log.info(data + rn);
+			
 			String email = data.getEmail();
 			String login = email.substring(0, email.indexOf("@")).toString();
 
