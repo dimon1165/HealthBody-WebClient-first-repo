@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.softserveinc.healthbody.webclient.dto.StatisticsDTO;
@@ -18,7 +17,7 @@ public class AddLoginStatisticsController {
 	private StatisticsService statisticsService;
 	
 	@RequestMapping(value= "/addLoginStatistics.html")
-	public String loginSpringSecurity(Model model) {
+	public String addLoginStatistics() {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		statisticsService.addStatistics(new StatisticsDTO(null, userLogin, new Date(), null));
 		return "redirect:/main.html";	
