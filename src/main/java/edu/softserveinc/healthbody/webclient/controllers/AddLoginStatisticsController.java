@@ -3,6 +3,7 @@ package edu.softserveinc.healthbody.webclient.controllers;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,17 +12,15 @@ import edu.softserveinc.healthbody.webclient.dto.StatisticsDTO;
 import edu.softserveinc.healthbody.webclient.service.StatisticsService;
 
 @Controller
-public class StatisticsController {
+public class AddLoginStatisticsController {
 	
-	@Autowired(required = true)
+	@Autowired
 	private StatisticsService statisticsService;
 	
-	@RequestMapping(value= "/statistics.html")
+	@RequestMapping(value= "/addLoginStatistics.html")
 	public String loginSpringSecurity(Model model) {
-		StatisticsDTO statistics = new StatisticsDTO(null, "Kolja", new Date(), null);
-		statisticsService.addStatistics(statistics);
-		model.addAttribute("ds", statistics);
-		return "statistics";
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		statisticsService.addStatistics(new StatisticsDTO(null, userLogin, new Date(), null));
+		return "redirect:/main.html";	
 	}
-
 }

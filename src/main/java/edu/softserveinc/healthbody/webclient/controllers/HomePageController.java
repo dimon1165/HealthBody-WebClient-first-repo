@@ -15,5 +15,4 @@ public class HomePageController {
 	public String login() {
 		return "login";
 	}
-
 }

@@ -1,6 +1,5 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,9 @@ public class EditUserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String saveEdit(@ModelAttribute("userToEdit") UserDTORest userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) 
-			throws IOException {
+	public String saveEdit(@ModelAttribute("userToEdit") UserDTORest userToEdit, Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
-	
 		UserDTO user = service.getUserByLogin(userLogin);
 		user.setFirstname(userToEdit.getFirstname());
 		user.setLastname(userToEdit.getLastname());

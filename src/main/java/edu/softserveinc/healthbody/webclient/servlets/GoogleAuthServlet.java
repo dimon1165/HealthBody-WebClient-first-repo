@@ -121,8 +121,8 @@ public class GoogleAuthServlet extends HttpServlet {
 			Authentication authentication = new UsernamePasswordAuthenticationToken(login,
 					service.getUserByLogin(login).getPassword(), authorities);
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-			
-			response.sendRedirect("main.html");
+						
+			response.sendRedirect("addLoginStatistics.html");
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);

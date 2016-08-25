@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/login*", "/", "/homePage.html", "/resources/**","/GoogleAuthServ*")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login.html")
-				.defaultSuccessUrl("/main.html").failureUrl("/login.html?error=true").and().logout()
+				.defaultSuccessUrl("/addLoginStatistics.html").failureUrl("/login.html?error=true").and().logout()
 				.logoutSuccessUrl("/login.html");
 	}
 }
