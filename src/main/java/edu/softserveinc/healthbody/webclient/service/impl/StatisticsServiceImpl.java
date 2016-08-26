@@ -30,10 +30,10 @@ public class StatisticsServiceImpl implements StatisticsService {
 
 	@Override
 	@Transactional
-	public List<StatisticsDTO> getAllStatistics() {
+	public List<StatisticsDTO> getAllUserStatisticsPerDate(String likeDate) {
 		List<StatisticsDTO> statisticsList= new ArrayList<>();
 		StatisticsDTO statisticsDTO = new StatisticsDTO();
-		for(Statistics statistics : statisticsRepository.getAll()) {
+		for(Statistics statistics : statisticsRepository.getAllUsersPerDate(likeDate)) {
 			statisticsList.add(StatisticsMapper.toDto(statisticsDTO, statistics));
 		}
 		return statisticsList;
@@ -54,5 +54,10 @@ public class StatisticsServiceImpl implements StatisticsService {
 	@Transactional
 	public void updateStatistics(Date logoutDate, String userLogin) {
 		statisticsRepository.updateStatistics(logoutDate, userLogin);
+	}
+
+	@Override
+	public Integer getUserStatisticsPerDate(String userLogin, String likeDate) {
+		return statisticsRepository.getCountLoginUserPerDate(userLogin, likeDate);
 	}
 }

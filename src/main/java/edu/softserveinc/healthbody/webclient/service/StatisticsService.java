@@ -9,10 +9,11 @@ public interface StatisticsService {
 	
 	void addStatistics(StatisticsDTO statisticsDTO);
 	
-	List<StatisticsDTO> getAllStatistics();
+	List<StatisticsDTO> getAllUserStatisticsPerDate(String likeDate);
 	
 	List<StatisticsDTO> getStatisticsByUserLogin(String userLogin);
 	
 	void updateStatistics(Date logoutDate, String userLogin);
-
+	
+	Integer getUserStatisticsPerDate(String userLogin, String likeDate);
 }

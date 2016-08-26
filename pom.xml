@@ -20,7 +20,6 @@
 		<jdk.source.version.openshift>1.6</jdk.source.version.openshift>
 		<jdk.compiler.version.openshift>1.6</jdk.compiler.version.openshift>
 		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
-		<postgresql.connector.version>9.4-1200-jdbc41</postgresql.connector.version>
 		<!-- - - - - - Logger - - - - - -->
 		<org.slf4j.version>1.7.21</org.slf4j.version>
 		<!-- - - - - - Test - - - - - -->
@@ -39,6 +38,7 @@
 		<org.springframework.version>4.3.1.RELEASE</org.springframework.version>
 		<org.springframework.security.version>4.1.1.RELEASE</org.springframework.security.version>
 		<!--  - - - - - JPA - - - - - -->
+		<spring-data-jpa.version>1.10.1.RELEASE</spring-data-jpa.version>
 		<postgresql.connector.version>9.4-1200-jdbc41</postgresql.connector.version>
 	    <hibernate.version>5.0.0.Final</hibernate.version>
 		<!-- - - - - - Variables - - - - - -->
@@ -155,7 +155,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.10.1.RELEASE</version>
+			<version>${spring-data-jpa.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -165,7 +165,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>4.3.1.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>

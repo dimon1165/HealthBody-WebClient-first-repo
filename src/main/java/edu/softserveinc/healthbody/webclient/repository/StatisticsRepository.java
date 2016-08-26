@@ -20,6 +20,9 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Integer>
 	@Query("update Statistics s set s.logoutDate = ?1 where s.userLogin = ?2 and s.logoutDate is null")
 	void updateStatistics(Date logoutDate, String userLogin);
 	
-	@Query("select s from Statistics s ")
-	List<Statistics> getAll();
+	@Query("select count(s.userLogin) from Statistics s where s.userLogin = ?1 and s.loginDate like ?2")
+	Integer getCountLoginUserPerDate(String userLogin, String likeDate);
+	
+	@Query("select distinct s from Statistics s where s.loginDate like ?1")
+	List<Statistics> getAllUsersPerDate(String likeDate);
 }
