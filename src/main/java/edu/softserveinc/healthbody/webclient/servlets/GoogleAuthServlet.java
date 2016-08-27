@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GoogleAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	public GoogleAuthServlet() {
 		super();
 	}
@@ -53,7 +54,7 @@ public class GoogleAuthServlet extends HttpServlet {
 		String rn = System.lineSeparator();
 		OutputStreamWriter writer = null;
 		BufferedReader reader = null;
-
+		HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 		// get code
 		String code = request.getParameter("code");
 		log.info(code + rn);
@@ -61,7 +62,6 @@ public class GoogleAuthServlet extends HttpServlet {
 		String urlParameters = "code=" + code + "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
 				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
 				+ GoogleConstants.GRANT_TYPE;
-
 		try {
 			// post parameters
 			URL url = new URL(GoogleConstants.TOKEN_URL);
@@ -70,7 +70,6 @@ public class GoogleAuthServlet extends HttpServlet {
 			writer = new OutputStreamWriter(urlConn.getOutputStream());
 			writer.write(urlParameters);
 			writer.flush();
-
 			// get output in outputString
 			String line, outputString = "";
 			reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
@@ -78,58 +77,26 @@ public class GoogleAuthServlet extends HttpServlet {
 				outputString += line;
 			}
 			log.info(outputString + rn);
-
 			// get Access Token
 			JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
 			String access_token = json.get("access_token").getAsString();
 			log.info(access_token + rn);
-
 			// get User Info
 			url = new URL(GoogleConstants.USERINFO_URL + access_token);
 			urlConn = url.openConnection();
 			GoogleUser data = new Gson().fromJson(
 					new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8), GoogleUser.class);
 			log.info(data + rn);
-			
-			String email = data.getEmail();
-			String login = email.substring(0, email.indexOf("@")).toString();
 
-			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
-			if (service.getUserByLogin(login) == null) {
-				UserDTO userDTO = makeNewUser(data);
-				userDTO.setIdUser(UUID.randomUUID().toString());
-				userDTO.setPassword(access_token.substring(0, 15));
-				service.createUser(userDTO);
-				EmailSender emailSender = EmailSender.getInstance();
-						emailSender.setParameters("Health Body Service Registration","Dear "
-						+ userDTO.getFirstname() 
-						+ GoogleConstants.SUCSESFULL_REGISTRATION_EMALE,
-						email);
-				Thread thread = new Thread(emailSender);
-				thread.start();
-			} else {
-				UserDTO userDTO = service.getUserByLogin(login);
-				userDTO.setPassword(access_token.substring(0, 15));
-				service.updateUser(userDTO);
-			}
-			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			if ("admin".equals(service.getUserByLogin(login).getRoleName())) {
-				authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-			}
-			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-			Authentication authentication = new UsernamePasswordAuthenticationToken(login,
-					service.getUserByLogin(login).getPassword(), authorities);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-						
+			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
+			handleGoogleUser(service, data, access_token);
+			setAuthenticated(login, service);
 			response.sendRedirect("addLoginStatistics.html");
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);
 			return;
-		}
-
-		finally {
+		} finally {
 			if (writer != null && reader != null) {
 				try {
 					writer.close();
@@ -143,26 +110,17 @@ public class GoogleAuthServlet extends HttpServlet {
 		}
 	}
 
-	public UserDTO makeNewUser(GoogleUser data) {
-		// form UserDTO
-		String email = data.getEmail();
-		String login = email.substring(0, email.indexOf("@")).toString();
-		String firstname = data.getGiven_name();
-		String lastname = data.getFamily_name();
-		String photoURL = data.getPicture();
-		String gender = data.getGender();
-		HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
+	public UserDTO makeNewUser(GoogleUser data, HealthBodyService service) {
 		UserDTO userDTO = new UserDTO();
 
-		userDTO.setLogin(login);
-		userDTO.setFirstname(firstname);
-		userDTO.setLastname(lastname);
-		userDTO.setPassword("");
-		userDTO.setEmail(email);
+		userDTO.setLogin(data.getEmail().substring(0, data.getEmail().indexOf("@")).toString());
+		userDTO.setFirstname(data.getGiven_name());
+		userDTO.setLastname(data.getFamily_name());
+		userDTO.setEmail(data.getEmail());
 		userDTO.setAge("0");
 		userDTO.setWeight("0.0");
-		userDTO.setGender(gender);
-		userDTO.setPhotoURL(photoURL);
+		userDTO.setGender(data.getGender());
+		userDTO.setPhotoURL(data.getPicture());
 		userDTO.setRoleName(GoogleConstants.DEFAULT_ROLE_NAME);
 		userDTO.setStatus(null);
 		userDTO.setScore("0");
@@ -172,6 +130,40 @@ public class GoogleAuthServlet extends HttpServlet {
 		userDTO.setIsDisabled(GoogleConstants.DEFAULT_USER_DISABLED);
 		log.info(userDTO.toString());
 		return userDTO;
+	}
+
+	private Collection<GrantedAuthority> getAuthorities(UserDTO user) {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		if (user.getRoleName().equals("admin")) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		return authorities;
+	}
+
+	private void setAuthenticated(String login, HealthBodyService service) {
+		Authentication authentication = new UsernamePasswordAuthenticationToken(login,
+				service.getUserByLogin(login).getPassword(), getAuthorities(service.getUserByLogin(login)));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+	}
+
+	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String access_token) {
+		String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
+		if (service.getUserByLogin(login) == null) {
+			UserDTO userDTO = makeNewUser(data, service);
+			userDTO.setIdUser(UUID.randomUUID().toString());
+			userDTO.setPassword(access_token.substring(0, 15));
+			service.createUser(userDTO);
+			EmailSender emailSender = EmailSender.getInstance();
+			emailSender.setParameters("Health Body Service Registration",
+					"Dear " + userDTO.getFirstname() + GoogleConstants.SUCSESFULL_REGISTRATION_EMALE, data.getEmail());
+			Thread thread = new Thread(emailSender);
+			thread.start();
+		} else {
+			UserDTO userDTO = service.getUserByLogin(login);
+			userDTO.setPassword(access_token.substring(0, 15));
+			service.updateUser(userDTO);
+		}
 	}
 
 	@Override
