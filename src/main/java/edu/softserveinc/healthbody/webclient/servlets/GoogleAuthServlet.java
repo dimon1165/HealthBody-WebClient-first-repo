@@ -139,7 +139,7 @@ public class GoogleAuthServlet extends HttpServlet {
 			UserDTO userDTO = makeNewUser(data, service);
 			userDTO.setIdUser(UUID.randomUUID().toString());
 			userDTO.setPassword(access_token.substring(0, 15));
-			userDTO.setHealth(stepCount);
+			userDTO.setGoogleApi(stepCount);
 			service.createUser(userDTO);
 			EmailSender emailSender = EmailSender.getInstance();
 			emailSender.setParameters("Health Body Service Registration",
@@ -148,8 +148,9 @@ public class GoogleAuthServlet extends HttpServlet {
 			thread.start();
 		} else {
 			UserDTO userDTO = service.getUserByLogin(login);
+			userDTO.setPhotoURL(data.getPicture());
 			userDTO.setPassword(access_token.substring(0, 15));
-			userDTO.setHealth(stepCount);
+			userDTO.setGoogleApi(stepCount);
 			service.updateUser(userDTO);
 		}
 	}
