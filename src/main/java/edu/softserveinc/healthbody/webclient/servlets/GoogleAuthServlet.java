@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -73,8 +72,8 @@ public class GoogleAuthServlet extends HttpServlet {
 			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
 			/* Google Fit */
 			Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
-			String steps = GoogleFitUtils.post(access_token, startTime, currentTime);
-			stepCount = getStepCount(steps);
+			String fitData = GoogleFitUtils.post(access_token, startTime, currentTime);
+			stepCount = GoogleFitUtils.getStepCount(fitData);
 			/* Authenticate User */
 			handleGoogleUser(service, data, access_token, stepCount);
 			setAuthenticated(login, service);
@@ -187,26 +186,6 @@ public class GoogleAuthServlet extends HttpServlet {
 		String access_token = json.get("access_token").getAsString();
 		log.info(access_token + rn);
 		return access_token;
-	}
-
-	private String getStepCount(String steps) {
-		String stepCount = "0";
-		if ("empty".equals(steps)) {
-			log.info("You don't have steps , we will set your step count \"0\"");
-		} else {
-			log.info(steps);
-			JSONObject googleSteps = (JSONObject) new JSONObject(steps);
-			if (googleSteps.isNull("bucket")) {
-				log.info("Sorry your info about steps is empty");
-			} else {
-				stepCount = googleSteps.getJSONArray("bucket").getJSONObject(0).getJSONArray("dataset").getJSONObject(0)
-						.getJSONArray("point").getJSONObject(0).getJSONArray("value").getJSONObject(0).get("intVal")
-						.toString();
-			}
-		}
-		log.info("Your steps count :" + stepCount);
-		return stepCount;
-
 	}
 
 	@Override

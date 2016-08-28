@@ -9,6 +9,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONObject;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,11 +39,31 @@ public class GoogleFitUtils {
 			InputStream body = response.getEntity().getContent();
 			BufferedReader in = new BufferedReader(new InputStreamReader(body));
 			String line;
-			String output = "";
+			String fitData = "";
 			while ((line = in.readLine()) != null) {
-				output += line;
+				fitData += line;
 			}
-			return output;
+			return fitData;
 		}
+	}
+
+	public static String getStepCount(String fitData) {
+		String stepCount = "0";
+		if ("empty".equals(fitData)) {
+			log.info("You don't have steps , we will set your step count \"0\"");
+		} else {
+			log.info(fitData);
+			JSONObject googleSteps = new JSONObject(fitData);
+			if (googleSteps.isNull("bucket")) {
+				log.info("Sorry your info about steps is empty");
+			} else {
+				stepCount = googleSteps.getJSONArray("bucket").getJSONObject(0).getJSONArray("dataset").getJSONObject(0)
+						.getJSONArray("point").getJSONObject(0).getJSONArray("value").getJSONObject(0).get("intVal")
+						.toString();
+			}
+		}
+		log.info("Your steps count :" + stepCount);
+		return stepCount;
+
 	}
 }
