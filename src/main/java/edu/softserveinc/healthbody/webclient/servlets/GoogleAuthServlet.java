@@ -79,7 +79,6 @@ public class GoogleAuthServlet extends HttpServlet {
 			handleGoogleUser(service, data, access_token, stepCount);
 			setAuthenticated(login, service);
 			response.sendRedirect("addLoginStatistics.html");
-
 		} catch (IOException e) {
 			log.error("IOException catched", e);
 			return;
@@ -94,7 +93,6 @@ public class GoogleAuthServlet extends HttpServlet {
 					log.error("IOException catched" + e);
 					return;
 				}
-
 			}
 		}
 	}
