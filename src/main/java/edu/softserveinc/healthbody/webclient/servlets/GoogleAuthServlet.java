@@ -193,7 +193,7 @@ public class GoogleAuthServlet extends HttpServlet {
 
 	private String getStepCount(String steps) {
 		String stepCount = "0";
-		if (steps.equals("empty")) {
+		if ("empty".equals(steps)) {
 			log.info("You don't have steps , we will set your step count \"0\"");
 		} else {
 			log.info(steps);
