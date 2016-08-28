@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,6 +36,7 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodySer
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import edu.softserveinc.healthbody.webclient.models.ExeptionResponse;
 import edu.softserveinc.healthbody.webclient.utils.EmailSender;
+import edu.softserveinc.healthbody.webclient.utils.GoogleFitUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")
@@ -54,6 +56,8 @@ public class GoogleAuthServlet extends HttpServlet {
 		String rn = System.lineSeparator();
 		OutputStreamWriter writer = null;
 		BufferedReader reader = null;
+		String stepCount = "0";
+		Long currentTime = System.currentTimeMillis();
 		HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 		// get code
 		String code = request.getParameter("code");
@@ -89,13 +93,29 @@ public class GoogleAuthServlet extends HttpServlet {
 			log.info(data + rn);
 
 			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
-			handleGoogleUser(service, data, access_token);
+
+			/* Google Fit */
+			String steps = GoogleFitUtils.post(access_token, 1470036056000L, currentTime);
+			if (steps.equals("empty")) {
+				log.info("You don't have steps , we will set your step count \"0\"");
+			} else {
+				log.info(steps);
+				JSONObject googleSteps = (JSONObject) new JSONObject(steps).getJSONArray("bucket").getJSONObject(0)
+						.getJSONArray("dataset").getJSONObject(0).getJSONArray("point").getJSONObject(0)
+						.getJSONArray("value").getJSONObject(0);
+				stepCount = googleSteps.get("intVal").toString();
+			}
+			log.info("Your steps count :" + stepCount);
+			/* Authenticate User */
+			handleGoogleUser(service, data, access_token,stepCount);
 			setAuthenticated(login, service);
 			response.sendRedirect("addLoginStatistics.html");
 
 		} catch (IOException e) {
 			log.error("IOException catched" + e);
 			return;
+		} catch (Exception e) {
+			log.error("Geting google fit data failed", e);
 		} finally {
 			if (writer != null && reader != null) {
 				try {
@@ -147,12 +167,13 @@ public class GoogleAuthServlet extends HttpServlet {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
-	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String access_token) {
+	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String access_token, String stepCount) {
 		String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
 		if (service.getUserByLogin(login) == null) {
 			UserDTO userDTO = makeNewUser(data, service);
 			userDTO.setIdUser(UUID.randomUUID().toString());
 			userDTO.setPassword(access_token.substring(0, 15));
+			userDTO.setHealth(stepCount);
 			service.createUser(userDTO);
 			EmailSender emailSender = EmailSender.getInstance();
 			emailSender.setParameters("Health Body Service Registration",
@@ -162,6 +183,7 @@ public class GoogleAuthServlet extends HttpServlet {
 		} else {
 			UserDTO userDTO = service.getUserByLogin(login);
 			userDTO.setPassword(access_token.substring(0, 15));
+			userDTO.setHealth(stepCount);
 			service.updateUser(userDTO);
 		}
 	}
