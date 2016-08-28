@@ -35,6 +35,7 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodySer
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import edu.softserveinc.healthbody.webclient.models.ExeptionResponse;
+import edu.softserveinc.healthbody.webclient.utils.CustomDateFormater;
 import edu.softserveinc.healthbody.webclient.utils.EmailSender;
 import edu.softserveinc.healthbody.webclient.utils.GoogleFitUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GoogleAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String rn = System.lineSeparator();
 
 	public GoogleAuthServlet() {
 		super();
@@ -53,7 +55,6 @@ public class GoogleAuthServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		String rn = System.lineSeparator();
 		OutputStreamWriter writer = null;
 		BufferedReader reader = null;
 		String stepCount = "0";
@@ -67,52 +68,20 @@ public class GoogleAuthServlet extends HttpServlet {
 				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
 				+ GoogleConstants.GRANT_TYPE;
 		try {
-			// post parameters
-			URL url = new URL(GoogleConstants.TOKEN_URL);
-			URLConnection urlConn = url.openConnection();
-			urlConn.setDoOutput(true);
-			writer = new OutputStreamWriter(urlConn.getOutputStream());
-			writer.write(urlParameters);
-			writer.flush();
-			// get output in outputString
-			String line, outputString = "";
-			reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-			while ((line = reader.readLine()) != null) {
-				outputString += line;
-			}
-			log.info(outputString + rn);
-			// get Access Token
-			JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
-			String access_token = json.get("access_token").getAsString();
-			log.info(access_token + rn);
-			// get User Info
-			url = new URL(GoogleConstants.USERINFO_URL + access_token);
-			urlConn = url.openConnection();
-			GoogleUser data = new Gson().fromJson(
-					new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8), GoogleUser.class);
-			log.info(data + rn);
-
+			String access_token = getAccessToken(urlParameters);
+			GoogleUser data = getUserInfo(access_token);
 			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
-
 			/* Google Fit */
-			String steps = GoogleFitUtils.post(access_token, 1470036056000L, currentTime);
-			if (steps.equals("empty")) {
-				log.info("You don't have steps , we will set your step count \"0\"");
-			} else {
-				log.info(steps);
-				JSONObject googleSteps = (JSONObject) new JSONObject(steps).getJSONArray("bucket").getJSONObject(0)
-						.getJSONArray("dataset").getJSONObject(0).getJSONArray("point").getJSONObject(0)
-						.getJSONArray("value").getJSONObject(0);
-				stepCount = googleSteps.get("intVal").toString();
-			}
-			log.info("Your steps count :" + stepCount);
+			Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
+			String steps = GoogleFitUtils.post(access_token, startTime, currentTime);
+			stepCount = getStepCount(steps);
 			/* Authenticate User */
-			handleGoogleUser(service, data, access_token,stepCount);
+			handleGoogleUser(service, data, access_token, stepCount);
 			setAuthenticated(login, service);
 			response.sendRedirect("addLoginStatistics.html");
 
 		} catch (IOException e) {
-			log.error("IOException catched" + e);
+			log.error("IOException catched", e);
 			return;
 		} catch (Exception e) {
 			log.error("Geting google fit data failed", e);
@@ -186,6 +155,60 @@ public class GoogleAuthServlet extends HttpServlet {
 			userDTO.setHealth(stepCount);
 			service.updateUser(userDTO);
 		}
+	}
+
+	private GoogleUser getUserInfo(String access_token) throws IOException {
+		// get User Info
+		URL url = new URL(GoogleConstants.USERINFO_URL + access_token);
+		URLConnection urlConn = url.openConnection();
+		GoogleUser data = new Gson().fromJson(new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8),
+				GoogleUser.class);
+		log.info(data + rn);
+		return data;
+	}
+
+	private String getAccessToken(String urlParameters) throws IOException {
+		OutputStreamWriter writer = null;
+		BufferedReader reader = null;
+		// post parameters
+		URL url = new URL(GoogleConstants.TOKEN_URL);
+		URLConnection urlConn = url.openConnection();
+		urlConn.setDoOutput(true);
+		writer = new OutputStreamWriter(urlConn.getOutputStream());
+		writer.write(urlParameters);
+		writer.flush();
+		// get output in outputString
+		String line, outputString = "";
+		reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+		while ((line = reader.readLine()) != null) {
+			outputString += line;
+		}
+		log.info(outputString + rn);
+		// get Access Token
+		JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
+		String access_token = json.get("access_token").getAsString();
+		log.info(access_token + rn);
+		return access_token;
+	}
+
+	private String getStepCount(String steps) {
+		String stepCount = "0";
+		if (steps.equals("empty")) {
+			log.info("You don't have steps , we will set your step count \"0\"");
+		} else {
+			log.info(steps);
+			JSONObject googleSteps = (JSONObject) new JSONObject(steps);
+			if (googleSteps.isNull("bucket")) {
+				log.info("Sorry your info about steps is empty");
+			} else {
+				stepCount = googleSteps.getJSONArray("bucket").getJSONObject(0).getJSONArray("dataset").getJSONObject(0)
+						.getJSONArray("point").getJSONObject(0).getJSONArray("value").getJSONObject(0).get("intVal")
+						.toString();
+			}
+		}
+		log.info("Your steps count :" + stepCount);
+		return stepCount;
+
 	}
 
 	@Override
