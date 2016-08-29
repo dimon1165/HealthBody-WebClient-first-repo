@@ -145,7 +145,7 @@
 								<!-- 								</script> -->
 
 								<a class="btn btn-success" type="submit"
-									href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read%20https://www.googleapis.com/auth/fitness.nutrition.read&redirect_uri=http://localhost:8080/HealthBody-WebClient/GoogleAuthServ&response_type=code&client_id=48524677967-juniqolaio06efre3m3q7774097q50u8.apps.googleusercontent.com&approval_prompt=auto&access_type=offline">
+									href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read%20https://www.googleapis.com/auth/fitness.nutrition.read&redirect_uri=http://localhost:8080/HealthBody-WebClient/GoogleAuthServ&response_type=code&client_id=48524677967-juniqolaio06efre3m3q7774097q50u8.apps.googleusercontent.com&prompt=consent&access_type=offline">
 									Login with <i class="fa fa-google"></i>oogle
 								</a>
 							</div>

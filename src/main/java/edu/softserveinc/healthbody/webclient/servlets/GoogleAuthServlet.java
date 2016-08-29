@@ -185,7 +185,9 @@ public class GoogleAuthServlet extends HttpServlet {
 		// get Access Token
 		JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
 		String access_token = json.get("access_token").getAsString();
-		log.info(access_token + rn);
+		String refresh_token = json.get("refresh_token").getAsString();
+		log.info("Access Token: " + access_token);
+		log.info("Refresh Token: " + refresh_token);
 		return access_token;
 	}
 
