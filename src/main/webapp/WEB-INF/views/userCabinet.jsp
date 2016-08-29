@@ -159,7 +159,7 @@
 									<tr>
 										<c:forEach items="${usercompetitions}" var="p">
 											<td><a
-												href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}" style="color: black">${p.name}</a></td>
+												href="competition.html?idCompetition=${p.idCompetition}&userLogin=${user.login}" style="color: black">${p.name}</a></td>
 
 										</c:forEach>
 									</tr>

@@ -68,12 +68,12 @@
 			<c:forEach items="${getCompetitions}" var="p">
 				<tr class="info">
 					<td><a
-						href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+						href="competition.html?idCompetition=${p.idCompetition}&userLogin=${user.login}">${p.name}</a></td>
 					<td>${p.count}</td>
 					<td>${p.startDate}</td>
 					<td>${p.finishDate}</td>
 					<td><a class="btn btn-primary" type="submit"
-						href="editCompetition.html?nameCompetition=${p.name}">Edit</a></td>
+						href="editCompetition.html?idCompetition=${p.idCompetition}">Edit</a></td>
 				</tr>
 			</c:forEach>
 		</table>

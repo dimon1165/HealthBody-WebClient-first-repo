@@ -66,9 +66,12 @@
 			commandName="competitionToEdit">
 			<table class="table">
 				<tr class="info">
+					<td><form:input path="idCompetition" readonly="true" type="hidden" value="${competitionToEdit.idCompetition}" /></td>
+					<td></td>
+				</tr>
+				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>
-					<td><form:input path="name" readonly="true"
-							style="background-color:#DCDCDC"
+					<td><form:input path="name"
 							value="${competitionToEdit.name}" /></td>
 				</tr>
 				<tr class="info">

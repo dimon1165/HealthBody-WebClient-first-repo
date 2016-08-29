@@ -60,14 +60,14 @@ public class CompetitionController {
 
 	@RequestMapping(value = "/competition.html", method = RequestMethod.GET)
 	public String getCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition) {
+			String idCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		model.addAttribute("user", service.getUserByLogin(userLogin));
-		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
-		model.addAttribute("getScore", service.getUserCompetition(nameCompetition, userLogin));
+		model.addAttribute("getCompetition", service.getCompetitionViewById(idCompetition));
+		model.addAttribute("getScore", service.getUserCompetition(idCompetition, userLogin));
 		for (CompetitionDTO competition : service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin)) {
-			if (nameCompetition.equals(competition.getName())) {
+			if (idCompetition.equals(competition.getIdCompetition())) {
 				return "leaveCompetition";
 			}
 		}
@@ -76,10 +76,10 @@ public class CompetitionController {
 
 	@RequestMapping(value = "/joinCompetition.html", method = RequestMethod.GET)
 	public String joinCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition) {
+			String idCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		service.addUserInCompetitionView(nameCompetition, userLogin);
+		service.addUserInCompetitionView(idCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "userCabinet";
@@ -87,13 +87,13 @@ public class CompetitionController {
 
 	@RequestMapping(value = "/leaveCompetition.html", method = RequestMethod.GET)
 	public String leaveCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition) {
+			String idCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		service.deleteUserCompetition(nameCompetition, userLogin);
+		service.deleteUserCompetition(idCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
-		model.addAttribute("getScore", service.getUserCompetition(nameCompetition, userLogin));
+		model.addAttribute("getScore", service.getUserCompetition(idCompetition, userLogin));
 		return "userCabinet";
 	}
 
@@ -123,10 +123,10 @@ public class CompetitionController {
 
 	@RequestMapping(value = "/editCompetition.html", method = RequestMethod.GET)
 	public String editCompetitionDescription(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition) {
+			String idCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		CompetitionDTO competitionDTO = service.getCompetitionViewByName(nameCompetition);
+		CompetitionDTO competitionDTO = service.getCompetitionViewById(idCompetition);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("competitionToEdit", competitionDTO);
 		return "editCompetition";
@@ -136,7 +136,8 @@ public class CompetitionController {
 	public String editCompetition(@ModelAttribute("competitionToEdit") CompetitionDTO competitionToEdit,
 			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		CompetitionDTO competitionDTO = service.getCompetitionViewByName(competitionToEdit.getName());
+		CompetitionDTO competitionDTO = service.getCompetitionViewById(competitionToEdit.getIdCompetition());
+		competitionDTO.setName(competitionToEdit.getName());
 		competitionDTO.setDescription(competitionToEdit.getDescription());
 		competitionDTO.setStartDate(competitionToEdit.getStartDate());
 		competitionDTO.setFinishDate(competitionToEdit.getFinishDate());
