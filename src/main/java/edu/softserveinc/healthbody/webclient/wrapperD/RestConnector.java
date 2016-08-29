@@ -58,25 +58,25 @@ public class RestConnector {
 			}
 				JsonParser jsonParser = new JsonParser();
 				JsonElement jsonElement = jsonParser.parse(new InputStreamReader((InputStream) request.getContent(),StandardCharsets.UTF_8));
-				System.out.println(jsonElement.toString());
 				request.disconnect();
 				
 		return jsonElement;
 	}
 	
 	public void sendRequestPOST(URL url, String json) throws IOException {
-		HttpURLConnection request = (HttpURLConnection) url.openConnection();
-		request.setDoOutput(true);
-		request.setRequestMethod("POST");
-		request.setRequestProperty("Content-Type", "application/json");
-			if (request.getResponseCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : " + request.getResponseCode());
-			}
-			
-			OutputStream os = request.getOutputStream();
+		HttpURLConnection requestPost = (HttpURLConnection) url.openConnection();
+		requestPost.setDoOutput(true);
+		requestPost.setRequestMethod("POST");
+		requestPost.setRequestProperty("Content-Type", "application/json");
+		
+			OutputStream os = requestPost.getOutputStream();
 			os.write(json.getBytes());
 			os.flush();
-
-		request.disconnect();
+			
+			if (requestPost.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + requestPost.getResponseCode());
+			}
+			
+			requestPost.disconnect();
 	}
 }

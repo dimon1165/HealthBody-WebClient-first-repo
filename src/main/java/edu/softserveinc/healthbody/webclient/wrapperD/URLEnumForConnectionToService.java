@@ -4,7 +4,7 @@ public class URLEnumForConnectionToService {
 
 	public enum Users{
 		GET_USER_BY_LOGIN("%s/HealthBody-WebService/listener/%s?login=%s"),
-		UPDATE_USER_DTO("%s/HealthBody-WebService/listener/UpdateUser?userDTO=%s"),
+		UPDATE_USER_DTO("%s/HealthBody-WebService/listener/UpdateUser"),
 		GET_USERS_PART_NUMBER_PART_SIZE("%s/HealthBody-WebService/listener/%s?partNumber=%d&partSize=%d");		
 		
 		private String urlForConnetionToListener;
