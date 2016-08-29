@@ -63,6 +63,7 @@ public class MainPageController {
 			log.info("Get current weather for " + defaultCity + " in JSON format");
 			weather = weatherService.currentWeatherByCityName(defaultCity);
 			log.info("Parsing JSON");
+			try {
 			json = parser.parse(weather.getRawResponse()).getAsJsonObject();
 			log.info(json.get("cod").getAsString());
 			if (json.get("cod").getAsString().equals("200")) {
@@ -80,6 +81,9 @@ public class MainPageController {
 				model.addAttribute("wind", wind.get("speed").getAsString());
 				return "main";
 			}
+			} catch (Exception e) {
+				log.error("Weather exception", e);
+			}
 		} catch (JSONException e) {
 			log.error("JSONException", e);
 		} catch (IOException e1) {
@@ -87,7 +91,7 @@ public class MainPageController {
 		}
 		return "main";
 	}
-	
+
 	@RequestMapping(value = "/check_take_part.html", method = RequestMethod.GET)
 	public String checkCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			String nameCompetition) {
@@ -107,8 +111,7 @@ public class MainPageController {
 			return "joinCompetition";
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "/getOutOfCompetition.html", method = RequestMethod.GET)
 	public String getOutCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
 			String nameCompetition) {
@@ -116,9 +119,9 @@ public class MainPageController {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		service.removeUserFromCompetition(nameCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
-		model.addAttribute("usercompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));		
+		model.addAttribute("usercompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "redirect:main.html";
-		
+
 	}
 
 }

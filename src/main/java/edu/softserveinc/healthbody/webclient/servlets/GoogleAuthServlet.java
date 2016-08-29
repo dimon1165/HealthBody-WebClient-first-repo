@@ -34,13 +34,16 @@ import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodySer
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
 import edu.softserveinc.healthbody.webclient.models.ExeptionResponse;
+import edu.softserveinc.healthbody.webclient.utils.CustomDateFormater;
 import edu.softserveinc.healthbody.webclient.utils.EmailSender;
+import edu.softserveinc.healthbody.webclient.utils.GoogleFitUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/GoogleAuthServ")
 @Slf4j
 public class GoogleAuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	String rn = System.lineSeparator();
 
 	public GoogleAuthServlet() {
 		super();
@@ -51,9 +54,10 @@ public class GoogleAuthServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		String rn = System.lineSeparator();
 		OutputStreamWriter writer = null;
 		BufferedReader reader = null;
+		String stepCount = "0";
+		Long currentTime = System.currentTimeMillis();
 		HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 		// get code
 		String code = request.getParameter("code");
@@ -63,39 +67,22 @@ public class GoogleAuthServlet extends HttpServlet {
 				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
 				+ GoogleConstants.GRANT_TYPE;
 		try {
-			// post parameters
-			URL url = new URL(GoogleConstants.TOKEN_URL);
-			URLConnection urlConn = url.openConnection();
-			urlConn.setDoOutput(true);
-			writer = new OutputStreamWriter(urlConn.getOutputStream());
-			writer.write(urlParameters);
-			writer.flush();
-			// get output in outputString
-			String line, outputString = "";
-			reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-			while ((line = reader.readLine()) != null) {
-				outputString += line;
-			}
-			log.info(outputString + rn);
-			// get Access Token
-			JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
-			String access_token = json.get("access_token").getAsString();
-			log.info(access_token + rn);
-			// get User Info
-			url = new URL(GoogleConstants.USERINFO_URL + access_token);
-			urlConn = url.openConnection();
-			GoogleUser data = new Gson().fromJson(
-					new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8), GoogleUser.class);
-			log.info(data + rn);
-
+			String access_token = getAccessToken(urlParameters);
+			GoogleUser data = getUserInfo(access_token);
 			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
-			handleGoogleUser(service, data, access_token);
+			/* Google Fit */
+			Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
+			String fitData = GoogleFitUtils.post(access_token, startTime, currentTime);
+			stepCount = GoogleFitUtils.getStepCount(fitData);
+			/* Authenticate User */
+			handleGoogleUser(service, data, access_token, stepCount);
 			setAuthenticated(login, service);
 			response.sendRedirect("addLoginStatistics.html");
-
 		} catch (IOException e) {
-			log.error("IOException catched" + e);
+			log.error("IOException catched", e);
 			return;
+		} catch (Exception e) {
+			log.error("Geting google fit data failed", e);
 		} finally {
 			if (writer != null && reader != null) {
 				try {
@@ -105,7 +92,6 @@ public class GoogleAuthServlet extends HttpServlet {
 					log.error("IOException catched" + e);
 					return;
 				}
-
 			}
 		}
 	}
@@ -147,12 +133,13 @@ public class GoogleAuthServlet extends HttpServlet {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
-	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String access_token) {
+	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String access_token, String stepCount) {
 		String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
 		if (service.getUserByLogin(login) == null) {
 			UserDTO userDTO = makeNewUser(data, service);
 			userDTO.setIdUser(UUID.randomUUID().toString());
 			userDTO.setPassword(access_token.substring(0, 15));
+			userDTO.setGoogleApi(stepCount);
 			service.createUser(userDTO);
 			EmailSender emailSender = EmailSender.getInstance();
 			emailSender.setParameters("Health Body Service Registration",
@@ -161,9 +148,47 @@ public class GoogleAuthServlet extends HttpServlet {
 			thread.start();
 		} else {
 			UserDTO userDTO = service.getUserByLogin(login);
+			userDTO.setPhotoURL(data.getPicture());
 			userDTO.setPassword(access_token.substring(0, 15));
+			userDTO.setGoogleApi(stepCount);
 			service.updateUser(userDTO);
 		}
+	}
+
+	private GoogleUser getUserInfo(String access_token) throws IOException {
+		// get User Info
+		URL url = new URL(GoogleConstants.USERINFO_URL + access_token);
+		URLConnection urlConn = url.openConnection();
+		GoogleUser data = new Gson().fromJson(new InputStreamReader(urlConn.getInputStream(), StandardCharsets.UTF_8),
+				GoogleUser.class);
+		log.info(data + rn);
+		return data;
+	}
+
+	private String getAccessToken(String urlParameters) throws IOException {
+		OutputStreamWriter writer = null;
+		BufferedReader reader = null;
+		// post parameters
+		URL url = new URL(GoogleConstants.TOKEN_URL);
+		URLConnection urlConn = url.openConnection();
+		urlConn.setDoOutput(true);
+		writer = new OutputStreamWriter(urlConn.getOutputStream());
+		writer.write(urlParameters);
+		writer.flush();
+		// get output in outputString
+		String line, outputString = "";
+		reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+		while ((line = reader.readLine()) != null) {
+			outputString += line;
+		}
+		log.info(outputString + rn);
+		// get Access Token
+		JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
+		String access_token = json.get("access_token").getAsString();
+		String refresh_token = json.get("refresh_token").getAsString();
+		log.info("Access Token: " + access_token);
+		log.info("Refresh Token: " + refresh_token);
+		return access_token;
 	}
 
 	@Override

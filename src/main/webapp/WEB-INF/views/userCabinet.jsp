@@ -96,6 +96,10 @@
 										<td>Health :</td>
 										<td>${user.health}</td>
 									</tr>
+									<tr>
+										<td>All steps :</td>
+										<td>${user.score}</td>
+									</tr>
 								</tbody>
 							</table>
 							<a href="editUser.html?userLogin=${user.login}"
