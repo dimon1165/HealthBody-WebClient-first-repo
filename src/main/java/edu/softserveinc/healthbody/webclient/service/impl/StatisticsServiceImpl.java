@@ -30,21 +30,16 @@ public class StatisticsServiceImpl implements StatisticsService {
 
 	@Override
 	@Transactional
-	public List<StatisticsDTO> getAllUserStatisticsPerDate(String likeDate) {
-		List<StatisticsDTO> statisticsList= new ArrayList<>();
-		StatisticsDTO statisticsDTO = new StatisticsDTO();
-		for(Statistics statistics : statisticsRepository.getAllUsersPerDate(likeDate)) {
-			statisticsList.add(StatisticsMapper.toDto(statisticsDTO, statistics));
-		}
-		return statisticsList;
+	public List<String> getAllUsersLogin() {
+		return statisticsRepository.getAllUsers();
 	}
 
 	@Override
 	@Transactional
 	public List<StatisticsDTO> getStatisticsByUserLogin(String userLogin) {
 		List<StatisticsDTO> statisticsList= new ArrayList<>();
-		StatisticsDTO statisticsDTO = new StatisticsDTO();
 		for(Statistics statistics : statisticsRepository.findByUserLogin(userLogin)) {
+			StatisticsDTO statisticsDTO = new StatisticsDTO();
 			statisticsList.add(StatisticsMapper.toDto(statisticsDTO, statistics));
 		}
 		return statisticsList;

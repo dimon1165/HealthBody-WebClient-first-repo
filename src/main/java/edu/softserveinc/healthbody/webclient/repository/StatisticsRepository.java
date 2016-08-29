@@ -23,6 +23,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Integer>
 	@Query("select count(s.userLogin) from Statistics s where s.userLogin = ?1 and s.loginDate like ?2")
 	Integer getCountLoginUserPerDate(String userLogin, String likeDate);
 	
-	@Query("select distinct s from Statistics s where s.loginDate like ?1")
-	List<Statistics> getAllUsersPerDate(String likeDate);
+	@Query("select distinct s.userLogin from Statistics s")
+	List<String> getAllUsers();
 }

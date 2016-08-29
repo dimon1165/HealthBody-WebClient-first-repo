@@ -35,6 +35,7 @@
 				<li><a href="userlist.html">Users</a></li>
 				<li><a href="listGroups.html">Groups</a></li>
 				<li><a href="listCompetitions.html">Competitions</a></li>
+				<li><a href="pieChart.html">Statistics</a></li>
 			</ul>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
