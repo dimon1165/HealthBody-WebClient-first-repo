@@ -67,15 +67,20 @@ public class GoogleAuthServlet extends HttpServlet {
 				+ GoogleConstants.CLIENT_SECRET + "&redirect_uri=" + GoogleConstants.REDIRECT_URI + "&grant_type="
 				+ GoogleConstants.GRANT_TYPE;
 		try {
-			String access_token = getAccessToken(urlParameters);
+			String outputString = getAccessToken(urlParameters);
+			JsonObject json = new JsonParser().parse(outputString).getAsJsonObject();
+			String access_token = json.get("access_token").getAsString();
+			String refresh_token = json.get("refresh_token").getAsString();
 			GoogleUser data = getUserInfo(access_token);
 			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
 			/* Google Fit */
+			log.info(GoogleFitUtils.postForAccessToken(service.getUserByLogin(login).getScore()));
+			String geted_token = GoogleFitUtils.postForAccessToken(service.getUserByLogin(login).getScore());
 			Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
-			String fitData = GoogleFitUtils.post(access_token, startTime, currentTime);
+			String fitData = GoogleFitUtils.post(geted_token, startTime, currentTime);
 			stepCount = GoogleFitUtils.getStepCount(fitData);
 			/* Authenticate User */
-			handleGoogleUser(service, data, access_token, stepCount);
+			handleGoogleUser(service, data, refresh_token, stepCount);
 			setAuthenticated(login, service);
 			response.sendRedirect("addLoginStatistics.html");
 		} catch (IOException e) {
@@ -133,13 +138,13 @@ public class GoogleAuthServlet extends HttpServlet {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
-	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String access_token, String stepCount) {
+	private void handleGoogleUser(HealthBodyService service, GoogleUser data, String refresh_token, String stepCount) {
 		String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
 		if (service.getUserByLogin(login) == null) {
 			UserDTO userDTO = makeNewUser(data, service);
 			userDTO.setIdUser(UUID.randomUUID().toString());
-			userDTO.setPassword(access_token.substring(0, 15));
-			userDTO.setGoogleApi(stepCount);
+			userDTO.setPassword(refresh_token.substring(0, 15));
+			userDTO.setGoogleApi(refresh_token);
 			service.createUser(userDTO);
 			EmailSender emailSender = EmailSender.getInstance();
 			emailSender.setParameters("Health Body Service Registration",
@@ -149,8 +154,8 @@ public class GoogleAuthServlet extends HttpServlet {
 		} else {
 			UserDTO userDTO = service.getUserByLogin(login);
 			userDTO.setPhotoURL(data.getPicture());
-			userDTO.setPassword(access_token.substring(0, 15));
-			userDTO.setGoogleApi(stepCount);
+			userDTO.setPassword(refresh_token.substring(0, 15));
+			userDTO.setGoogleApi(refresh_token);
 			service.updateUser(userDTO);
 		}
 	}
@@ -188,7 +193,7 @@ public class GoogleAuthServlet extends HttpServlet {
 		String refresh_token = json.get("refresh_token").getAsString();
 		log.info("Access Token: " + access_token);
 		log.info("Refresh Token: " + refresh_token);
-		return access_token;
+		return outputString;
 	}
 
 	@Override

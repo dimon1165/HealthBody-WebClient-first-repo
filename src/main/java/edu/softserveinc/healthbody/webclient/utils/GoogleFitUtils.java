@@ -1,8 +1,12 @@
 package edu.softserveinc.healthbody.webclient.utils;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,6 +15,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONObject;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import edu.softserveinc.healthbody.webclient.constants.GoogleConstants;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -44,6 +52,45 @@ public class GoogleFitUtils {
 				fitData += line;
 			}
 			return fitData;
+		}
+	}
+
+	public static String postForAccessToken(String refreshToken) {
+		String urlParameters = "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
+				+ GoogleConstants.CLIENT_SECRET + "&refresh_token=" + refreshToken + "&grant_type=refresh_token";
+
+		StringBuffer response = new StringBuffer();
+		try {
+			URL url = new URL("https://www.googleapis.com/oauth2/v4/token");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			// Send post request
+			conn.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+			wr.writeBytes(urlParameters);
+			wr.flush();
+			wr.close();
+
+			int responseCode = conn.getResponseCode();
+			log.info("\nSending 'POST' request to URL : " + url);
+			log.info("Post parameters : " + urlParameters);
+			log.info("Response Code : " + responseCode);
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			JsonObject json = new JsonParser().parse(response.toString()).getAsJsonObject();
+			String token = json.get("access_token").getAsString();
+			log.info("New Access Token : " + token);
+			return token;
+		} catch (IOException e) {
+			log.error("Bad request , no access token returned");
+			return null;
 		}
 	}
 
