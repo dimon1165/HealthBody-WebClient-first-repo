@@ -63,7 +63,7 @@
 	<br>
 	<div class="container">
 		<form:form action="createCompetition.html" method="POST"
-			commandName="competitionToCreate" id="competitionToCreate">
+			commandName="competitionToCreate">
 			<table class="table">
 				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>
