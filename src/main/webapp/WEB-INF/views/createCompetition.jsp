@@ -68,20 +68,24 @@
 				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>
 					<td><form:input path="name" /></td>
+					<td><form:errors path="name" class="error"/></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="description">Description:</form:label></td>
 					<td><textarea name="description" rows="4" cols="50"></textarea></td>
+					<td><form:errors path="description" class="error"/></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="startDate">Start Date:</form:label></td>
 					<td><form:input path="startDate" type="text"
 							class="my-datepicker" size="30" /></td>
+					<td><form:errors path="startDate" class="error"/></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="finishDate">Finish Date:</form:label></td>
 					<td><form:input path="finishDate" type="text"
 							class="my-datepicker" size="30" /></td>
+					<td><form:errors path="finishDate" class="error"/></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="left"><input class="btn btn-success"

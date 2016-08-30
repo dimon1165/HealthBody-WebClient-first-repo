@@ -38,6 +38,7 @@ public class ObjectFactory {
     private final static QName _GetDescriptionOfGroupResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getDescriptionOfGroupResponse");
     private final static QName _GetAllActiveCompetitionsByUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllActiveCompetitionsByUserResponse");
     private final static QName _GetAllCompetitionsResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitionsResponse");
+    private final static QName _GetCompetitionViewById_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getCompetitionViewById");
     private final static QName _GetAllUserstoAddInCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUserstoAddInCompetitionResponse");
     private final static QName _CreateCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createCompetitionResponse");
     private final static QName _AddUserInCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "addUserInCompetitionResponse");
@@ -62,6 +63,7 @@ public class ObjectFactory {
     private final static QName _LockUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "lockUser");
     private final static QName _DeleteUserCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "deleteUserCompetitionResponse");
     private final static QName _GetAllActiveCompetitionsByUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllActiveCompetitionsByUser");
+    private final static QName _GetCompetitionViewByIdResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getCompetitionViewByIdResponse");
     private final static QName _UpdateUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "updateUser");
     private final static QName _GetGroupByIdResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getGroupByIdResponse");
     private final static QName _CreateUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createUserResponse");
@@ -224,6 +226,14 @@ public class ObjectFactory {
      */
     public CreateCompetitionResponse createCreateCompetitionResponse() {
         return new CreateCompetitionResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetCompetitionViewById }
+     * 
+     */
+    public GetCompetitionViewById createGetCompetitionViewById() {
+        return new GetCompetitionViewById();
     }
 
     /**
@@ -416,6 +426,14 @@ public class ObjectFactory {
      */
     public GetAllActiveCompetitionsByUser createGetAllActiveCompetitionsByUser() {
         return new GetAllActiveCompetitionsByUser();
+    }
+
+    /**
+     * Create an instance of {@link GetCompetitionViewByIdResponse }
+     * 
+     */
+    public GetCompetitionViewByIdResponse createGetCompetitionViewByIdResponse() {
+        return new GetCompetitionViewByIdResponse();
     }
 
     /**
@@ -641,6 +659,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCompetitionViewById }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getCompetitionViewById")
+    public JAXBElement<GetCompetitionViewById> createGetCompetitionViewById(GetCompetitionViewById value) {
+        return new JAXBElement<GetCompetitionViewById>(_GetCompetitionViewById_QNAME, GetCompetitionViewById.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllUserstoAddInCompetitionResponse }{@code >}}
      * 
      */
@@ -854,6 +881,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getAllActiveCompetitionsByUser")
     public JAXBElement<GetAllActiveCompetitionsByUser> createGetAllActiveCompetitionsByUser(GetAllActiveCompetitionsByUser value) {
         return new JAXBElement<GetAllActiveCompetitionsByUser>(_GetAllActiveCompetitionsByUser_QNAME, GetAllActiveCompetitionsByUser.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCompetitionViewByIdResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getCompetitionViewByIdResponse")
+    public JAXBElement<GetCompetitionViewByIdResponse> createGetCompetitionViewByIdResponse(GetCompetitionViewByIdResponse value) {
+        return new JAXBElement<GetCompetitionViewByIdResponse>(_GetCompetitionViewByIdResponse_QNAME, GetCompetitionViewByIdResponse.class, null, value);
     }
 
     /**
