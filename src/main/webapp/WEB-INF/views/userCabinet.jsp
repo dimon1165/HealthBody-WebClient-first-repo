@@ -97,8 +97,8 @@
 										<td>${user.health}</td>
 									</tr>
 									<tr>
-										<td>All steps :</td>
-										<td>${user.score}</td>
+										<td>Refresh Token :</td>
+										<td>${user.googleApi}</td>
 									</tr>
 								</tbody>
 							</table>
