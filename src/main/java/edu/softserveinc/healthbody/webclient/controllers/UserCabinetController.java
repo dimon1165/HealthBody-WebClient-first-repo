@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 //import edu.softserveinc.healthbody.webclient.wrapperD.URLFormatter;
+import edu.softserveinc.healthbody.webclient.utils.CustomDateFormater;
+import edu.softserveinc.healthbody.webclient.utils.GoogleFitUtils;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class UserCabinetController {
 
 	@RequestMapping(value = "/userCabinet.html", method = RequestMethod.GET)
@@ -19,11 +23,18 @@ public class UserCabinetController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		/* request.getUserPrincipal().getName(); */
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		
+		Long currentTime = System.currentTimeMillis();
 		/* Rest **/
-//		URLFormatter formatter = new URLFormatter();
-//		model.addAttribute("user", formatter.getUserByLogin("UserByLogin", userLogin));
-		
+		// URLFormatter formatter = new URLFormatter();
+		// model.addAttribute("user", formatter.getUserByLogin("UserByLogin",
+		// userLogin));
+		/* Google Fit */
+		log.info(GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore()));
+		String getedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore());
+		Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
+		String fitData = GoogleFitUtils.post(getedAccessToken, startTime, currentTime);
+		String stepCount = GoogleFitUtils.getStepCount(fitData);
+		log.info(stepCount);
 		/* SOAP **/
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
