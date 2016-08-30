@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
-//import edu.softserveinc.healthbody.webclient.wrapperD.URLFormatter;
 import edu.softserveinc.healthbody.webclient.utils.CustomDateFormater;
 import edu.softserveinc.healthbody.webclient.utils.GoogleFitUtils;
+//import edu.softserveinc.healthbody.webclient.wrapperD.URLFormatter;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -30,7 +30,7 @@ public class UserCabinetController {
 		// userLogin));
 		/* Google Fit */
 		log.info(GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore()));
-		String gettedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore());
+		String gettedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getGoogleApi());
 		Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
 		String fitData = GoogleFitUtils.post(gettedAccessToken, startTime, currentTime);
 		String stepCount = GoogleFitUtils.getStepCount(fitData);

@@ -28,12 +28,42 @@ public interface HealthBodyService {
     /**
      * 
      * @param arg0
+     * @return
+     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO
      */
     @WebMethod
-    @RequestWrapper(localName = "createUser", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateUser")
-    @ResponseWrapper(localName = "createUserResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateUserResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createUserRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createUserResponse")
-    public void createUser(
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUserByLogin", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLogin")
+    @ResponseWrapper(localName = "getUserByLoginResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLoginResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginResponse")
+    public UserDTO getUserByLogin(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getGroupByName", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetGroupByName")
+    @ResponseWrapper(localName = "getGroupByNameResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetGroupByNameResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getGroupByNameRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getGroupByNameResponse")
+    public GroupDTO getGroupByName(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateUser", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateUser")
+    @ResponseWrapper(localName = "updateUserResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateUserResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateUserRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateUserResponse")
+    public void updateUser(
         @WebParam(name = "arg0", targetNamespace = "")
         UserDTO arg0);
 
@@ -327,48 +357,6 @@ public interface HealthBodyService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "updateUser", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateUser")
-    @ResponseWrapper(localName = "updateUserResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateUserResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateUserRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateUserResponse")
-    public void updateUser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        UserDTO arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getGroupByName", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetGroupByName")
-    @ResponseWrapper(localName = "getGroupByNameResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetGroupByNameResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getGroupByNameRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getGroupByNameResponse")
-    public GroupDTO getGroupByName(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getUserByLogin", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLogin")
-    @ResponseWrapper(localName = "getUserByLoginResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLoginResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginResponse")
-    public UserDTO getUserByLogin(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
-
-    /**
-     * 
      * @param arg1
      * @param arg0
      */
@@ -444,5 +432,17 @@ public interface HealthBodyService {
         int arg0,
         @WebParam(name = "arg1", targetNamespace = "")
         int arg1);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "createUser", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateUser")
+    @ResponseWrapper(localName = "createUserResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateUserResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createUserRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createUserResponse")
+    public void createUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        UserDTO arg0);
 
 }
