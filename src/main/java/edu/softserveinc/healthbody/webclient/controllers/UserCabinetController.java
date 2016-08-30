@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
-//import edu.softserveinc.healthbody.webclient.wrapperD.URLFormatter;
 
 @Controller
 public class UserCabinetController {

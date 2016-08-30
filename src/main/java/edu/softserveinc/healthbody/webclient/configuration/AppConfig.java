@@ -76,7 +76,7 @@ public class AppConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
-
+	
 	private Map<String, String> jpaProperties() {
 		Map<String, String> jpaProperties = new HashMap<>();
 		jpaProperties.put("hibernate.dialect", env.getProperty("hb.dialect"));
