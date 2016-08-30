@@ -75,9 +75,9 @@ public class GoogleAuthServlet extends HttpServlet {
 			String login = data.getEmail().substring(0, data.getEmail().indexOf("@")).toString();
 			/* Google Fit */
 			log.info(GoogleFitUtils.postForAccessToken(service.getUserByLogin(login).getScore()));
-			String getedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(login).getScore());
+			String gettedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(login).getScore());
 			Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
-			String fitData = GoogleFitUtils.post(getedAccessToken, startTime, currentTime);
+			String fitData = GoogleFitUtils.post(gettedAccessToken, startTime, currentTime);
 			stepCount = GoogleFitUtils.getStepCount(fitData);
 			/* Authenticate User */
 			handleGoogleUser(service, data, refresh_token, stepCount);

@@ -30,9 +30,9 @@ public class UserCabinetController {
 		// userLogin));
 		/* Google Fit */
 		log.info(GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore()));
-		String getedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore());
+		String gettedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getScore());
 		Long startTime = CustomDateFormater.getDateInMilliseconds("2016-08-01");
-		String fitData = GoogleFitUtils.post(getedAccessToken, startTime, currentTime);
+		String fitData = GoogleFitUtils.post(gettedAccessToken, startTime, currentTime);
 		String stepCount = GoogleFitUtils.getStepCount(fitData);
 		log.info(stepCount);
 		/* SOAP **/

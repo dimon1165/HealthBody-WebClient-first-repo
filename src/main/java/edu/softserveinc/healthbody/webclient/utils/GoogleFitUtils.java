@@ -60,7 +60,10 @@ public class GoogleFitUtils {
 		}
 		return data;
 	}
-
+	/**
+	 * Make Post call for getting new access token by refresh token
+	 * 
+	 **/
 	public static String postForAccessToken(String refreshToken) {
 		String urlParameters = "&client_id=" + GoogleConstants.CLIENT_ID + "&client_secret="
 				+ GoogleConstants.CLIENT_SECRET + "&refresh_token=" + refreshToken + "&grant_type=refresh_token";
@@ -98,7 +101,10 @@ public class GoogleFitUtils {
 		}
 		return token;
 	}
-
+	/**
+	 * Get Step value from response JSON
+	 * parameter  fitData represents JSON
+	 **/
 	public static String getStepCount(String fitData) {
 		String stepCount = "0";
 		if ("empty".equals(fitData)) {
