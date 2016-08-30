@@ -23,7 +23,7 @@
 		$(document).on("click", ".confirm", function(e) {
 	        bootbox.confirm("Are you sure? All your scores and awards in this competition will be lost!", function(result){ 
 					if (result) {
-						location.href = "leaveCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}";
+						location.href = "leaveCompetition.html?idCompetition=${getCompetition.idCompetition}&userLogin=${user.login}";
 					} else {
 					}
 			});

@@ -73,9 +73,9 @@
 					<td>${comp.startDate}</td>
 					<td>${comp.finishDate}</td>
 					<td>
-						<a href="check_take_part.html?nameCompetition=${comp.name}&userLogin=${login}">
+						<a href="check_take_part.html?idCompetition=${comp.idCompetition}&userLogin=${login}">
 							<c:forEach items="${getAllCompTakePart}" var="t">
-							    <c:if test="${t.name == comp.name}"> 
+							    <c:if test="${t.idCompetition == comp.idCompetition}"> 
 							    	<c:set var="check" value="true"/>							    													
 							    </c:if>    
 				    		</c:forEach>

@@ -70,7 +70,7 @@
 			</tr>
 			<tr>
 				<td><a class="btn btn-success" type="submit"
-					href="joinCompetition.html?nameCompetition=${getCompetition.name}&userLogin=${user.login}">Join
+					href="joinCompetition.html?idCompetition=${getCompetition.idCompetition}&userLogin=${user.login}">Join
 						Competition</a></td>
 			</tr>
 		</table>

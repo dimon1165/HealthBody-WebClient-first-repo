@@ -94,17 +94,17 @@ public class MainPageController {
 
 	@RequestMapping(value = "/check_take_part.html", method = RequestMethod.GET)
 	public String checkCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition) {
+			String idCompetition) {
 		String login = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		boolean test = false;
 		for (CompetitionDTO competition : service.getAllActiveCompetitionsByUser(1, Integer.MAX_VALUE, login)) {
-			if (competition.getName().equals(nameCompetition)) {
+			if (competition.getIdCompetition().equals(idCompetition)) {
 				test = true;
 			}
 		}
 		model.addAttribute("user", service.getUserByLogin(login));
-		model.addAttribute("getCompetition", service.getCompetitionViewByName(nameCompetition));
+		model.addAttribute("getCompetition", service.getCompetitionViewById(idCompetition));
 		if (test) {
 			return "getOutOfCompetition";
 		} else {
@@ -114,10 +114,10 @@ public class MainPageController {
 
 	@RequestMapping(value = "/getOutOfCompetition.html", method = RequestMethod.GET)
 	public String getOutCompetition(Model model, @Autowired HealthBodyServiceImplService healthBody,
-			String nameCompetition) {
+			String idCompetition) {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
-		service.removeUserFromCompetition(nameCompetition, userLogin);
+		service.removeUserFromCompetition(idCompetition, userLogin);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetition", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "redirect:main.html";

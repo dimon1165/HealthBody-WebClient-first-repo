@@ -60,7 +60,7 @@
 			<c:forEach items="${getCompetitions}" var="p">
 				<tr class="info">
 					<td><a
-						href="competition.html?nameCompetition=${p.name}&userLogin=${user.login}">${p.name}</a></td>
+						href="competition.html?idCompetition=${p.idCompetition}&userLogin=${user.login}">${p.name}</a></td>
 					<td>${p.count}</td>
 					<td>${p.startDate}</td>
 					<td>${p.finishDate}</td>
