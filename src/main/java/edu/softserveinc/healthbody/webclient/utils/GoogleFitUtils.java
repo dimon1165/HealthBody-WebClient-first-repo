@@ -56,10 +56,11 @@ public class GoogleFitUtils {
 				data = fitData;
 			}
 		} catch (IOException e) {
-			log.error("IOException", e);
+			log.error("IOException catched ", e);
 		}
 		return data;
 	}
+
 	/**
 	 * Make Post call for getting new access token by refresh token
 	 * 
@@ -72,7 +73,6 @@ public class GoogleFitUtils {
 		try {
 			URL url = new URL("https://www.googleapis.com/oauth2/v4/token");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			// Send post request
@@ -83,13 +83,12 @@ public class GoogleFitUtils {
 			wr.close();
 
 			int responseCode = conn.getResponseCode();
-			log.info("\nSending 'POST' request to URL : " + url);
+			log.info("Sending 'POST' request to URL : " + url);
 			log.info("Post parameters : " + urlParameters);
 			log.info("Response Code : " + responseCode);
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String inputLine;
-
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
 			}
@@ -101,9 +100,9 @@ public class GoogleFitUtils {
 		}
 		return token;
 	}
+
 	/**
-	 * Get Step value from response JSON
-	 * parameter  fitData represents JSON
+	 * Get Step value from response JSON parameter fitData represents JSON
 	 **/
 	public static String getStepCount(String fitData) {
 		String stepCount = "0";
