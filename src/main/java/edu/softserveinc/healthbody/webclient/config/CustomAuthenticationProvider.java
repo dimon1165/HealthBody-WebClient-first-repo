@@ -2,8 +2,10 @@ package edu.softserveinc.healthbody.webclient.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,13 +16,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import edu.softserveinc.healthbody.webclient.dto.StatisticsDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO;
+import edu.softserveinc.healthbody.webclient.service.StatisticsService;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
+	@Autowired
+	private StatisticsService statisticsService;
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String name = authentication.getName();
@@ -29,6 +36,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			HealthBodyService service = new HealthBodyServiceImplService().getHealthBodyServiceImplPort();
 			UserDTO userDTO = service.getUserByLogin(name);
 			if (userDTO != null && userDTO.getPassword().equals(password)) {
+				statisticsService.addStatistics(new StatisticsDTO(null, name, new Date(), null));
 				return new UsernamePasswordAuthenticationToken(name, password, getAuthorities(userDTO));
 			} else {
 				throw new UsernameNotFoundException("Username Not Found");

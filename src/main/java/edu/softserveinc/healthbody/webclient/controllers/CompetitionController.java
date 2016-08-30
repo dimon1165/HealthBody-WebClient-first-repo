@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
@@ -23,9 +24,9 @@ import edu.softserveinc.healthbody.webclient.validator.CompetitionValidator;
 
 @Controller
 public class CompetitionController {
-	
+
 	@Autowired
-    private CompetitionValidator competitionValidator;
+	private CompetitionValidator competitionValidator;
 
 	final Integer COMPETITIONS_PER_PAGE = 5;
 
@@ -108,18 +109,26 @@ public class CompetitionController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = new CompetitionDTO();
+		competitionDTO.setIdCompetition(null);
+		competitionDTO.setName(null);
+		competitionDTO.setCount(null);
+		competitionDTO.setStartDate(null);
+		competitionDTO.setFinishDate(null);
+		competitionDTO.setDescription(null);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("competitionToCreate", competitionDTO);
 		return "createCompetition";
 	}
 
 	@RequestMapping(value = "/createCompetition.html", method = RequestMethod.POST)
-	public String createCompetition(@ModelAttribute("competitionToCreate") CompetitionDTO competitionToCreate,
-			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody, BindingResult result) {
+	public ModelAndView createCompetition(@ModelAttribute("competitionToCreate") CompetitionDTO competitionToCreate,
+			@Autowired HealthBodyServiceImplService healthBody, BindingResult result) {
 		competitionValidator.validate(competitionToCreate, result);
+		ModelAndView model = new ModelAndView();
 		if (result.hasErrors()) {
-            return "createCompetition";
-        }
+			model.setViewName("createCompetition");
+			return model;
+		}
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = competitionToCreate;
 		competitionDTO.setIdCompetition(UUID.randomUUID().toString());
@@ -128,7 +137,8 @@ public class CompetitionController {
 		competitionDTO.setStartDate(competitionToCreate.getStartDate());
 		competitionDTO.setFinishDate(competitionToCreate.getFinishDate());
 		service.createCompetition(competitionDTO);
-		return "redirect:/listCompetitions.html";
+		model.setViewName("redirect:/listCompetitions.html");
+		return model;
 	}
 
 	@RequestMapping(value = "/editCompetition.html", method = RequestMethod.GET)
@@ -143,8 +153,13 @@ public class CompetitionController {
 	}
 
 	@RequestMapping(value = "/editCompetition.html", method = RequestMethod.POST)
-	public String editCompetition(@ModelAttribute("competitionToEdit") CompetitionDTO competitionToEdit,
-			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
+	public ModelAndView editCompetition(@ModelAttribute("competitionToEdit") CompetitionDTO competitionToEdit,
+			@Autowired HealthBodyServiceImplService healthBody, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		if (result.hasErrors()) {
+			model.setViewName("editCompetition");
+			return model;
+		}
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = service.getCompetitionViewById(competitionToEdit.getIdCompetition());
 		competitionDTO.setName(competitionToEdit.getName());
@@ -152,7 +167,8 @@ public class CompetitionController {
 		competitionDTO.setStartDate(competitionToEdit.getStartDate());
 		competitionDTO.setFinishDate(competitionToEdit.getFinishDate());
 		service.updateCompetition(competitionDTO);
-		return "redirect:/listCompetitions.html";
+		model.setViewName("redirect:/listCompetitions.html");
+		return model;
 	}
 
 }

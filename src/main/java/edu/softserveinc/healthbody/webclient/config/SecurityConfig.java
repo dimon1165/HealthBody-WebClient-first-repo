@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@ComponentScan
+@ComponentScan(basePackages = "edu.softserveinc.healthbody.webclient")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	CustomAuthenticationProvider authProvider;
@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/login*", "/", "/homePage.html", "/resources/**","/GoogleAuthServ*")
 				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login.html")
-				.defaultSuccessUrl("/addLoginStatistics.html").failureUrl("/login.html?error=true").and().logout()
+				.defaultSuccessUrl("/main.html").failureUrl("/login.html?error=true").and().logout()
 				.logoutSuccessUrl("/login.html");
 	}
 }
