@@ -48,6 +48,7 @@ public class ObjectFactory {
     private final static QName _RemoveUserFromCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "removeUserFromCompetition");
     private final static QName _GetAllCompetitions_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitions");
     private final static QName _GetGroupById_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getGroupById");
+    private final static QName _GetCompetitionViewByNameResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getCompetitionViewByNameResponse");
     private final static QName _GetAllCompetitionsByUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitionsByUserResponse");
     private final static QName _AddUserInCompetitionView_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "addUserInCompetitionView");
     private final static QName _GetGroupByNameResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getGroupByNameResponse");
@@ -67,6 +68,7 @@ public class ObjectFactory {
     private final static QName _GetGroupByIdResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getGroupByIdResponse");
     private final static QName _CreateUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createUserResponse");
     private final static QName _GetGroupByName_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getGroupByName");
+    private final static QName _GetCompetitionViewByName_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getCompetitionViewByName");
     private final static QName _CreateUser_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createUser");
     private final static QName _UpdateGroupResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "updateGroupResponse");
     private final static QName _GetAllGroupsParticipantsResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllGroupsParticipantsResponse");
@@ -256,6 +258,14 @@ public class ObjectFactory {
      */
     public GetGroupByNameResponse createGetGroupByNameResponse() {
         return new GetGroupByNameResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetCompetitionViewByNameResponse }
+     * 
+     */
+    public GetCompetitionViewByNameResponse createGetCompetitionViewByNameResponse() {
+        return new GetCompetitionViewByNameResponse();
     }
 
     /**
@@ -464,6 +474,14 @@ public class ObjectFactory {
      */
     public CreateCompetition createCreateCompetition() {
         return new CreateCompetition();
+    }
+
+    /**
+     * Create an instance of {@link GetCompetitionViewByName }
+     * 
+     */
+    public GetCompetitionViewByName createGetCompetitionViewByName() {
+        return new GetCompetitionViewByName();
     }
 
     /**
@@ -731,6 +749,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCompetitionViewByNameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getCompetitionViewByNameResponse")
+    public JAXBElement<GetCompetitionViewByNameResponse> createGetCompetitionViewByNameResponse(GetCompetitionViewByNameResponse value) {
+        return new JAXBElement<GetCompetitionViewByNameResponse>(_GetCompetitionViewByNameResponse_QNAME, GetCompetitionViewByNameResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllCompetitionsByUserResponse }{@code >}}
      * 
      */
@@ -899,6 +926,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getGroupByName")
     public JAXBElement<GetGroupByName> createGetGroupByName(GetGroupByName value) {
         return new JAXBElement<GetGroupByName>(_GetGroupByName_QNAME, GetGroupByName.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCompetitionViewByName }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getCompetitionViewByName")
+    public JAXBElement<GetCompetitionViewByName> createGetCompetitionViewByName(GetCompetitionViewByName value) {
+        return new JAXBElement<GetCompetitionViewByName>(_GetCompetitionViewByName_QNAME, GetCompetitionViewByName.class, null, value);
     }
 
     /**

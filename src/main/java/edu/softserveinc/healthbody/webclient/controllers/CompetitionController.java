@@ -6,9 +6,11 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
+import edu.softserveinc.healthbody.webclient.validator.CompetitionValidator;
 
 @Controller
 public class CompetitionController {
+	
+	@Autowired
+    private CompetitionValidator competitionValidator;
 
 	final Integer COMPETITIONS_PER_PAGE = 5;
 
@@ -109,7 +115,11 @@ public class CompetitionController {
 
 	@RequestMapping(value = "/createCompetition.html", method = RequestMethod.POST)
 	public String createCompetition(@ModelAttribute("competitionToCreate") CompetitionDTO competitionToCreate,
-			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody) {
+			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody, BindingResult result) {
+		competitionValidator.validate(competitionToCreate, result);
+		if (result.hasErrors()) {
+            return "createCompetition";
+        }
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = competitionToCreate;
 		competitionDTO.setIdCompetition(UUID.randomUUID().toString());
