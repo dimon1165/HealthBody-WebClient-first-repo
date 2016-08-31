@@ -38,6 +38,8 @@ public class ObjectFactory {
     private final static QName _GetDescriptionOfGroupResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getDescriptionOfGroupResponse");
     private final static QName _GetAllActiveCompetitionsByUserResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllActiveCompetitionsByUserResponse");
     private final static QName _GetAllCompetitionsResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllCompetitionsResponse");
+    private final static QName _UpdateUserCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "updateUserCompetitionResponse");
+    private final static QName _UpdateUserCompetition_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "updateUserCompetition");
     private final static QName _GetCompetitionViewById_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getCompetitionViewById");
     private final static QName _GetAllUserstoAddInCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "getAllUserstoAddInCompetitionResponse");
     private final static QName _CreateCompetitionResponse_QNAME = new QName("http://webservice.healthbody.softserveinc.edu/", "createCompetitionResponse");
@@ -157,6 +159,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UpdateUserCompetition }
+     * 
+     */
+    public UpdateUserCompetition createUpdateUserCompetition() {
+        return new UpdateUserCompetition();
+    }
+
+    /**
      * Create an instance of {@link GetDescriptionOfGroupResponse }
      * 
      */
@@ -178,6 +188,14 @@ public class ObjectFactory {
      */
     public GetAllCompetitionsResponse createGetAllCompetitionsResponse() {
         return new GetAllCompetitionsResponse();
+    }
+
+    /**
+     * Create an instance of {@link UpdateUserCompetitionResponse }
+     * 
+     */
+    public UpdateUserCompetitionResponse createUpdateUserCompetitionResponse() {
+        return new UpdateUserCompetitionResponse();
     }
 
     /**
@@ -656,6 +674,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "getAllCompetitionsResponse")
     public JAXBElement<GetAllCompetitionsResponse> createGetAllCompetitionsResponse(GetAllCompetitionsResponse value) {
         return new JAXBElement<GetAllCompetitionsResponse>(_GetAllCompetitionsResponse_QNAME, GetAllCompetitionsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateUserCompetitionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "updateUserCompetitionResponse")
+    public JAXBElement<UpdateUserCompetitionResponse> createUpdateUserCompetitionResponse(UpdateUserCompetitionResponse value) {
+        return new JAXBElement<UpdateUserCompetitionResponse>(_UpdateUserCompetitionResponse_QNAME, UpdateUserCompetitionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateUserCompetition }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice.healthbody.softserveinc.edu/", name = "updateUserCompetition")
+    public JAXBElement<UpdateUserCompetition> createUpdateUserCompetition(UpdateUserCompetition value) {
+        return new JAXBElement<UpdateUserCompetition>(_UpdateUserCompetition_QNAME, UpdateUserCompetition.class, null, value);
     }
 
     /**

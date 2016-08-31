@@ -27,6 +27,183 @@ public interface HealthBodyService {
 
     /**
      * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllActiveCompetitionsByUser", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllActiveCompetitionsByUser")
+    @ResponseWrapper(localName = "getAllActiveCompetitionsByUserResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllActiveCompetitionsByUserResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllActiveCompetitionsByUserRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllActiveCompetitionsByUserResponse")
+    public List<CompetitionDTO> getAllActiveCompetitionsByUser(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "createCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateCompetition")
+    @ResponseWrapper(localName = "createCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createCompetitionResponse")
+    public void createCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        CompetitionDTO arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateCompetition")
+    @ResponseWrapper(localName = "updateCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateCompetitionResponse")
+    public void updateCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        CompetitionDTO arg0);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addUserInCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetition")
+    @ResponseWrapper(localName = "addUserInCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionResponse")
+    public boolean addUserInCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addUserInCompetitionView", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetitionView")
+    @ResponseWrapper(localName = "addUserInCompetitionViewResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetitionViewResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionViewRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionViewResponse")
+    public boolean addUserInCompetitionView(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "removeUserFromCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.RemoveUserFromCompetition")
+    @ResponseWrapper(localName = "removeUserFromCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.RemoveUserFromCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/removeUserFromCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/removeUserFromCompetitionResponse")
+    public boolean removeUserFromCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.util.List<edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAllGroupsParticipants", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllGroupsParticipants")
+    @ResponseWrapper(localName = "getAllGroupsParticipantsResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllGroupsParticipantsResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllGroupsParticipantsRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllGroupsParticipantsResponse")
+    public List<GroupDTO> getAllGroupsParticipants(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        int arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.UserCompetitionsDTO
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUserCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserCompetition")
+    @ResponseWrapper(localName = "getUserCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserCompetitionResponse")
+    public UserCompetitionsDTO getUserCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
+
+    /**
+     * 
+     * @param arg1
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "deleteUserCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.DeleteUserCompetition")
+    @ResponseWrapper(localName = "deleteUserCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.DeleteUserCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/deleteUserCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/deleteUserCompetitionResponse")
+    public void deleteUserCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updateUserCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateUserCompetition")
+    @ResponseWrapper(localName = "updateUserCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateUserCompetitionResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateUserCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateUserCompetitionResponse")
+    public void updateUserCompetition(
+        @WebParam(name = "arg0", targetNamespace = "")
+        UserCompetitionsDTO arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUserByLogin", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLogin")
+    @ResponseWrapper(localName = "getUserByLoginResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLoginResponse")
+    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginResponse")
+    public UserDTO getUserByLogin(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
      * @param arg0
      */
     @WebMethod
@@ -267,171 +444,6 @@ public interface HealthBodyService {
         int arg1,
         @WebParam(name = "arg2", targetNamespace = "")
         String arg2);
-
-    /**
-     * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns java.util.List<edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllActiveCompetitionsByUser", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllActiveCompetitionsByUser")
-    @ResponseWrapper(localName = "getAllActiveCompetitionsByUserResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllActiveCompetitionsByUserResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllActiveCompetitionsByUserRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllActiveCompetitionsByUserResponse")
-    public List<CompetitionDTO> getAllActiveCompetitionsByUser(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        int arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        String arg2);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "createCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateCompetition")
-    @ResponseWrapper(localName = "createCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.CreateCompetitionResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/createCompetitionResponse")
-    public void createCompetition(
-        @WebParam(name = "arg0", targetNamespace = "")
-        CompetitionDTO arg0);
-
-    /**
-     * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "updateCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateCompetition")
-    @ResponseWrapper(localName = "updateCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.UpdateCompetitionResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/updateCompetitionResponse")
-    public void updateCompetition(
-        @WebParam(name = "arg0", targetNamespace = "")
-        CompetitionDTO arg0);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "addUserInCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetition")
-    @ResponseWrapper(localName = "addUserInCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetitionResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionResponse")
-    public boolean addUserInCompetition(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "addUserInCompetitionView", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetitionView")
-    @ResponseWrapper(localName = "addUserInCompetitionViewResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.AddUserInCompetitionViewResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionViewRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/addUserInCompetitionViewResponse")
-    public boolean addUserInCompetitionView(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "removeUserFromCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.RemoveUserFromCompetition")
-    @ResponseWrapper(localName = "removeUserFromCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.RemoveUserFromCompetitionResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/removeUserFromCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/removeUserFromCompetitionResponse")
-    public boolean removeUserFromCompetition(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns java.util.List<edu.softserveinc.healthbody.webclient.healthbody.webservice.GroupDTO>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllGroupsParticipants", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllGroupsParticipants")
-    @ResponseWrapper(localName = "getAllGroupsParticipantsResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetAllGroupsParticipantsResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllGroupsParticipantsRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getAllGroupsParticipantsResponse")
-    public List<GroupDTO> getAllGroupsParticipants(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        int arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.UserCompetitionsDTO
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getUserCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserCompetition")
-    @ResponseWrapper(localName = "getUserCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserCompetitionResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserCompetitionResponse")
-    public UserCompetitionsDTO getUserCompetition(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "deleteUserCompetition", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.DeleteUserCompetition")
-    @ResponseWrapper(localName = "deleteUserCompetitionResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.DeleteUserCompetitionResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/deleteUserCompetitionRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/deleteUserCompetitionResponse")
-    public void deleteUserCompetition(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        String arg1);
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns edu.softserveinc.healthbody.webclient.healthbody.webservice.UserDTO
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getUserByLogin", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLogin")
-    @ResponseWrapper(localName = "getUserByLoginResponse", targetNamespace = "http://webservice.healthbody.softserveinc.edu/", className = "edu.softserveinc.healthbody.webclient.healthbody.webservice.GetUserByLoginResponse")
-    @Action(input = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginRequest", output = "http://webservice.healthbody.softserveinc.edu/HealthBodyService/getUserByLoginResponse")
-    public UserDTO getUserByLogin(
-        @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
 
     /**
      * 
