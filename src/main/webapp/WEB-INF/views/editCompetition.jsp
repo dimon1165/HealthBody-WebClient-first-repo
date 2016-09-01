@@ -68,6 +68,7 @@
 				<tr class="info">
 					<td><form:input path="idCompetition" readonly="true" type="hidden" value="${competitionToEdit.idCompetition}" /></td>
 					<td></td>
+					<td></td>
 				</tr>
 				<tr class="info">
 					<td><form:label path="name">Name:</form:label></td>

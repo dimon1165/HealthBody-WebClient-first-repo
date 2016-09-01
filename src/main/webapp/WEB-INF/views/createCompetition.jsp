@@ -72,7 +72,7 @@
 				</tr>
 				<tr class="info">
 					<td><form:label path="description">Description:</form:label></td>
-					<td><textarea name="description" rows="4" cols="50"></textarea></td>
+					<td><textarea name="description" rows="4" cols="50">${competitionToCreate.description}</textarea></td>
 					<td><form:errors path="description" class="error"/></td>
 				</tr>
 				<tr class="info">

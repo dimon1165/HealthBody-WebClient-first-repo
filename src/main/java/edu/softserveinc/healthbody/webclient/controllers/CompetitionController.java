@@ -1,10 +1,7 @@
 package edu.softserveinc.healthbody.webclient.controllers;
 
-import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.CompetitionDTO;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyService;
 import edu.softserveinc.healthbody.webclient.healthbody.webservice.HealthBodyServiceImplService;
@@ -89,13 +85,14 @@ public class CompetitionController {
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		service.addUserInCompetitionView(idCompetition, userLogin);
 		String gettedAccessToken = GoogleFitUtils.postForAccessToken(service.getUserByLogin(userLogin).getGoogleApi());
-		Long startTime = CustomDateFormater.getDateInMilliseconds(service.getCompetitionViewById(idCompetition).getStartDate());
+		Long startTime = CustomDateFormater
+				.getDateInMilliseconds(service.getCompetitionViewById(idCompetition).getStartDate());
 		String fitData = GoogleFitUtils.post(gettedAccessToken, startTime, System.currentTimeMillis());
 		String stepCount = GoogleFitUtils.getStepCount(fitData);
-		UserCompetitionsDTO userCompetition =  service.getUserCompetition(idCompetition, userLogin);
+		UserCompetitionsDTO userCompetition = service.getUserCompetition(idCompetition, userLogin);
 		userCompetition.setUserScore(stepCount);
 		service.updateUserCompetition(userCompetition);
-		
+
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("usercompetitions", service.getAllCompetitionsByUser(1, Integer.MAX_VALUE, userLogin));
 		return "userCabinet";
@@ -118,12 +115,6 @@ public class CompetitionController {
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = new CompetitionDTO();
-		competitionDTO.setIdCompetition(null);
-		competitionDTO.setName(null);
-		competitionDTO.setCount(null);
-		competitionDTO.setStartDate(null);
-		competitionDTO.setFinishDate(null);
-		competitionDTO.setDescription(null);
 		model.addAttribute("user", service.getUserByLogin(userLogin));
 		model.addAttribute("competitionToCreate", competitionDTO);
 		return "createCompetition";
@@ -131,12 +122,15 @@ public class CompetitionController {
 
 	@RequestMapping(value = "/createCompetition.html", method = RequestMethod.POST)
 	public String createCompetition(@ModelAttribute("competitionToCreate") CompetitionDTO competitionToCreate,
-			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody, BindingResult result) {
+			Model model, BindingResult result) {
 		competitionValidator.validate(competitionToCreate, result);
+		HealthBodyServiceImplService healthBody = new HealthBodyServiceImplService();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addAttribute("user", service.getUserByLogin(userLogin));
 		if (result.hasErrors()) {
 			return "createCompetition";
 		}
-		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = competitionToCreate;
 		competitionDTO.setIdCompetition(UUID.randomUUID().toString());
 		competitionDTO.setName(competitionToCreate.getName());
@@ -159,13 +153,16 @@ public class CompetitionController {
 	}
 
 	@RequestMapping(value = "/editCompetition.html", method = RequestMethod.POST)
-	public String editCompetition(@ModelAttribute("competitionToEdit") CompetitionDTO competitionToEdit,
-			Map<String, Object> model, @Autowired HealthBodyServiceImplService healthBody, BindingResult result) {
+	public String editCompetition(@ModelAttribute("competitionToEdit") CompetitionDTO competitionToEdit, Model model,
+			BindingResult result) {
 		competitionValidator.validate(competitionToEdit, result);
+		HealthBodyServiceImplService healthBody = new HealthBodyServiceImplService();
+		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
+		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
+		model.addAttribute("user", service.getUserByLogin(userLogin));
 		if (result.hasErrors()) {
 			return "editCompetition";
 		}
-		HealthBodyService service = healthBody.getHealthBodyServiceImplPort();
 		CompetitionDTO competitionDTO = service.getCompetitionViewById(competitionToEdit.getIdCompetition());
 		competitionDTO.setName(competitionToEdit.getName());
 		competitionDTO.setDescription(competitionToEdit.getDescription());
